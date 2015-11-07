@@ -1,0 +1,137 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+.modal{
+    direction: ltr;
+    display: block;
+    overflow: auto;
+}
+form{
+    direction: rtl;
+    background-color: #262F3E;
+    color:white;
+}
+body{
+    width: 100%;
+    background-image: url("../images/3.jpg");
+}
+.navbar-inverse{
+    background-color: #262F3E;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.64);
+
+}
+.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+
+}
+.navbar-header {
+    border-bottom: 2px solid;
+    border-bottom-color: #f5bd35;
+}
+.navbar-right > .navbar-brand {
+    font-size: 26px;
+    color: #fff;
+}
+.nav-btn{
+    font-size: 24px;
+}
+
+.nav-btn-effect:hover{
+    background-color: #1F2631;
+}
+.nav-hover:hover{
+    border-bottom: 2px solid;
+    border-bottom-color:#42B3FF;
+
+}
+.choose{
+    padding: 3px;
+    font-size: 12px;
+    display: inline;
+    margin: 5px;
+    color: #42B3FF;
+    border: 1px solid #fff;
+    border-radius: 2px;
+}
+
+.dropdown-toggle{
+    font-size: 18px;
+}
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-right: auto;
+}
+.main{
+    position: absolute;
+    top: 70px;
+    width: 100%;
+}
+.row-costume-setup{
+    display: block;
+    position: static;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.panel{
+    float: left;
+    width: 8%;
+    border: solid 2px ;
+    margin-right: 1%;
+    margin-left: 1%;
+    height: 130px;
+    padding: 0;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.panel:hover{
+    border: solid 2px black;
+    box-shadow: 7px 7px 3px #899999;
+}
+
+.panel > img{
+    margin-right: 0;
+    margin-left: 0;
+    display: block;
+    position: inherit;
+    width: 100%;
+    height: 80%;
+}
+.card-p{
+    display: inline;
+    max-width: 100px;
+    overflow: auto;
+}
+.card-lable{
+    display: inline;
+}
+
+.card{
+    display: block;
+    height: 20%;
+}
+.label-add-card{
+    width: 50%;
+    display: inline;
+}
+.input-add-card{
+    color:black;
+    float: left;
+    width: 50%;
+    display: inline;
+}
+.form-group{
+    display: block;
+}
+.input-big{
+    color:black;
+    display: block;
+    height: 50px;
+    width: 500px;
+}
+
+.panel-body{
+    margin-top: 80px;
+}
