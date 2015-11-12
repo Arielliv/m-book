@@ -3,21 +3,28 @@
  */
 
     'use strict';
-var app = angular.module('app', [ 'ui.bootstrap' ,'restangular']);
-    app.controller('nav', function($scope, $uibModal, $filter, Restangular) {
+var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
+    app.controller('nav', function($scope, $uibModal, $filter, Restangular,$sce) {
+        app.filter('to_trusted', ['$sce', function($sce){
+            return function(text) {
+                return $sce.trustAsHtml(text);
+            };
+        }]);
         $scope.Cards = [];
         $scope.counterAddCards = 0;
-        console.log($scope.counterAddCards);
         $scope.search = false;
-        $scope.addToViewCrad= function(){
-            var htmlTest = '';
-            for(var i = 0;i < y; i++){
-                console.log($scope.counterAddCards);
-                htmlTest = htmlTest + '<ng-monitor-card class="panel col-lg-1">' +
-                    '<lable class="card col-lg-12 col-lg-offset-1">{{newCard.monitorName}}</lable>' +
-                    '<img  src=' + img + '>' + '</ng-monitor-card>';
+        $scope.addToViewCard= function(){
+            $scope.htmlTest = '<div class="panel col-lg-1">' +
+                '<lable class="card col-lg-12 col-lg-offset-1">{{selectedCard.monitorName}}</lable>' +
+                '<img src="images/oracleDB.jpg">'+
+                '</div>';
+
+            for(var i = 1;i < $scope.Cards.length; i++){
+                $scope.htmlTest = $scope.htmlTest + '<div class="panel col-lg-1">' +
+                    '<lable class="card col-lg-12 col-lg-offset-1">'+'{{' + selectedCard.monitorName +'}}'+'</lable>' +
+                    '<img src="images/oracleDB.jpg">'+
+                    '</div>';
             }
-            return htmlTest;
         };
         $scope.addCard = function(){
             var modalInstance = $uibModal.open({
@@ -31,8 +38,14 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular']);
                 console.log($scope.counterAddCards);
             });
         };
+        $scope.openCard = function(){
+            var modalInstance = $uibModal.open({
+                templateUrl: 'cardView.html',
+                controller: 'monitorController'
+            });
+        };
     });
-app.directive('ngCreateMonitorCard',function(){
+/*app.directive('ngCreateMonitorCard',function(){
     return{
         restrict: 'E',
         template:function($scope, elemnt, attr) {
@@ -56,22 +69,11 @@ app.directive('ngMonitorCard',['$uibModal',function($uibModal) {
     return {
         link: function($scope, element, attr) {
             element.bind('click',function(){
-                var modalInstance = $uibModal.open({
-                    templateUrl: 'cardView.html',
-                    controller: 'monitorController',
-                    resolve:{
-                        Cards: function(){
-                            return $scope.Cards;
-                        },
-                        Length: function(){
-                            return $scope.Cards.length;
-                        }
-                    }
-                });
+
             });
         }
     };
-}]);
+}]);*/
 
 
 
