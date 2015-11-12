@@ -9,7 +9,7 @@ app.controller('addCardController',function($scope,$modalInstance ){
             'monitorType' : $scope.monitorType,
             'monitorProdact' : $scope.monitorProdact,
             'monitorSystem' : $scope.monitorSystem,
-            'monitorExplain' : $scope.monitorExplain
+            'monitorExplain' : $scope.monitorExplain,
         });
     };
     $scope.cancel = function() {
