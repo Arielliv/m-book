@@ -38,10 +38,16 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
                 console.log($scope.counterAddCards);
             });
         };
-        $scope.openCard = function(){
+        $scope.openCard = function(selectedCard){
             var modalInstance = $uibModal.open({
                 templateUrl: 'cardView.html',
-                controller: 'monitorController'
+                controller: 'monitorController',
+                resolve: {
+                    selectedCard: function () {
+                        return selectedCard;
+                    }
+                }
+
             });
         };
     });
