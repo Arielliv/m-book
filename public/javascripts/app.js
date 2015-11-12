@@ -9,6 +9,16 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular']);
         $scope.counterAddCards = 0;
         console.log($scope.counterAddCards);
         $scope.search = false;
+        $scope.addToViewCrad= function(){
+            var htmlTest = '';
+            for(var i = 0;i < y; i++){
+                console.log($scope.counterAddCards);
+                htmlTest = htmlTest + '<ng-monitor-card class="panel col-lg-1">' +
+                    '<lable class="card col-lg-12 col-lg-offset-1">{{newCard.monitorName}}</lable>' +
+                    '<img  src=' + img + '>' + '</ng-monitor-card>';
+            }
+            return htmlTest;
+        };
         $scope.addCard = function(){
             var modalInstance = $uibModal.open({
                 templateUrl: 'addCardView.html',
