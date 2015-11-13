@@ -144,59 +144,82 @@ body{
 }
 
 .btn-modal-costume{
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
+    border-radius: 0;
     width: 100%;
     height: 50px;
+
 }
 .modal-footer{
     padding: 0;
 }
+
+.form-body-costume:before{
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    display: block;
+    background-color: white;
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+    width: 570px;
+    height: 80%;
+    opacity: 0.8;
+    border:solid 2px white;
+    border-radius: 3px;
+}
+
+.form-body-costume{
+    position: inherit;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
 /*dynamic background classes*/
 /*########################################################################################################################################################################################################################################*/
-.oracleDB:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/oracleDB.jpg");  width:100%;  height:100%;  background-size:100% 100%;    -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
+.oracleDB:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/oracleDB.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
 }
-.oracleDB{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;    border-radius: 3px;
-}
-
-.mongoDB:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/mongoDB.jpg");  width:100%;  height:100%;  background-size:100% 100%;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
-}
-.mongoDB{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px;
+.oracleDB{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;    border-radius: 3px; background-color: white;
 }
 
-.windows:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/windows.jpg");  width:100%;  height:100%;  background-size:100% 100%;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
+.mongoDB:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/mongoDB.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
 }
-.windows{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px;
-}
-
-.linux:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/linux.jpg");  width:100%;  height:100%;  background-size:100% 100%;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
-}
-.linux{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;   border-radius: 3px;
+.mongoDB{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px; background-color: white;
 }
 
-.netapp:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/netapp.jpg");  width:100%;  height:100%;  background-size:100% 100%;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
+.windows:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/windows.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
 }
-.netapp{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px;
-}
-
-.vmware:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/vmware.jpg");  width:100%;  height:100%;  background-size:100% 100%;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
-}
-.vmware{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px;
+.windows{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px; background-color: white;
 }
 
-.hp:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/hp.jpg");  width:100%;  height:100%;  background-size:100% 100%;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
+.linux:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/linux.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
 }
-.hp{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px;
-}
-
-.IBM-MainFrame:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/IBM-MainFrame.jpg");  width:100%;  height:100%;  background-size:cover;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
-}
-.IBM-MainFrame{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;   border-radius: 3px;
+.linux{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;   border-radius: 3px; background-color: white;
 }
 
-.default:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/background4.jpg");  width:100%;  height:100%;  background-size:cover;  -webkit-filter: blur(1px) saturate(20%);  filter: blur(5px) saturate(70%);
+.netapp:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/netapp.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
 }
-.default{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px;
+.netapp{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px; background-color: white;
+}
+
+.vmware:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/vmware.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
+}
+.vmware{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px; background-color: white;
+}
+
+.hp:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/hp.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
+}
+.hp{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px; background-color: white;
+}
+
+.IBM-MainFrame:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/IBM-MainFrame.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
+}
+.IBM-MainFrame{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;   border-radius: 3px; background-color: white;
+}
+
+.default:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/background4.jpg");min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
+}
+.default{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px; background-color: white;
 }
 
 /*########################################################################################################################################################################################################################################*/
