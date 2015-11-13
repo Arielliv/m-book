@@ -13,7 +13,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
         $scope.Cards = [];
         $scope.counterAddCards = 0;
         $scope.search = false;
-        $scope.addToViewCard= function(){
+       /* $scope.addToViewCard= function(){
             $scope.htmlTest = '<div class="panel col-lg-1">' +
                 '<lable class="card col-lg-12 col-lg-offset-1">{{selectedCard.monitorName}}</lable>' +
                 '<img src="images/oracleDB.jpg">'+
@@ -25,7 +25,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
                     '<img src="images/oracleDB.jpg">'+
                     '</div>';
             }
-        };
+        };*/
         $scope.addCard = function(){
             var modalInstance = $uibModal.open({
                 templateUrl: 'addCardView.html',
@@ -34,6 +34,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
             modalInstance.result.then(function(newCard) {
                 $scope.counterAddCards ++;
                 newCard.$index = $scope.counterAddCards;
+
+                        newCard.img = "images/oracleDB.jpg";
                 $scope.Cards.push(newCard);
                 console.log($scope.counterAddCards);
             });

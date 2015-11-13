@@ -91,8 +91,10 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="main">
-    <div class="row row-costume-setup" ng-repeat="selectedCard in Cards">
-        <div class="panel col-lg-1" ng-click="openCard(selectedCard)"><lable class="card col-lg-12 col-lg-offset-1">{{selectedCard.monitorName}}</lable><img  src="images/mongoDB.jpg"></div>
+    <div class="row row-costume-setup ">
+        <div class="test">
+            <div class="panel col-lg-1" ng-repeat="selectedCard in Cards" ng-click="openCard(selectedCard)"><label class="card col-lg-12 col-lg-offset-1">{{selectedCard.monitorName}}</label><img  ng-src="{{selectedCard.img}}"></div>
+        </div>
     </div>
 </div>
 </body>

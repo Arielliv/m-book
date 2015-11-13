@@ -135,3 +135,7 @@ body{
 .panel-body{
     margin-top: 80px;
 }
+
+.test{
+    display: inline;
+}
