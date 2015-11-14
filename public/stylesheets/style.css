@@ -36,7 +36,7 @@ body{
     color: #fff;
 }
 .nav-btn{
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .nav-btn-effect:hover{
@@ -58,7 +58,7 @@ body{
 }
 
 .dropdown-toggle{
-    font-size: 18px;
+    font-size: 17px;
 }
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
     margin-right: auto;
@@ -108,7 +108,8 @@ body{
     margin-bottom: 0;
 }
 .card-lable2{
-    display: inline;;
+    display: inline;
+    font-size:18px;
 }
 
 .label-add-card{
@@ -141,13 +142,41 @@ body{
     display: inline;
     max-width: 100px;
     overflow: auto;
+    margin-right: 5px;
+    font-size: 14px;
 }
 
 .btn-modal-costume{
     border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     width: 100%;
     height: 50px;
 
+}
+
+.header-costume:before{  
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -2;
+    height: 30px;
+    display: block;
+    background: white;
+    border:solid 2px white;
+    border-radius: 3px;
+    opacity: 0.8;
+}
+.header-costume{  
+    position: inherit;  
+    left: 0;  
+    right: 0;  
+    z-index: 0;  
+    color: black;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 24px;
 }
 .modal-footer{
     padding: 0;
@@ -160,20 +189,26 @@ body{
     z-index: -1;
     display: block;
     background-color: white;
-    -webkit-filter: blur(3px);
-    filter: blur(3px);
     width: 570px;
     height: 80%;
     opacity: 0.8;
     border:solid 2px white;
     border-radius: 3px;
 }
-
+.background{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    bottom: 50%;
+    right: 50%;
+    z-index: 999;
+    color:orange;
+}
 .form-body-costume{
     position: inherit;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 20;
 }
 /*dynamic background classes*/
 /*########################################################################################################################################################################################################################################*/
@@ -220,6 +255,11 @@ body{
 .default:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/background4.jpg");min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
 }
 .default{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px; background-color: white;
+}
+
+.Mbook:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -2;  display: block;  background-image: url("../images/M.png") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;
+}
+.Mbook{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;    border-radius: 3px; background-color: #262F3E;
 }
 
 /*########################################################################################################################################################################################################################################*/

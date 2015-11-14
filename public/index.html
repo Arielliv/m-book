@@ -31,7 +31,7 @@
                 <li class="nav-btn-effect">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">סוג <span class="caret"></span><span class="choose">בסיסי</span></a>
                     <ul class="dropdown-menu">
-                        <li><a type="button" class=""> בסיסי </a></li>
+                        <li><a type="button" class="" > בסיסי </a></li>
                         <li role="separator" class="divider"></li>
                         <li><a type="button"> אפליקטיבי </a></li>
                         <li role="separator" class="divider"></li>
@@ -93,7 +93,7 @@
 <div class="main">
     <div class="row row-costume-setup ">
         <div class="costume-cards">
-            <div class="panel col-lg-1" ng-repeat="selectedCard in Cards" ng-click="openCard(selectedCard)"><label class="card-lable col-lg-12 col-lg-offset-1">{{selectedCard.monitorName}}</label><img  ng-src="{{selectedCard.img}}"></div>
+            <div class="panel col-lg-12" ng-repeat="selectedCard in Cards" ng-click="openCard(selectedCard)"><label class="card-lable col-lg-6 col-lg-offset-3">{{selectedCard.monitorName}}</label><img  ng-src="{{selectedCard.img}}"></div>
         </div>
     </div>
 </div>
