@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-hover">
+                    <a type="button" class="nav-hover" ng-click="openRandom()">
                         <span class="glyphicon glyphicon-random" aria-hidden="true"></span>
                     </a>
                 </li>
@@ -93,7 +93,7 @@
 <div class="main">
     <div class="row row-costume-setup ">
         <div class="costume-cards">
-            <div class="panel col-lg-12" ng-repeat="selectedCard in Cards" ng-click="openCard(selectedCard)"><label class="card-lable col-lg-6 col-lg-offset-3">{{selectedCard.monitorName}}</label><img  ng-src="{{selectedCard.img}}"></div>
+            <div class="panel row" ng-repeat="selectedCard in Cards" ng-click="openCard(selectedCard)"><label class="card-lable col-lg-12">{{selectedCard.monitorName | strLimit: 7}}</label><img  ng-src="{{selectedCard.img}}"></div>
         </div>
     </div>
 </div>

@@ -4,6 +4,16 @@
 
     'use strict';
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
+    app.filter('strLimit', ['$filter', function($filter) {
+        return function(input, limit) {
+            if (! input) return;
+            if (input.length <= limit) {
+                return input;
+            }
+
+            return $filter('limitTo')(input, limit) + '...';
+        };
+    }]);
     app.controller('nav', function($scope, $uibModal, $filter, Restangular,$sce) {
         app.filter('to_trusted', ['$sce', function($sce){
             return function(text) {
@@ -12,6 +22,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
         }]);
         $scope.Cards = [];
         $scope.search = false;
+        $scope.openRandom = function(){
+            var random = Math.floor(Math.random() * $scope.Cards.length) + 0;
+            $scope.openCard($scope.Cards[random]);
+        };
         $scope.addCard = function(){
             var modalInstance = $uibModal.open({
                 templateUrl: 'addCardView.html',
