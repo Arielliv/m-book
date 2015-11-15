@@ -53,12 +53,12 @@
             <div class="row">
                 <div class="form-group col-lg-8">
                     <label class="label-add-card">הסבר לניטור:</label>
-                    <textarea class="input-big form-control" type="text"  ng-model="monitorExplain"></textarea>
+                    <textarea class="input-big form-control " type="text"  ng-model="monitorExplain"></textarea>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume">שמור</button>
+        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume" ng-click="limitCharPerLine()">שמור</button>
     </div>
 </form>

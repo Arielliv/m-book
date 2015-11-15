@@ -22,6 +22,19 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
         }]);
         $scope.Cards = [];
         $scope.search = false;
+        $scope.limitCharPerLine = function(monitorExplain){
+            var count = 0;
+            var string = '';
+            for(var i = 0; i <monitorExplain.length;i++){
+                if(count === 70){
+                    string = string + monitorExplain.substr(0,count) + "\n";
+                    count = 0;
+                } else {
+                    count++;
+                }
+            }
+            return string;
+        };
         $scope.openRandom = function(){
             var random = Math.floor(Math.random() * $scope.Cards.length) + 0;
             $scope.openCard($scope.Cards[random]);
@@ -38,6 +51,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
                 } else {
                     newCard.img ="images/" + newCard.monitorProdact + ".jpg";
                 }
+                newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
                 $scope.Cards.push(newCard);
             });
         };
