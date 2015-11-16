@@ -22,6 +22,18 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
         };
     }]);
 
+app.directive('toggle', function($timeout){
+    return {
+        restrict: 'A',
+        link: (function(scope, element, attrs){
+            $timeout(function(){
+                if (attrs.toggle=="tooltip"){
+                    $(element).tooltip();
+                }
+            });
+        })
+    };
+});
     app.controller('nav', function($scope, $uibModal, $filter, Restangular,$sce) {
         $scope.Cards = [];
         $scope.search = false;
