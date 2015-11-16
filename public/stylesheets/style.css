@@ -1,6 +1,7 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+
 .modal{
     direction: ltr;
     display: block;
@@ -271,4 +272,83 @@ body{
 }
 
 /*########################################################################################################################################################################################################################################*/
+
+
+/*test*/
+.continer-test{
+    height: 250px;
+    width: 16%;
+    margin-left:2%;
+    margin-right:2%;
+    border:solid 1px #D8D8D8;
+    float: left;
+}
+.continer-img{
+    position: static;
+    display: block;
+    width: 100%;
+    height: 50%;
+    padding: 0;
+    margin-right: 0;
+    margin-left: 0;
+    top: 0%
+}
+.img{
+
+    padding: 0;
+    height: 100%;
+}
+.continer-text{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 20%;
+    background:white;
+}
+.text-test{
+    text-align: center;
+    top: 30%;
+}
+.continer-info{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 20%;
+    float: left;
+    margin-right: 0;
+    margin-left: 0;
+    background: #F0F0F0;
+}
+.test-a{
+    list-style-type: none;
+    text-align: center;
+}
+
+.button-footer{
+    position: relative;
+    display: block;
+    padding: 0;
+    width: 100%;
+    height: 10%;
+}
+.temp2{
+    border-right:#D8D8D8 solid 1px;
+    border-left:#D8D8D8 solid 1px;
+
+}
+.temp{
+    padding: 0;
+    height: 100%;
+    border-radius: 0;
+}
+.text{
+    font-size: 10px;
+    text-align: center;
+}
+
+
+
+
+
+
 

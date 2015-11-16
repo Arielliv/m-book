@@ -2,8 +2,9 @@
  * Created by Ariel on 06/11/2015.
  */
 
-    'use strict';
+'use strict';
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
+    /*make limit to characters in line' and add ...*/
     app.filter('strLimit', ['$filter', function($filter) {
         return function(input, limit) {
             if (! input) return;
@@ -14,12 +15,14 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
             return $filter('limitTo')(input, limit) + '...';
         };
     }]);
+    /*make angular as trustfull for dom(html)*/
+    app.filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]);
+
     app.controller('nav', function($scope, $uibModal, $filter, Restangular,$sce) {
-        app.filter('to_trusted', ['$sce', function($sce){
-            return function(text) {
-                return $sce.trustAsHtml(text);
-            };
-        }]);
         $scope.Cards = [];
         $scope.search = false;
         $scope.limitCharPerLine = function(monitorExplain){
@@ -36,7 +39,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
             return string;
         };
         $scope.openRandom = function(){
-            var random = Math.floor(Math.random() * $scope.Cards.length) + 0;
+            var random = Math.floor(Math.random() * $scope.Cards.length)/*you can add (+ num) to set start point to random*/;
             $scope.openCard($scope.Cards[random]);
         };
         $scope.addCard = function(){
