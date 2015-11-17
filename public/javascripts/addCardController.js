@@ -1,7 +1,3 @@
-/**
- * Created by Ariel on 07/11/2015.
- */
-
 app.controller('addCardController',function($scope,$modalInstance ){
     $scope.ok = function() {
         $modalInstance.close({
@@ -10,6 +6,7 @@ app.controller('addCardController',function($scope,$modalInstance ){
             'monitorProdact' : $scope.monitorProdact,
             'monitorSystem' : $scope.monitorSystem,
             'monitorExplain' : $scope.monitorExplain,
+            'views' : 0
         });
     };
     $scope.cancel = function() {

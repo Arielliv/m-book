@@ -145,6 +145,7 @@ body{
     overflow: auto;
     margin-right: 5px;
     font-size: 14px;
+    text-align: center;
 }
 
 .btn-modal-costume{
@@ -278,9 +279,17 @@ body{
 .continer-test{
     height: 250px;
     width: 16%;
-    margin:2%;
+    margin-right:2%;
+    margin-left:2%;
+    margin-top:2%;
+    margin-bottom:2%;
     border:solid 1px #D8D8D8;
     float: left;
+}
+
+.continer-test:hover{
+    border: solid 1px #C8C8C8;
+    box-shadow: 7px 7px 3px #899999;
 }
 .continer-img{
     position: static;
@@ -290,7 +299,7 @@ body{
     padding: 0;
     margin-right: 0;
     margin-left: 0;
-    top: 0%
+    top: 0%;
 }
 .img{
 
@@ -319,6 +328,7 @@ body{
     margin-left: 0;
     background: #F0F0F0;
 }
+
 .test-a{
     list-style-type: none;
     text-align: center;
@@ -332,12 +342,19 @@ body{
     width: 100%;
     height: 10%;
 }
+
 .temp2{
     border-right:#D8D8D8 solid 1px;
     border-left:#D8D8D8 solid 1px;
 
 }
+
 .temp{
+    padding: 0;
+    height: 100%;
+    border-radius: 0;
+}
+.abc{
     padding: 0;
     height: 100%;
     border-radius: 0;

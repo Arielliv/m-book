@@ -56,27 +56,27 @@
         <div class="collapse navbar-collapse navbar-left">
             <ul class="nav navbar-nav">
                 <li class="nav-btn-effect">
-                    <a type="button" ng-click="search=!search" ng-show="!search" class="nav-hover">
+                    <a type="button" ng-click="search=!search" ng-show="!search" class="nav-hover" title="חיפוש ניטור" data-toggle="tooltip" data-placement="bottom" tooltip>
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-hover" ng-click="addCard()">
+                    <a type="button" class="nav-hover" ng-click="addCard()" title="הוספת ניטור" data-toggle="tooltip" data-placement="bottom" tooltip>
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-hover" ng-click="openRandom()">
+                    <a type="button" class="nav-hover" ng-click="openRandom()"  title="ניטור רנדומלי" data-toggle="tooltip" data-placement="bottom" tooltip>
                         <span class="glyphicon glyphicon-random" aria-hidden="true"></span>
                     </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-hover">
-                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="מוניטין" data-toggle="tooltip" data-placement="top" tooltip></span>
+                    <a type="button" class="nav-hover"  title="מידע על האתר" data-toggle="tooltip" data-placement="bottom" tooltip>
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                     </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-hover">
+                    <a type="button" class="nav-hover"  title="הגדרות" data-toggle="tooltip" data-placement="bottom" tooltip>
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </a>
                 </li>
@@ -99,21 +99,21 @@
                         <img class="img col-lg-12" ng-src="{{selectedCard.img}}">
                     </div>
                     <div class="continer-text">
-                        <div class="col-lg-12 text-test">{{selectedCard.monitorName | strLimit: 7}}</div>
+                        <div class="col-lg-12 text-test">{{selectedCard.monitorName | strLimit: 25}}</div>
                     </div>
                     <div class="continer-info">
                         <ul class="test-a col-lg-12">
-                            <li class="col-lg-4 ">
-                                <span CLASS="temp" title="מוניטין" data-toggle="tooltip" data-placement="top" tooltip><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                            <li class="col-lg-4 " title="מוניטין" data-toggle="tooltip" data-placement="top" tooltip>
+                                <span CLASS="temp" ><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
                                 <div class="text">13</div>
                             </li>
-                            <li class="col-lg-4 temp2">
-                                <span CLASS="temp" title="צפיות" data-toggle="tooltip" data-placement="top" tooltip><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span></span>
-                                <div class="text">22</div>
+                            <li class="col-lg-4 temp2" title="צפיות" data-toggle="tooltip" data-placement="top" tooltip>
+                                <span CLASS="temp" ><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span></span>
+                                <div class="text">{{selectedCard.views}}</div>
                             </li>
-                            <li class="col-lg-4 ">
-                                <span CLASS="temp" title="תאריך יצירה" data-toggle="tooltip" data-placement="top" tooltip><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-                                <div class="text">22/07/1996</div>
+                            <li class="col-lg-4" title="תאריך יצירה" data-toggle="tooltip" data-placement="top" tooltip>
+                                <span CLASS="temp" ><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                                <div class="text row">{{selectedCard.dateHeader}}</div>
                             </li>
                         </ul>
                     </div>
@@ -136,6 +136,6 @@
     <script src="javascripts/app.js"></script>
     <script src="javascripts/monitorController.js"></script>
     <script src="javascripts/addCardController.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
+    <script src="vendors/angular/angular-sanitize.js"></script>
 </footer>
 </html>

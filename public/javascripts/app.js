@@ -1,7 +1,3 @@
-/**
- * Created by Ariel on 06/11/2015.
- */
-
 'use strict';
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
     /*make limit to characters in line' and add ...*/
@@ -11,8 +7,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
             if (input.length <= limit) {
                 return input;
             }
-
-            return $filter('limitTo')(input, limit) + '...';
+            return $filter('limitTo')('...' + input, limit);
         };
     }]);
     /*make angular as trustfull for dom(html)*/
@@ -21,27 +16,27 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
             return $sce.trustAsHtml(text);
         };
     }]);
-
-app.directive('toggle', function($timeout){
-    return {
-        restrict: 'A',
-        link: (function(scope, element, attrs){
-            $timeout(function(){
-                if (attrs.toggle=="tooltip"){
-                    $(element).tooltip();
-                }
-            });
-        })
-    };
-});
+    /*make comments*/
+    app.directive('toggle', function($timeout){
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs){
+                $timeout(function(){
+                    if (attrs.toggle=="tooltip"){
+                        $(element).tooltip();
+                    }
+                },0);
+            }
+        };
+    });
     app.controller('nav', function($scope, $uibModal, $filter, Restangular,$sce) {
         $scope.Cards = [];
         $scope.search = false;
         $scope.limitCharPerLine = function(monitorExplain){
             var count = 0;
-            var string = '';
+            var string = monitorExplain;
             for(var i = 0; i <monitorExplain.length;i++){
-                if(count === 70){
+                if(count === 50){
                     string = string + monitorExplain.substr(0,count) + "\n";
                     count = 0;
                 } else {
@@ -67,10 +62,12 @@ app.directive('toggle', function($timeout){
                     newCard.img ="images/" + newCard.monitorProdact + ".jpg";
                 }
                 newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
+                newCard.dateHeader = $filter('date')(new Date(),'dd-MM-yyyy');
                 $scope.Cards.push(newCard);
             });
         };
         $scope.openCard = function(selectedCard){
+            selectedCard.views ++;
             var modalInstance = $uibModal.open({
                 templateUrl: 'cardView.html',
                 controller: 'monitorController',
