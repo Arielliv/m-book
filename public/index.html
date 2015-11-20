@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
     <link href="vendors/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/angular-aside/src/styles/animate.css" rel="stylesheet">
     <link href="vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
+    <link href="vendors/angular-aside/dist/css/angular-aside.min.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>M-BOOK</title>
 </head>
 <body ng-app="app" class="ng-cloak" ng-controller="nav">
-<nav class="navbar navbar-inverse navbar-fixed-top" >
+<div class="nav-left" ng-click="openAside('right', true)">
+    <button type="button" class="btn btn-default btn-lg" >
+        <span class="glyphicon glyphicon-chevron-left "></span>
+    </button>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header navbar-right">
             <div class="navbar-brand" > M-BOOK </div>
@@ -16,19 +23,19 @@
         <div class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover">ניטורים</a>
+                    <a type="button" class="nav-btn nav-hover" ui-sref="monitors">ניטורים</a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover"> הורדות </a>
+                    <a type="button" class="nav-btn nav-hover" ui-sref="downloads"> הורדות </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover"> סקריפטים </a>
+                    <a type="button" class="nav-btn nav-hover" ui-sref="scripts"> סקריפטים </a>
                 </li>
             </ul>
         </div>
         <div class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="nav-btn-effect">
+                <li class="nav-btn-effect" ng-show="$state.includes('monitors')">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">סוג <span class="caret"></span><span class="choose">בסיסי</span></a>
                     <ul class="dropdown-menu">
                         <li><a type="button" class="" > בסיסי </a></li>
@@ -40,7 +47,7 @@
                         <li class="disabled"><a type="button"> מערכות </a></li>
                     </ul>
                 </li>
-                <li class="nav-btn-effect">
+                <li class="nav-btn-effect" ng-show="$state.includes('monitors')">
                     <a type="button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">סדר <span class="caret"></span><span class="choose">שם</span></a>
                     <ul class="dropdown-menu">
                         <li><a type="button" class=""> שם </a></li>
@@ -55,7 +62,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-left">
             <ul class="nav navbar-nav">
-                <li class="nav-btn-effect">
+                <li class="nav-btn-effect has">
                     <a type="button" ng-click="search=!search" ng-show="!search" class="nav-hover" title="חיפוש ניטור" data-toggle="tooltip" data-placement="bottom" tooltip>
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </a>
@@ -90,44 +97,12 @@
         </form><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div class="main">
-    <div class="row row-costume-setup ">
-        <div class="costume-cards">
-            <div class="" ng-repeat="selectedCard in Cards">
-                <div class="continer-test row">
-                    <div class="continer-img">
-                        <img class="img col-lg-12" ng-src="{{selectedCard.img}}">
-                    </div>
-                    <div class="continer-text">
-                        <div class="col-lg-12 text-test">{{selectedCard.monitorName | strLimit: 25}}</div>
-                    </div>
-                    <div class="continer-info">
-                        <ul class="test-a col-lg-12">
-                            <li class="col-lg-4 " title="מוניטין" data-toggle="tooltip" data-placement="top" tooltip>
-                                <span CLASS="temp" ><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
-                                <div class="text">13</div>
-                            </li>
-                            <li class="col-lg-4 temp2" title="צפיות" data-toggle="tooltip" data-placement="top" tooltip>
-                                <span CLASS="temp" ><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span></span>
-                                <div class="text">{{selectedCard.views}}</div>
-                            </li>
-                            <li class="col-lg-4" title="תאריך יצירה" data-toggle="tooltip" data-placement="top" tooltip>
-                                <span CLASS="temp" ><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-                                <div class="text row">{{selectedCard.dateHeader}}</div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-footer">
-                        <button type="submit" class="btn btn-success temp col-lg-12" ng-click="openCard(selectedCard)">פתח ניטור</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div ui-view>
 </div>
 </body>
 <footer>
     <script src="vendors/angular/angular.min.js"></script>
+    <script src="vendors/angular-aside/dist/js/angular-aside.min.js"></script>
     <script src="vendors/angular-ui/ui-bootstrap-tpls-0.14.2.min.js"></script>
     <script src="vendors/restangular/restangular.min.js"></script>
     <script src="vendors/underscore/underscore.js"></script>
@@ -137,5 +112,6 @@
     <script src="javascripts/monitorController.js"></script>
     <script src="javascripts/addCardController.js"></script>
     <script src="vendors/angular/angular-sanitize.js"></script>
+    <script src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
 </footer>
 </html>

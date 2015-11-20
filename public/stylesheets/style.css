@@ -276,7 +276,7 @@ body{
 
 
 /*test*/
-.continer-test{
+.card-container {
     height: 250px;
     width: 16%;
     margin-right:2%;
@@ -287,11 +287,11 @@ body{
     float: left;
 }
 
-.continer-test:hover{
-    border: solid 1px #C8C8C8;
+.card-container:hover{
+    border: solid 1px #383838;
     box-shadow: 7px 7px 3px #899999;
 }
-.continer-img{
+.card-img-container {
     position: static;
     display: block;
     width: 100%;
@@ -301,23 +301,22 @@ body{
     margin-left: 0;
     top: 0%;
 }
-.img{
-
+.card-img {
     padding: 0;
     height: 100%;
 }
-.continer-text{
+.card-label-container {
     position: relative;
     display: block;
     width: 100%;
     height: 20%;
     background:white;
 }
-.text-test{
+.card-text {
     text-align: center;
     top: 30%;
 }
-.continer-info{
+.card-extra-info-container {
     border-top:#D8D8D8 solid 1px;
     position: relative;
     display: block;
@@ -329,13 +328,13 @@ body{
     background: #F0F0F0;
 }
 
-.test-a{
+.card-ul-costume {
     list-style-type: none;
     text-align: center;
     top:12%;
 }
 
-.button-footer{
+.card-button-footer-container {
     position: relative;
     display: block;
     padding: 0;
@@ -343,26 +342,44 @@ body{
     height: 10%;
 }
 
-.temp2{
+.card-li-costume-mid {
     border-right:#D8D8D8 solid 1px;
     border-left:#D8D8D8 solid 1px;
-
 }
 
-.temp{
+.card-li-costume-sides {
     padding: 0;
     height: 100%;
     border-radius: 0;
 }
-.abc{
-    padding: 0;
-    height: 100%;
-    border-radius: 0;
-}
-.text{
+.card-extra-info-text {
     font-size: 10px;
     text-align: center;
 }
+.a{
+    width: 50%;
+    background-color: #262F3E;
+}
+.nav-left{
+    top:30%;
+    left: 97%;
+    position: fixed;
+}
+.btn-default{
+
+    color:#9d9d9d;
+}
+.btn-default:hover{
+
+    color:#9d9d9d;
+}
+
+.test2{
+    position: fixed;
+    top:30%;
+    left: 1010px;
+}
+
 
 
 

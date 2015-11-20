@@ -1,5 +1,6 @@
 'use strict';
-var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
+
+var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ]);
     /*make limit to characters in line' and add ...*/
     app.filter('strLimit', ['$filter', function($filter) {
         return function(input, limit) {
@@ -29,7 +30,48 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
             }
         };
     });
-    app.controller('nav', function($scope, $uibModal, $filter, Restangular,$sce) {
+    app.config(function($stateProvider, $urlRouterProvider) {
+        //
+        // For any unmatched url, redirect to /state1
+        $urlRouterProvider.otherwise("/monitors.html");
+        //
+        // Now set up the states
+        $stateProvider
+            .state('monitors', {
+                url: "/monitors",
+                templateUrl: "monitors.html"
+            })
+            .state('downloads', {
+                url: "/downloads",
+                templateUrl: "downloads.html"
+            })
+            .state('scripts', {
+                url: "/scripts",
+                templateUrl: "scripts.html"
+            })
+
+    });
+
+    app.controller('nav', function($scope, $uibModal, $filter, $state ,$aside, Restangular,$sce) {
+        $scope.openAside = function(position) {
+            $aside.open({
+                templateUrl: 'aside.html',
+                placement: position,
+                backdrop: true,
+                size: 'sm',
+                controller: function($scope, $modalInstance) {
+                    $scope.ok = function(e) {
+                        $modalInstance.close();
+                        e.stopPropagation();
+                    };
+                    $scope.cancel = function(e) {
+                        $modalInstance.dismiss();
+                        e.stopPropagation();
+                    };
+                }
+            })
+        };
+        $scope.$state = $state;
         $scope.Cards = [];
         $scope.search = false;
         $scope.limitCharPerLine = function(monitorExplain){
@@ -79,6 +121,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize']);
 
             });
         };
+
     });
 
 

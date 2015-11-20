@@ -1,29 +1,31 @@
-<form ng-submit="ok()">
+<form novalidate ng-submit="ok(Form.$valid)" name="Form">
     <div class="modal-header col-lg-12">
         <h3 class="col-lg-4 col-lg-offset-4">הוספת ניטור</h3>
     </div>
     <div class="modal-body">
         <div class="panel-body">
             <div class="row">
-                <div class="form-group col-lg-8">
-                    <label class="label-add-card">שם הניטור:</label>
-                    <input class="input-add-card form-control" type="text"  ng-model="monitorName">
+                <div class="form-group col-lg-8" ng-class="{'has-error': notPass && Form.monitorName.$invalid}">
+                    <label class="control-label label-add-card" for="monitorName">שם הניטור:</label>
+                    <input class="input-add-card form-control " id="monitorName" name="monitorName" type="text"  ng-model="monitorName" ng-pattern="/^[a-z1-9]{10,}$/" ng-required="true">
+                    <p ng-show="notPass && Form.monitorName.$invalid" class="help-block">שם הניטור חייב להיות לפחות 10 אותיות/מספרים</p>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-lg-8">
-                    <label class="label-add-card">סוג הניטור:</label>
-                    <select class="form-control input-add-card" ng-model="monitorType">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorType.$invalid}">
+                    <label class="control-label label-add-card" for="monitorType">סוג הניטור:</label>
+                    <select class="form-control input-add-card" id="monitorType" name="monitorType" ng-model="monitorType" ng-required="true">
                         <option>בסיסי</option>
                         <option>מתקדם</option>
                         <option>אפליקטיבי</option>
                     </select>
+                    <p ng-show="notPass && Form.monitorType.$invalid" class="help-block">לא נבחר סוג ניטור</p>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-lg-8">
-                    <label class="label-add-card">שם המוצר:</label>
-                    <select class="form-control input-add-card"  ng-model="monitorProdact">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorProdact.$invalid}">
+                    <label class="control-label label-add-card" for="monitorProdact">שם המוצר:</label>
+                    <select class="form-control input-add-card" id="monitorProdact" name="monitorProdact" ng-model="monitorProdact" ng-required="true">
                         <option>oracleDB</option>
                         <option>mongoDB</option>
                         <option>windows</option>
@@ -34,12 +36,13 @@
                         <option>IBM-MainFrame</option>
                         <option>not exist here</option>
                     </select>
+                    <p ng-show="notPass && Form.monitorProdact.$invalid" class="help-block">לא נבחר מוצר</p>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-lg-8">
-                    <label class="label-add-card">שם המערכת:</label>
-                    <select class="form-control input-add-card" ng-model="monitorSystem">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorSystem.$invalid}">
+                    <label class="control-label label-add-card" for="monitorSystem">שם המערכת:</label>
+                    <select class="form-control input-add-card" id="monitorSystem" name="monitorSystem" ng-model="monitorSystem" ng-required="true">
                         <option>מערכת1</option>
                         <option>מערכת2</option>
                         <option>מערכת3</option>
@@ -48,12 +51,14 @@
                         <option>מערכת6</option>
                         <option>לא קיים כאן</option>
                     </select>
+                    <p ng-show="notPass && Form.monitorSystem.$invalid" class="help-block">לא נבחרה מערכת</p>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-lg-8">
-                    <label class="label-add-card">הסבר לניטור:</label>
-                    <textarea class="input-big form-control " type="text"  ng-model="monitorExplain"></textarea>
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorExplain.$invalid}">
+                    <label class="control-label label-add-card" for="monitorExplain">הסבר לניטור:</label>
+                    <textarea class="input-big form-control " id="monitorExplain" name="monitorExplain" type="text"  ng-model="monitorExplain" ng-pattern="/^[a-z1-9]{1,}$/" ng-required="true"></textarea>
+                    <p ng-show="notPass && Form.monitorExplain.$invalid" class="help-block">הסבר חייב להיות לפחות 150 אותיות ו/או מספרים</p>
                 </div>
             </div>
         </div>
