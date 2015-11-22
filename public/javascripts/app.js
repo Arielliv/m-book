@@ -53,6 +53,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     });
 
     app.controller('nav', function($scope, $uibModal, $filter, $state ,$aside, Restangular,$sce) {
+        $scope.downloadsData = [];
+        $scope.scriptsData = [];
         $scope.openAside = function(position) {
             $aside.open({
                 templateUrl: 'aside.html',
@@ -92,21 +94,46 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             $scope.openCard($scope.Cards[random]);
         };
         $scope.addCard = function(){
-            var modalInstance = $uibModal.open({
-                templateUrl: 'addCardView.html',
-                controller: 'addCardController'
-            });
-            modalInstance.result.then(function(newCard) {
-                if(newCard.monitorProdact == "not exist here"){
-                    newCard.monitorProdact = "default";
-                    newCard.img = "images/background4.jpg"
-                } else {
-                    newCard.img ="images/" + newCard.monitorProdact + ".jpg";
-                }
-                newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
-                newCard.dateHeader = $filter('date')(new Date(),'dd-MM-yyyy');
-                $scope.Cards.push(newCard);
-            });
+            if( $scope.$state.includes('monitors')) {
+                var modalInstance1 = $uibModal.open({
+                    templateUrl: 'addCardView.html',
+                    controller: 'addCardController'
+                });
+
+                modalInstance1.result.then(function (newCard) {
+                    if (newCard.monitorProdact == "not exist here") {
+                        newCard.monitorProdact = "default";
+                        newCard.img = "images/background4.jpg"
+                    } else {
+                        newCard.img = "images/" + newCard.monitorProdact + ".jpg";
+                    }
+                    newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
+                    newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
+                    $scope.Cards.push(newCard);
+                });
+            }
+            if( $scope.$state.includes('scripts')){
+                var modalInstance2 = $uibModal.open({
+                    templateUrl: 'uploadScripts.html',
+                    controller: 'uploadScriptsController'
+                });
+
+                modalInstance2.result.then(function (data) {
+                    scope.scriptsData.push(data);
+                });
+            }
+            if( $scope.$state.includes('downloads')){
+                var modalInstance3 = $uibModal.open({
+                    templateUrl: 'uploadDownloads.html',
+                    controller: 'uploadDownloadsController'
+                });
+
+                modalInstance3.result.then(function (data) {
+                    $scope.downloadsData.push(data);
+                });
+            } else {
+                console.log("problem");
+            }
         };
         $scope.openCard = function(selectedCard){
             selectedCard.views ++;

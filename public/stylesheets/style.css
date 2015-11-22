@@ -379,6 +379,14 @@ body{
     top:30%;
     left: 1010px;
 }
+.up{
+    z-index: 1000;
+}
+.test{
+    top:100px;
+    position: absolute;
+    right: 80%;
+}
 
 
 
