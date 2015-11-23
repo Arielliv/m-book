@@ -1,8 +1,8 @@
 /**
- * Created by Ariel on 06/11/2015.
+ * Created by Ariel on 23/11/2015.
  */
-app.controller('monitorController',function($scope,$modalInstance,selectedCard){
-     $scope.selectedCard= selectedCard;
+app.controller('scriptViewController',function($scope,$modalInstance,script){
+    $scope.script= script;
     $scope.ok = function() {
         $modalInstance.close({
         });

@@ -119,7 +119,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
 
                 modalInstance2.result.then(function (data) {
-                    scope.scriptsData.push(data);
+                    $scope.scriptsData.push(data);
                 });
             }
             if( $scope.$state.includes('downloads')){
@@ -139,10 +139,34 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             selectedCard.views ++;
             var modalInstance = $uibModal.open({
                 templateUrl: 'cardView.html',
-                controller: 'monitorController',
+                controller: 'monitorViewController',
                 resolve: {
                     selectedCard: function () {
                         return selectedCard;
+                    }
+                }
+
+            });
+        };
+        $scope.openCardScript = function(script){
+            var modalInstance = $uibModal.open({
+                templateUrl: 'scriptView.html',
+                controller: 'scriptViewController',
+                resolve: {
+                    script: function () {
+                        return script;
+                    }
+                }
+
+            });
+        };
+        $scope.openCardDownload = function(download){
+            var modalInstance = $uibModal.open({
+                templateUrl: 'DownloadView.html',
+                controller: 'DownloadViewController',
+                resolve: {
+                    download: function () {
+                        return download;
                     }
                 }
 

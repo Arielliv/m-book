@@ -5,23 +5,24 @@
     <div class="modal-body">
         <div class="panel-body">
             <div class="row">
-                <div class="form-group col-lg-8" ng-class="{'has-error': notPass && Form.monitorName.$invalid}">
-                    <label class="control-label label-add-card" for="monitorName">שם הסקריפט:</label>
-                    <input class="input-add-card form-control " id="monitorName" name="monitorName" type="text"  ng-model="monitorName" ng-pattern="/^[a-z1-9]{10,}$/" ng-required="true">
-                    <p ng-show="notPass && Form.monitorName.$invalid" class="help-block">שם הניטור חייב להיות לפחות 10 אותיות/מספרים</p>
+                <div class="form-group col-lg-8" ng-class="{'has-error': notPass && Form.scriptName.$invalid}">
+                    <label class="control-label label-add-card" for="scriptName">שם הסקריפט:</label>
+                    <input class="input-add-card form-control " id="scriptName" name="scriptName" type="text"  ng-model="scriptName" ng-pattern="/^[a-z1-9]{10,}$/" ng-required="true">
+                    <p ng-show="notPass && Form.scriptName.$invalid" class="help-block">שם הסקריפט חייב להיות לפחות 10 אותיות/מספרים</p>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorExplain.$invalid}">
-                    <label class="control-label label-add-card" for="monitorExplain">הסבר על הקובץ</label>
-                    <textarea class="input-big form-control " id="monitorExplain" name="monitorExplain" type="text"  ng-model="monitorExplain" ng-pattern="/^[a-z1-9]{1,}$/" ng-required="true"></textarea>
-                    <p ng-show="notPass && Form.monitorExplain.$invalid" class="help-block">הסבר חייב להיות לפחות 150 אותיות ו/או מספרים</p>
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.scriptExplain.$invalid}">
+                    <label class="control-label label-add-card" for="scriptExplain">הסבר על הקובץ</label>
+                    <textarea class="input-big form-control " id="scriptExplain" name="scriptExplain" type="text"  ng-model="scriptExplain" ng-pattern="/^[a-z1-9]{1,}$/" ng-required="true"></textarea>
+                    <p ng-show="notPass && Form.scriptExplain.$invalid" class="help-block">הסבר על הקובץ חייב להיות לפחות 50 אותיות/מספרים</p>
                 </div>
             </div>
             <div>
-                <div class="form-group col-lg-8" ng-class="{'has-error': Form.uploadFile.$invalid}">
-                    <label class="control-label label-add-card" for="uploadDownloads">שם הקובץ</label>
-                    <input class="input-add-card form-control" id="uploadDownloads" name="uploadFile" ng-model="uploadDownloads" type="file" id="file" name="file"/>
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.uploadScripts.$invalid}">
+                    <label class="control-label label-add-card" for="uploadScripts">שם הקובץ</label>
+                    <input class="input-add-card form-control" id="uploadScripts" name="uploadScripts" ng-model="uploadDownloads" type="file" />
+                    <p ng-show="notPass && Form.uploadScripts.$invalid" class="help-block">עליך לבחור קובץ</p>
                 </div>
             </div>
         </div>
