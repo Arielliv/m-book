@@ -90,8 +90,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             return string;
         };
         $scope.openRandom = function(){
-            var random = Math.floor(Math.random() * $scope.Cards.length)/*you can add (+ num) to set start point to random*/;
-            $scope.openCard($scope.Cards[random]);
+            if($scope.Cards.length >0){
+                var random = Math.floor(Math.random() * $scope.Cards.length)/*you can add (+ num) to set start point to random*/;
+                $scope.openCard($scope.Cards[random]);
+            }
         };
         $scope.addCard = function(){
             if( $scope.$state.includes('monitors')) {
