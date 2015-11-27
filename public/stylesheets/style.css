@@ -2,11 +2,6 @@
     display: none !important;
 }
 
-.modal{
-    direction: ltr;
-    display: block;
-    overflow: auto;
-}
 form{
     direction: rtl;
     background-color: #262F3E;
@@ -16,26 +11,38 @@ form{
 }
 body{
     width: 100%;
-    background-image: url("../images/3.jpg");
+
+    background-color: #e9eaed;
 }
+
+.modal{
+    direction: ltr;
+    display: block;
+    overflow: auto;
+}
+
 .navbar-inverse{
     background-color: #262F3E;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.64);
 
 }
+
 .container-fluid{
     padding-right: 0;
     padding-left: 0;
 
 }
+
 .navbar-header {
     border-bottom: 2px solid;
     border-bottom-color: #f5bd35;
 }
+
 .navbar-right > .navbar-brand {
     font-size: 26px;
     color: #fff;
 }
+
 .nav-btn{
     font-size: 22px;
 }
@@ -43,11 +50,13 @@ body{
 .nav-btn-effect:hover{
     background-color: #1F2631;
 }
+
 .nav-hover:hover{
     border-bottom: 2px solid;
     border-bottom-color:#42B3FF;
 
 }
+
 .choose{
     padding: 3px;
     font-size: 12px;
@@ -61,14 +70,17 @@ body{
 .dropdown-toggle{
     font-size: 17px;
 }
+
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
     margin-right: auto;
 }
+
 .main{
     position: absolute;
     top: 70px;
     width: 100%;
 }
+
 .row-costume-setup{
     display: block;
     position: static;
@@ -102,12 +114,14 @@ body{
     width: 100%;
     height: 80%;
 }
+
 .card-lable{
     display: block;
     height: 20%;
     text-align: center;
     margin-bottom: 0;
 }
+
 .card-lable2{
     display: inline;
     font-size:18px;
@@ -117,21 +131,25 @@ body{
     width: 50%;
     display: inline;
 }
+
 .input-add-card{
     color:black;
     float: left;
     width: 50%;
     display: inline;
 }
+
 .form-group{
     display: block;
 }
+
 .input-big{
     color:black;
     display: block;
     height: 50px;
     width: 500px;
 }
+
 .panel-body{
     margin-top: 80px;
 }
@@ -139,6 +157,7 @@ body{
 .costume-cards{
     display: inline;
 }
+
 .card-p{
     display: inline;
     max-width: 100px;
@@ -177,6 +196,7 @@ body{
     border-radius: 3px;
     opacity: 0.8;
 }
+
 .header-costume{  
     position: inherit;
     top:-7.5px;
@@ -188,6 +208,7 @@ body{
     text-align: center;
     font-size: 24px;
 }
+
 .modal-footer{
     padding: 0;
 }
@@ -275,7 +296,7 @@ body{
 /*########################################################################################################################################################################################################################################*/
 
 
-/*test*/
+/*card classes*/
 .card-container {
     height: 250px;
     width: 16%;
@@ -356,6 +377,8 @@ body{
     font-size: 10px;
     text-align: center;
 }
+
+/*****/
 .a{
     width: 50%;
     background-color: #262F3E;
@@ -372,14 +395,15 @@ body{
     top:30%;
     left: 1010px;
 }
+
 .up{
     z-index: 1000;
 }
 .row-costume-files {
-    top:60px;
+    top:100px;
     position: absolute;
     display: block;
-    background-color: #f9f9f9;
+    
 }
 
 .file-continer {
@@ -422,7 +446,7 @@ body{
 }
 
 
-/*************************************************************************/
+/*sub dropdown menu*/
 .dropdown-submenu {
     position:relative;
 }
@@ -465,5 +489,7 @@ body{
     border-radius:6px 0 6px 6px;
 }
 
-
-
+/*****/
+.form-control-costume{
+    width: 100%;
+}
