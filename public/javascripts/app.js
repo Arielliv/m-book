@@ -1,6 +1,7 @@
 'use strict';
 
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ]);
+
     /*make limit to characters in line' and add ...*/
     app.filter('strLimit', ['$filter', function($filter) {
         return function(input, limit) {
@@ -11,12 +12,14 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             return $filter('limitTo')('...' + input, limit);
         };
     }]);
+
     /*make angular as trustfull for dom(html)*/
     app.filter('to_trusted', ['$sce', function($sce){
         return function(text) {
             return $sce.trustAsHtml(text);
         };
     }]);
+
     /*make comments*/
     app.directive('toggle', function($timeout){
         return {
@@ -30,6 +33,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             }
         };
     });
+
+    /*the config , set the states for the ng-rout-ui*/
     app.config(function($stateProvider, $urlRouterProvider) {
         //
         // For any unmatched url, redirect to /state1
@@ -49,12 +54,54 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 url: "/scripts",
                 templateUrl: "scripts.html"
             })
+            /*
+            .state('scriptsView', {
+                url: "/scriptView",
+                templateUrl: "scriptView.html"
+            })
+            .state('uploadScripts', {
+                url: "/uploadScripts",
+                templateUrl: "uploadScripts.html"
+            })
+            .state('DownloadsView', {
+                url: "/DownloadsView",
+                templateUrl: "DownloadsView.html"
+            })
+            .state('uploadDownloads', {
+                url: "/uploadDownloads",
+                templateUrl: "uploadDownloads.html"
+            })*/
 
     });
 
-    app.controller('nav', function($scope, $uibModal, $filter, $state ,$aside, Restangular,$sce) {
+    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside, Restangular,$sce) {
+        /*arrays of input*/
         $scope.downloadsData = [];
         $scope.scriptsData = [];
+        $scope.Cards = [];
+
+
+        $scope.test=function(){
+            console.log($scope.property);
+            console.log($scope.filterValue);
+            return "monitorName";
+        };
+        $scope.test2=function(){
+            return $scope.propertyor === $scope.filterValue;
+        };
+        /*order cards*/
+        var orderBy = $filter('orderBy');
+        $scope.order = function(predicate, reverse) {
+            $scope.Cards = orderBy($scope.Cards, predicate, reverse);
+
+        };
+        $scope.order('-name',false);
+
+        /*variables*/
+        $scope.$state = $state;
+        $scope.search = false;
+
+        /*open side nav bar, its a modal-ui*/
         $scope.openAside = function(position) {
             $aside.open({
                 templateUrl: 'aside.html',
@@ -73,9 +120,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 }
             })
         };
-        $scope.$state = $state;
-        $scope.Cards = [];
-        $scope.search = false;
+
+        /*limit the chars in line, and drop down*/
         $scope.limitCharPerLine = function(monitorExplain){
             var count = 0;
             var string = monitorExplain;
@@ -89,12 +135,16 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             }
             return string;
         };
+
+        /*open random card*/
         $scope.openRandom = function(){
             if($scope.Cards.length >0){
                 var random = Math.floor(Math.random() * $scope.Cards.length)/*you can add (+ num) to set start point to random*/;
                 $scope.openCard($scope.Cards[random]);
             }
         };
+
+        /*add new card/script/file, opens modal*/
         $scope.addCard = function(){
             if( $scope.$state.includes('monitors')) {
                 var modalInstance1 = $uibModal.open({
@@ -113,8 +163,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
                     $scope.Cards.push(newCard);
                 });
-            }
-            if( $scope.$state.includes('scripts')){
+            } else if( $scope.$state.includes('scripts')){
                 var modalInstance2 = $uibModal.open({
                     templateUrl: 'uploadScripts.html',
                     controller: 'uploadScriptsController'
@@ -123,8 +172,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 modalInstance2.result.then(function (data) {
                     $scope.scriptsData.push(data);
                 });
-            }
-            if( $scope.$state.includes('downloads')){
+            } else if( $scope.$state.includes('downloads')){
                 var modalInstance3 = $uibModal.open({
                     templateUrl: 'uploadDownloads.html',
                     controller: 'uploadDownloadsController'
@@ -137,6 +185,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 console.log("problem");
             }
         };
+
+        /*open card view, its a modal*/
         $scope.openCard = function(selectedCard){
             selectedCard.views ++;
             var modalInstance = $uibModal.open({
@@ -150,6 +200,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
             });
         };
+
+        /*open scripts view to download, its a modal*/
         $scope.openCardScript = function(script){
             var modalInstance = $uibModal.open({
                 templateUrl: 'scriptView.html',
@@ -162,6 +214,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
             });
         };
+
+        /*open file view to download, its a modal*/
         $scope.openCardDownload = function(download){
             var modalInstance = $uibModal.open({
                 templateUrl: 'DownloadView.html',
