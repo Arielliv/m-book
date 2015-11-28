@@ -23,13 +23,13 @@
         <div class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover" ng-class="{'active' : state=monitor}"  ui-sref="monitors">ניטורים</a>
+                    <a type="button" class="nav-btn nav-hover" ng-class="{'active nav-active' : $state.includes('monitors')}"  ui-sref="monitors">ניטורים</a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover" ng-class="{'downloads' : state=monitor}" ui-sref="downloads"> הורדות </a>
+                    <a type="button" class="nav-btn nav-hover" ng-class="{'active nav-active' : $state.includes('downloads')}" ui-sref="downloads"> הורדות </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover" ng-class="{'scripts' : state=monitor}" ui-sref="scripts"> סקריפטים </a>
+                    <a type="button" class="nav-btn nav-hover" ng-class="{'active nav-active' : $state.includes('scripts')}" ui-sref="scripts"> סקריפטים </a>
                 </li>
             </ul>
         </div>

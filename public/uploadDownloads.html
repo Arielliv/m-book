@@ -19,9 +19,11 @@
                 </div>
             </div>
             <div>
-                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.uploadDownloads.$invalid}">
-                    <label class="control-label label-add-card" for="uploadDownloads">שם הקובץ</label>
-                    <input class="form-control input-add-card form-control-costume" id="uploadDownloads" name="uploadDownloads" ng-model="uploadDownloads" type="file" />
+                <div class="form-group col-lg-12" ng-class="{'has-error':notPass && Form.uploadDownloads.$invalid}">
+
+                    <input  ng-model="uploadDownloads" class="form-control-file" id="uploadDownloads" type="file" fd-input file-names="fileNames" />
+                    <input  class="btn btn-primary" type="button" value="בחר קובץ" ng-click="choose()"/> <!-- on button click fire the file click event -->
+                    <span class="badge badge-important">{{fileNames}}</span>
                     <p ng-show="notPass && Form.uploadDownloads.$invalid" class="help-block">עליך לבחור קובץ</p>
                 </div>
             </div>

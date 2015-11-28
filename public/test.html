@@ -7,90 +7,12 @@
     <meta charset="UTF-8">
     <title>M-BOOK</title>
 </head>
-<body>
-<div class="row-costume-files col-lg-8 col-lg-offset-2">
-    <button class="btn btn-primary file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </button>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">s</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-    <div class="file-continer">
-        <span class="glyphicon glyphicon-floppy-save "></span>
-        <label class="file-label">ALscscscscsript</label>
-    </div>
-</div>
+<body ng-app="appt" ng-controller="AppController">
+<input style="visibility:hidden; width: 1px;" ng-model="uploadDownloads" type="file" fd-input file-names="fileNames" />
+<input  class="btn btn-primary" type="button" value="בחר קובץ" onclick="$(this).parent().find('input[type=file]').click();"/> <!-- on button click fire the file click event -->
 
+
+<span class="badge badge-important">{{fileNames}}</span>
 </body>
 <footer>
     <script src="vendors/angular/angular.min.js"></script>
@@ -99,9 +21,10 @@
     <script src="vendors/underscore/underscore.js"></script>
     <script src="vendors/jquery/jquery-2.1.4.min.js"></script>
     <script src="vendors/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-    <script src="javascripts/app.js"></script>
+    <script src="javascripts/test.js"></script>
     <script src="javascripts/monitorViewController.js"></script>
     <script src="javascripts/addCardController.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
+    <script src="javascripts/test.js"></script>
+
 </footer>
 </html>

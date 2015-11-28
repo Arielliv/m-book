@@ -2,6 +2,10 @@
  * Created by Ariel on 22/11/2015.
  */
 app.controller('uploadScriptsController',function($scope,$modalInstance ){
+    $scope.fileNames = '';
+    $scope.choose = function(){
+        $('#uploadScripts').trigger('click');
+    };
     $scope.add = function(valid){
         if(valid){
                 $scope.data = 'none';

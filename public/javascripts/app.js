@@ -34,6 +34,24 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         };
     });
 
+    /*get and shows the file name*/
+    app.directive('fdInput', function($timeout){
+        return {
+            scope: {
+                fileNames: '='
+            },
+            link:function(scope, element, attrs) {
+                $timeout(element.on('change', function(evt) {
+                    var files = evt.target.files;
+                    console.log(files[0].name);
+                    console.log(files[0].size);
+
+                    scope.fileNames = files[0].name;
+                    scope.$apply();
+                }),0);
+            }
+        }
+    });
     /*the config , set the states for the ng-rout-ui*/
     app.config(function($stateProvider, $urlRouterProvider) {
         //
@@ -73,6 +91,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             })*/
 
     });
+
 
     app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside, Restangular,$sce) {
         /*arrays of input*/
@@ -179,6 +198,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
 
                 modalInstance3.result.then(function (data) {
+                    console.log(data);
                     $scope.downloadsData.push(data);
                 });
             } else {

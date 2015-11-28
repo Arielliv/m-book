@@ -11,7 +11,7 @@ form{
 }
 body{
     width: 100%;
-
+    background-image: url("../images/swirl_pattern.png");
     background-color: #e9eaed;
 }
 
@@ -57,6 +57,10 @@ body{
 
 }
 
+.nav-active{
+    border-bottom: 2px solid;
+    border-bottom-color:#42B3FF;
+}
 .choose{
     padding: 3px;
     font-size: 12px;
@@ -490,6 +494,26 @@ body{
 }
 
 /*****/
-.form-control-costume{
-    width: 100%;
+.form-control-file{
+    visibility:hidden;
+    width: 1px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }
