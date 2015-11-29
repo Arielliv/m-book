@@ -179,6 +179,23 @@ body{
     height: 50px;
 
 }
+
+.btn-modal-costume-admin{
+    border-radius: 0;
+    width: 50%;
+    height: 50px;
+    display: inline;
+}
+
+.row-costume{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.col-costume{
+    width: 100%;
+    display: inline;
+}
 /*
 .btn-modal-costume:hover{
     background-color: #4464ff;
@@ -516,4 +533,7 @@ body{
     background: white;
     cursor: inherit;
     display: block;
+}
+.c{
+
 }

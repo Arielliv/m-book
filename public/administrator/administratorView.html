@@ -1,0 +1,20 @@
+
+<div ui-sref="administrator">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>שם הניטור</th>
+            <th>תאריך</th>
+            <th>סטאטוס</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="selected in Cards | filter:{pass:true}">
+            <td>{{selected.monitorName | strLimit: 25}}</td>
+            <td>{{selected.dateHeader}}</td>
+            <td>{{selected.pass}}</td>
+            <td><button class="btn btn-success card-li-costume-sides" ng-click="openCardAdmin(selected)">פתח ניטור</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

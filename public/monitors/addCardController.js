@@ -5,6 +5,7 @@ app.controller('addCardController',function($scope,$modalInstance ){
             $modalInstance.close({
                 'monitorName' : $scope.monitorName,
                 'monitorType' : $scope.monitorType,
+                /*change to level*/"monitorLevel" : $scope.monitorLevel,
                 'monitorProdact' : $scope.monitorProdact,
                 'monitorSystem' : $scope.monitorSystem,
                 'monitorExplain' : $scope.monitorExplain,

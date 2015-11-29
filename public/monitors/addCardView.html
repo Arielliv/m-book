@@ -15,11 +15,24 @@
                 <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorType.$invalid}">
                     <label class="control-label label-add-card" for="monitorType">סוג הניטור:</label>
                     <select class="form-control input-add-card" id="monitorType" name="monitorType" ng-model="monitorType" ng-required="true">
+                        <option>winlog</option>
+                        <option>log</option>
+                        <option>service/process</option>
+                        <option>schedule task</option>
+                        <option>...</option>
+                    </select>
+                    <p ng-show="notPass && Form.monitorType.$invalid" class="help-block">לא נבחר סוג ניטור</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorLevel.$invalid}">
+                    <label class="control-label label-add-card" for="monitorLevel">רמת ניטור:</label>
+                    <select class="form-control input-add-card" id="monitorLevel" name="monitorType" ng-model="monitorLevel" ng-required="true">
                         <option>בסיסי</option>
                         <option>מתקדם</option>
                         <option>אפליקטיבי</option>
                     </select>
-                    <p ng-show="notPass && Form.monitorType.$invalid" class="help-block">לא נבחר סוג ניטור</p>
+                    <p ng-show="notPass && Form.monitorLevel.$invalid" class="help-block">לא נבחרה רמת ניטור</p>
                 </div>
             </div>
             <div class="row">

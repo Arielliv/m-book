@@ -2,7 +2,7 @@
 <div class="main" ui-sref="monitors">
     <div class="row row-costume-setup " ui-view>
         <div class="costume-cards">
-            <div class="" ng-repeat="selectedCard in Cards | filter:filterValue">
+            <div class="" ng-repeat="selectedCard in Cards | filter:{pass:true,monitorName:filterValue} ">
                 <div class="card-container row">
                     <div class="card-img-container">
                         <img class="card-img col-lg-12" ng-src="{{selectedCard.img}}">

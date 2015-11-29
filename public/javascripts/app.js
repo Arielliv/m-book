@@ -61,16 +61,20 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         // Now set up the states
         $stateProvider
             .state('monitors', {
-                url: "/monitors",
-                templateUrl: "monitors.html"
+                url: "/monitors/monitors",
+                templateUrl: "monitors/monitors.html"
             })
             .state('downloads', {
-                url: "/downloads",
-                templateUrl: "downloads.html"
+                url: "/files/downloads",
+                templateUrl: "files/downloads.html"
             })
             .state('scripts', {
-                url: "/scripts",
-                templateUrl: "scripts.html"
+                url: "/scripts/scripts",
+                templateUrl: "scripts/scripts.html"
+            })
+            .state('administrator', {
+                url: "/administrator/administratorView",
+                templateUrl: "administrator/administratorView.html"
             })
             /*
             .state('scriptsView', {
@@ -119,6 +123,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*variables*/
         $scope.$state = $state;
         $scope.search = false;
+        $scope.count = 0;
 
         /*open side nav bar, its a modal-ui*/
         $scope.openAside = function(position) {
@@ -167,7 +172,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.addCard = function(){
             if( $scope.$state.includes('monitors')) {
                 var modalInstance1 = $uibModal.open({
-                    templateUrl: 'addCardView.html',
+                    templateUrl: 'monitors/addCardView.html',
                     controller: 'addCardController'
                 });
 
@@ -180,11 +185,15 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     }
                     newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
+                    newCard.id = $scope.count;
+                    newCard.pass = true;
+                    $scope.count ++;
+                    console.log(newCard)
                     $scope.Cards.push(newCard);
                 });
             } else if( $scope.$state.includes('scripts')){
                 var modalInstance2 = $uibModal.open({
-                    templateUrl: 'uploadScripts.html',
+                    templateUrl: 'scripts/uploadScripts.html',
                     controller: 'uploadScriptsController'
                 });
 
@@ -193,7 +202,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
             } else if( $scope.$state.includes('downloads')){
                 var modalInstance3 = $uibModal.open({
-                    templateUrl: 'uploadDownloads.html',
+                    templateUrl: 'files/uploadDownloads.html',
                     controller: 'uploadDownloadsController'
                 });
 
@@ -210,7 +219,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.openCard = function(selectedCard){
             selectedCard.views ++;
             var modalInstance = $uibModal.open({
-                templateUrl: 'cardView.html',
+                templateUrl: 'monitors/cardView.html',
                 controller: 'monitorViewController',
                 resolve: {
                     selectedCard: function () {
@@ -224,7 +233,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*open scripts view to download, its a modal*/
         $scope.openCardScript = function(script){
             var modalInstance = $uibModal.open({
-                templateUrl: 'scriptView.html',
+                templateUrl: 'scripts/scriptView.html',
                 controller: 'scriptViewController',
                 resolve: {
                     script: function () {
@@ -238,11 +247,24 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*open file view to download, its a modal*/
         $scope.openCardDownload = function(download){
             var modalInstance = $uibModal.open({
-                templateUrl: 'DownloadView.html',
+                templateUrl: 'files/DownloadView.html',
                 controller: 'DownloadViewController',
                 resolve: {
                     download: function () {
                         return download;
+                    }
+                }
+
+            });
+        };
+
+        $scope.openCardAdmin = function(selectedCard){
+            var modalInstance = $uibModal.open({
+                templateUrl: 'administrator/cardViewAdmin.html',
+                controller: 'adminController',
+                resolve: {
+                    selectedCard: function () {
+                        return selectedCard;
                     }
                 }
 
