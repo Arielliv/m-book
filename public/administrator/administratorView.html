@@ -1,19 +1,23 @@
 
-<div ui-sref="administrator">
-    <table class="table">
+<div class="main" ui-sref="administrator">
+    <table class="table col-lg-8 col-lg-offset-2" ui-view>
         <thead>
         <tr>
-            <th>שם הניטור</th>
-            <th>תאריך</th>
-            <th>סטאטוס</th>
+            <th class="table-text">שם הניטור</th>
+            <th class="table-text">תאריך</th>
+            <th class="table-text">סטאטוס</th>
+            <th class="table-text">פעולות</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="selected in Cards | filter:{pass:true}">
-            <td>{{selected.monitorName | strLimit: 25}}</td>
-            <td>{{selected.dateHeader}}</td>
-            <td>{{selected.pass}}</td>
-            <td><button class="btn btn-success card-li-costume-sides" ng-click="openCardAdmin(selected)">פתח ניטור</button></td>
+            <td class="table-text">{{selected.monitorName | strLimit: 25}}</td>
+            <td class="table-text">{{selected.dateHeader}}</td>
+            <td class="table-text">{{selected.pass}}</td>
+            <td class="table-text">
+                <button class="btn btn-success" ng-click="openCardAdmin(selected)">פתח ניטור</button>
+                <button class="btn btn-danger" ng-click="openCardAdmin(selected)">מחק ניטור</button>
+            </td>
         </tr>
         </tbody>
     </table>

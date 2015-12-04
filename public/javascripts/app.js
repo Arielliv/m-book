@@ -2,6 +2,56 @@
 
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ]);
 
+
+    app.factory('ServiceArray',function($filter){
+        var Cards = [{dateHeader: "04-12-2015",
+            id: 0,
+            img: "images/windows.jpg",
+            monitorExplain: "s",
+            monitorLevel: "מתקדם",
+            monitorName: "scscscscscscscs",
+            monitorProdact: "windows",
+            monitorSystem: "מערכת4",
+            monitorType: "service/process",
+            pass: true,
+            views: 0}];
+        var Downloads = [];
+        var Scripts = [];
+        return{
+            getCards : function(){
+                return Cards;
+            },
+            addCard: function(card){
+                Cards.push(card);
+                return Cards;
+            },
+            getCard: function(monitorName){
+                return $filter('filter')(Cards, { monitorName: monitorName})[0];
+            },
+            getDownloads: function(){
+                return Downloads;
+            },
+            addDownload: function(Download){
+                Downloads.push(Download);
+                return Downloads;
+            },
+            getDownload: function(downloadName){
+                return $filter('filter')(Downloads, { fileName: downloadName})[0];
+            },
+            getScripts: function(){
+                return Scripts;
+            },
+            addScripts: function(Script){
+                Scripts.push(Script);
+                return Scripts;
+            },
+            getScript: function(scriptName){
+                return $filter('filter')(Scripts, { scriptName: scriptName})[0];
+            }
+
+        }
+    });
+
     /*make limit to characters in line' and add ...*/
     app.filter('strLimit', ['$filter', function($filter) {
         return function(input, limit) {
@@ -97,21 +147,12 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     });
 
 
-    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside, Restangular,$sce) {
+    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,Restangular,$sce) {
         /*arrays of input*/
-        $scope.downloadsData = [];
-        $scope.scriptsData = [];
-        $scope.Cards = [];
+        $scope.downloadsData = ServiceArray.getDownloads();
+        $scope.scriptsData = ServiceArray.getScripts();
+        $scope.Cards = ServiceArray.getCards();
 
-
-        $scope.test=function(){
-            console.log($scope.property);
-            console.log($scope.filterValue);
-            return "monitorName";
-        };
-        $scope.test2=function(){
-            return $scope.propertyor === $scope.filterValue;
-        };
         /*order cards*/
         var orderBy = $filter('orderBy');
         $scope.order = function(predicate, reverse) {
@@ -188,8 +229,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.id = $scope.count;
                     newCard.pass = true;
                     $scope.count ++;
-                    console.log(newCard)
-                    $scope.Cards.push(newCard);
+                    console.log(newCard);
+                    $scope.Cards= ServiceArray.addCard(newCard);
+                    //$scope.Cards.push(newCard);
                 });
             } else if( $scope.$state.includes('scripts')){
                 var modalInstance2 = $uibModal.open({
@@ -198,7 +240,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
 
                 modalInstance2.result.then(function (data) {
-                    $scope.scriptsData.push(data);
+                    $scope.scriptsData =ServiceArray.addScripts(data);
+                    //$scope.scriptsData.push(data);
                 });
             } else if( $scope.$state.includes('downloads')){
                 var modalInstance3 = $uibModal.open({
@@ -208,7 +251,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
                 modalInstance3.result.then(function (data) {
                     console.log(data);
-                    $scope.downloadsData.push(data);
+                    $scope.downloadsData = ServiceArray.addDownload(data);
+                    //$scope.downloadsData.push(data);
                 });
             } else {
                 console.log("problem");
