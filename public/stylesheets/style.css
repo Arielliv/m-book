@@ -180,15 +180,6 @@ body{
 
 }
 
-/*.btn-modal-costume-admin*/
-.b:nth-child(2){
-    padding-right: 0;
-}
-
-/*.btn-modal-costume-admin*/
-.b:nth-child(1){
-    padding-left: 0;
-}
 
 .row-costume{
     margin-left: 0;
@@ -403,10 +394,7 @@ body{
 }
 
 /*****/
-.a{
-    width: 50%;
-    background-color: #262F3E;
-}
+
 .nav-left{
     top:30%;
     left: 97%;
@@ -539,11 +527,119 @@ body{
 }
 .table{
     background-color: #262F3E;
-    border: 2px solid;
-    border-radius: 3px;
+    border-radius: 5px;
     color: white;
 }
 
 .table-text{
     text-align: center;
+}
+
+.continer-btn-admin {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-admin{
+    border-radius: 0;
+}
+
+.test-body{
+    z-index: -1000;
+    background-color:  #00308F !important;
+    width: 100%;
+    height: 65%;
+    position: fixed;
+    top: 0%;
+
+}
+
+.test-row{
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    position: fixed;
+    top: 150px;
+}
+
+.test-outbox{
+
+    height:350px;
+}
+
+.test-inbox-center {
+    height: 300px;         /*your login box height*/
+    position: absolute;
+    top: 50%;
+    margin-top: -150px;    /*height/2*/
+    border:1px black solid;
+    border-radius: 3px;
+    background-color:white;
+    padding: 0;
+    box-shadow: 0 10px 10px -2px black;
+}
+
+.mainOuterDiv{
+    height:300px;
+    overflow:hidden;
+
+}
+.middDiv{
+    width:80%;
+    height:75px;
+    margin:0px auto;
+    position:relative;
+    margin-top:50%;
+}
+.innerLeft{
+    position: absolute;
+    left: -60px;
+    top: -20px;
+    width: 60px;
+    height: 100%;
+    z-index: 1;
+    transform: skew(180deg,215deg);
+    background-color: #262F31;
+    -webkit-filter: brightness(300%);
+}
+.innerRight{
+    position: absolute;
+    right: -60px;
+    top: -20px;
+    width: 60px;
+    height: 100%;
+    z-index: 1;
+    transform: skew(180deg,145deg);
+    background-color: #262F31;
+    -webkit-filter: brightness(300%);
+}
+
+.textDiv:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -2;
+    background-color: #262F3E;
+    -webkit-filter: brightness(400%);
+    display: block;
+    min-height: 100%;
+}
+.textDiv{
+    z-index:120;
+    width:100%;
+    height:100%;
+    position:absolute;
+    color: white;
+    text-align: center;
+}
+
+
+.test-background-costume{
+    z-index: -1000;
+    background-color:  #72A0C1 !important;
+    width: 100%;
+    height: 45%;
+    position: fixed;
+    top: 55%;
 }

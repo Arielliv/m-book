@@ -1,18 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="test-body">
 <head>
     <link href="vendors/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>M-BOOK</title>
+    <title>M-BOOK-test</title>
 </head>
-<body ng-app="appt" ng-controller="AppController">
-<input style="visibility:hidden; width: 1px;" ng-model="uploadDownloads" type="file" fd-input file-names="fileNames" />
-<input  class="btn btn-primary" type="button" value="בחר קובץ" onclick="$(this).parent().find('input[type=file]').click();"/> <!-- on button click fire the file click event -->
-
-
-<span class="badge badge-important">{{fileNames}}</span>
+<body ng-app="appt" ng-controller="AppController" >
+    <div class="row test-row">
+        <div class="col-lg-4 test-outbox">
+            <div class="test-inbox-center col-lg-10 col-lg-offset-1 mainOuterDiv">
+                <div class="middDiv">
+                    <div class="innerLeft"></div>
+                    <div class="innerRight"></div>
+                    <div class="textDiv"><h1 class="h-cos">בסיסי</h1></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 test-outbox">
+            <div class="test-inbox-center col-lg-10 col-lg-offset-1 mainOuterDiv">
+                <div class="middDiv">
+                    <div class="innerLeft"></div>
+                    <div class="innerRight"></div>
+                    <div class="textDiv"><h1 class="h-cos">אפליקטיבי</h1></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 test-outbox">
+            <div class="test-inbox-center col-lg-10 col-lg-offset-1 mainOuterDiv">
+                <div class="middDiv">
+                    <div class="innerLeft"></div>
+                    <div class="innerRight"></div>
+                    <div class="textDiv"><h1 class="h-cos">מתקדם</h1></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="test-background-costume"></div>
 </body>
 <footer>
     <script src="vendors/angular/angular.min.js"></script>
