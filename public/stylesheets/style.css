@@ -11,7 +11,7 @@ form{
 }
 body{
     width: 100%;
-    background-image: url("../images/swirl_pattern.png");
+    background-image: url("../images/stardust.png");
     background-color: #e9eaed;
 }
 
@@ -102,12 +102,12 @@ body{
     height: 130px;
     padding: 0;
     border-radius: 5px;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 3px 3px 3px black;
 }
 
 .panel:hover{
-    border: solid 2px black;
-    box-shadow: 7px 7px 3px #899999;
+    border: solid 1px #D8D8D8;
+    box-shadow: 3px 3px 3px black;
 }
 
 .panel > img{
@@ -324,8 +324,8 @@ body{
 }
 
 .card-container:hover{
-    border: solid 1px #383838;
-    box-shadow: 7px 7px 3px #899999;
+    border: solid 1px #D8D8D8;
+    box-shadow: 3px 3px 3px black;
 }
 .card-img-container {
     position: static;
@@ -432,8 +432,8 @@ body{
     border:solid 1px #D8D8D8;
 }
 .file-continer:hover{
-    border: solid 1px #383838;
-    box-shadow: 7px 7px 3px #899999;
+    border: solid 1px #D8D8D8;
+    box-shadow: 3px 3px 3px black;
 }
 
 .file-label {
@@ -526,9 +526,10 @@ body{
     display: block;
 }
 .table{
-    background-color: #262F3E;
+    background-color: #72A0C1;
     border-radius: 5px;
     color: white;
+    box-shadow: 0 10px 10px -2px black;
 }
 
 .table-text{
@@ -546,7 +547,7 @@ body{
 
 .test-body{
     z-index: -1000;
-    background-color:  #00308F !important;
+    background-image: url("../images/stardust.png") !important;
     width: 100%;
     height: 65%;
     position: fixed;
@@ -642,4 +643,66 @@ body{
     height: 45%;
     position: fixed;
     top: 55%;
+}
+
+
+.container
+{
+    position:relative;
+    width:380px;
+    height:300px;
+    overflow:hidden;
+}
+.mainDiv
+{
+    height:300px; width:300px;
+    background-color:white;
+    border:solid 1px black;
+    position:absolute;
+    left:0;right:0;margin:auto;
+}
+.middDiv
+{
+    height:55px; width:70%;
+    background-color:lightblue;
+    position:absolute;
+    bottom:0;left:0;right:0;
+    margin:auto;
+    z-index:10;
+}
+.leftDiv, .rightDiv
+{
+    position:absolute;
+    bottom:30px;
+    width:30%;height:50px;
+    background-color:blue;
+    z-index:10;
+}
+.leftDiv
+{
+    left:-13%;
+    transform:rotate(30deg) skew(30deg);
+}
+.rightDiv
+{
+    right:-13%;
+    transform:rotate(-30deg) skew(-30deg);
+}
+.leftBDiv, .rightBDiv
+{
+    position:absolute;
+    width:13%; height:47px;
+    bottom:72px;
+    background-color:black;
+    z-index:9;
+}
+.leftBDiv
+{
+    left:-12%;
+    transform:rotate(-30deg) skew(-30deg);
+}
+.rightBDiv
+{
+    right:-12%;
+    transform:rotate(30deg) skew(30deg);
 }
