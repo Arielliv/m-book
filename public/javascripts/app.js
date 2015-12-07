@@ -61,6 +61,15 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             getCard: function(monitorName){
                 return $filter('filter')(Cards, { monitorName: monitorName})[0];
             },
+            updateStatusCard: function(monitorName){
+                ($filter('filter')(Cards, { monitorName: monitorName})[0]).status ++;
+                return Cards;
+            },
+            delCard: function(card){
+                var index = Cards.indexOf(card);
+                Cards.splice(index, 1);
+                return Cards;
+            },
             getDownloads: function(){
                 return Downloads;
             },
@@ -95,6 +104,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             return $filter('limitTo')('...' + input, limit);
         };
     }]);
+/*have never been tested, suppase to be the filter for the monitors*/
     app.filter('cardFilter', ['$filter', function($filter) {
         return function(selectedCard, status, monitorLevel,monitorSystem) {
             var selectedCard2 = null;
@@ -221,10 +231,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             $scope.filterValueLevel = value;
             if(status == '2'){
                 $scope.filterValueStatus = '2';
-                console.log($scope.filterValueStatus);
             }   else {
                 $scope.filterValueStatus = '3';
-                console.log($scope.filterValueStatus);
             }
         };
         $scope.adminFilter = '1';
@@ -301,7 +309,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.id = $scope.count;
                     newCard.status = 3;
                     $scope.count ++;
-                    console.log(newCard);
                     $scope.Cards= ServiceArray.addCard(newCard);
                     //$scope.Cards.push(newCard);
                 });
@@ -385,7 +392,13 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 }
 
             });
+            modalInstance.result.then(function () {
+                $scope.Cards = ServiceArray.getCards();
+            });
         };
+        $scope.delMonitor = function(selectedCard){
+            $scope.Cards = ServiceArray.delCard(selectedCard);
+        }
 
     });
 
