@@ -1,42 +1,37 @@
 
-<div class="main " ui-sref="monitors"  ng-init="filterValue1 = 'start'">
+<div class="main " ui-sref="monitors">
     <div class="row row-costume-setup " ui-view>
 
-<div class="test-body" ng-show="filterValue1=='start'">
+<div class="test-body" ng-show="filterValueLevel == 'start'">
         <div class="row test-row">
-            <div class="col-lg-4 test-outbox">
-                <div class="test-inbox-center col-lg-10 col-lg-offset-1 mainOuterDiv" ng-click="filterValue1='בסיסי'">
-                    <div class="middDiv">
-                        <div class="innerLeft"></div>
-                        <div class="innerRight"></div>
-                        <div class="textDiv"><h1 class="h-cos">בסיסי</h1></div>
-                    </div>
+            <div class="col-lg-3 test-outbox">
+                <div class="test-inbox-center col-lg-10 col-lg-offset-1 background-img-basic" ng-click="changeFilterValue('בסיסי' , '3')">
+                    <div class="text-div-test"><h1>בסיסי</h1></div>
                 </div>
             </div>
-            <div class="col-lg-4 test-outbox">
-                <div class="test-inbox-center col-lg-10 col-lg-offset-1 mainOuterDiv" ng-click="filterValue1='אפליקטיבי'">
-                    <div class="middDiv">
-                        <div class="innerLeft"></div>
-                        <div class="innerRight"></div>
-                        <div class="textDiv"><h1 class="h-cos">אפליקטיבי</h1></div>
-                    </div>
+            <div class="col-lg-3 test-outbox">
+                <div class="test-inbox-center col-lg-10 col-lg-offset-1 background-img-applicative" ng-click="changeFilterValue('אפליקטיבי' , '3')">
+                    <div class="text-div-test"><h1>אפליקטיבי</h1></div>
                 </div>
             </div>
-            <div class="col-lg-4 test-outbox">
-                <div class="test-inbox-center col-lg-10 col-lg-offset-1 mainOuterDiv" ng-click="filterValue1='מתקדם'">
-                    <div class="middDiv">
-                        <div class="innerLeft"></div>
-                        <div class="innerRight"></div>
-                        <div class="textDiv"><h1 class="h-cos">מתקדם</h1></div>
-                    </div>
+            <div class="col-lg-3 test-outbox">
+                <div class="test-inbox-center col-lg-10 col-lg-offset-1 background-img-advance" ng-click="changeFilterValue('מתקדם' , '3')">
+                    <div class="text-div-test"><h1>מתקדם</h1></div>
                 </div>
             </div>
+            <div class="col-lg-3 test-outbox">
+                <div class="test-inbox-center col-lg-10 col-lg-offset-1 background-img-construction" ng-click="changeFilterValue('בבניה', '2')">
+                    <div class="text-div-test"><h1>בבנייה</h1></div>
+                </div>
+            </div>
+            <div class="col-xs-12 shelf"></div>
         </div>
         <div class="test-background-costume" ></div>
 </div>
-        <div class="costume-cards" ng-show="filterValue1!='start'">
-            <div class="" ng-repeat="selectedCard in Cards | filter:{pass:true,monitorLevel:filterValue1,monitorSystem:filterValue} ">
-                <div class="card-container row">
+        <div class="costume-cards" ng-show="filterValueLevel != 'start'">
+
+            <div class="" ng-repeat="selectedCard in Cards | filter: filterValueStatus == '2' ? {status:'2'} : {status:'3', monitorLevel:filterValueLevel, monitorSystem:filterValue}">
+            <div class="card-container row">
                     <div class="card-img-container">
                         <img class="card-img col-lg-12" ng-src="{{selectedCard.img}}">
                     </div>

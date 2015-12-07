@@ -5,15 +5,15 @@
         <tr>
             <th class="table-text">שם הניטור</th>
             <th class="table-text">תאריך</th>
-            <th class="table-text">סטאטוס</th>
+            <th class="table-text" ng-click="adminFilterChange()">סטאטוס</th>
             <th class="table-text">פעולות</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="selected in Cards | filter:{pass:true}">
+        <tr ng-repeat="selected in Cards | filter:{status:adminFilter}">
             <td class="table-text">{{selected.monitorName | strLimit: 25}}</td>
             <td class="table-text">{{selected.dateHeader}}</td>
-            <td class="table-text">{{selected.pass}}</td>
+            <td class="table-text">{{selected.status}}</td>
             <td class="table-text">
                 <button class="btn btn-success" ng-click="openCardAdmin(selected)">פתח ניטור</button>
                 <button class="btn btn-danger disabled" >מחק ניטור</button>

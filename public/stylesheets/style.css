@@ -566,6 +566,7 @@ body{
 .test-outbox{
 
     height:350px;
+
 }
 
 .test-inbox-center {
@@ -578,12 +579,63 @@ body{
     background-color:white;
     padding: 0;
     box-shadow: 0 10px 10px -2px black;
+    -webkit-filter:grayscale(100%);
+}
+.test-inbox-center:hover{
+    -webkit-animation-name: cardIntro;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode:forwards;
+    box-shadow: 0 20px 20px -2px black;
 }
 
-.mainOuterDiv{
+@-webkit-keyframes cardIntro {
+    from{
+        -webkit-filter:grayscale(100%);
+    }
+    to{
+        -webkit-filter:grayscale(0);
+        -webkit-transform: scale(1.1);
+    }
+
+}
+.background-img-basic{
+    background-image: url("../images/basic2.png") ;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+}
+
+.background-img-advance{
+    background-image: url("../images/advance.png") ;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+}
+
+.background-img-applicative{
+    background-image: url("../images/applicative.png") ;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+}
+
+.background-img-construction{
+    background-image: url("../images/Construction.png") ;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+}
+/*.mainOuterDiv{
     height:300px;
     overflow:hidden;
-
+    background-image: url("../images/M.png") ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
 }
 .middDiv{
     width:80%;
@@ -634,18 +686,11 @@ body{
     color: white;
     text-align: center;
 }
+*/
 
 
-.test-background-costume{
-    z-index: -1000;
-    background-color:  #72A0C1 !important;
-    width: 100%;
-    height: 45%;
-    position: fixed;
-    top: 55%;
-}
 
-
+/*
 .container
 {
     position:relative;
@@ -705,4 +750,58 @@ body{
 {
     right:-12%;
     transform:rotate(30deg) skew(30deg);
+}
+*/
+.text-div-test:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -2;
+    background-color: #1F2631;
+    -webkit-filter:blur(3px);
+    display: block;
+    min-height: 100%;
+    box-shadow: 2px 1px 2px 1px black;
+    border-right:3px black solid;
+    border-bottom:3px black solid;
+    border-left:3px black solid;
+}
+.text-div-test{
+    bottom:0 ;
+    z-index:120;
+    width:100%;
+    height:30%;
+    position:absolute;
+    color: white;
+    text-align: center;
+}
+.shelf {
+    border-bottom: 70px solid #72A0C1;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    top: -50px;
+    z-index: -10;
+}
+/*Example adding pseudo element to give shelf depth*/
+.shelf:after {
+    content: '';
+    background: #00308F;
+    height: 200px;
+    width: calc(100% + 40px); /*IE9+*/
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    margin: 0 -20px;
+    -webkit-filter:grayscale(70%);
+}
+
+.test-background-costume{
+    z-index: -1000;
+    background-image: url("../images/stardust.png") !important;
+    width: 100%;
+    height: 100%;
+    position: fixed;
 }

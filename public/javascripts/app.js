@@ -13,8 +13,41 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             monitorProdact: "windows",
             monitorSystem: "מערכת4",
             monitorType: "service/process",
-            pass: true,
-            views: 0}];
+            status: '2',
+            views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "מתקדם",
+                monitorName: "asssa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "ariel",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '1',
+                views: 0}];
         var Downloads = [];
         var Scripts = [];
         return{
@@ -60,6 +93,25 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 return input;
             }
             return $filter('limitTo')('...' + input, limit);
+        };
+    }]);
+    app.filter('cardFilter', ['$filter', function($filter) {
+        return function(selectedCard, status, monitorLevel,monitorSystem) {
+            var selectedCard2 = null;
+            if (selectedCard.status == status) {
+                if(selectedCard.status == '2'){
+                    selectedCard2 = selectedCard;
+                }
+                if (selectedCard.status == '3') {
+                    if(selectedCard.monitorLevel.include(monitorLevel)){
+                        selectedCard2 = selectedCard;
+                        if(selectedCard.monitorSystem.include(monitorSystem)){
+                            selectedCard2 = selectedCard;
+                        }
+                    }
+                }
+            }
+            return selectedCard2;
         };
     }]);
 
@@ -147,7 +199,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     });
 
 
-    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,Restangular,$sce) {
+    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window ,Restangular,$sce) {
         /*arrays of input*/
         $scope.downloadsData = ServiceArray.getDownloads();
         $scope.scriptsData = ServiceArray.getScripts();
@@ -163,6 +215,26 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
         /*variables*/
         $scope.$state = $state;
+        $scope.filterValueLevel = 'start';
+        $scope.filterValueStatus = '1';
+        $scope.changeFilterValue = function(value , status){
+            $scope.filterValueLevel = value;
+            if(status == '2'){
+                $scope.filterValueStatus = '2';
+                console.log($scope.filterValueStatus);
+            }   else {
+                $scope.filterValueStatus = '3';
+                console.log($scope.filterValueStatus);
+            }
+        };
+        $scope.adminFilter = '1';
+        $scope.adminFilterChange = function(){
+            if($scope.adminFilter != '3'){
+                $scope.adminFilter ++;
+            } else {
+                $scope.adminFilter = '1';
+            }
+        };
         $scope.search = false;
         $scope.count = 0;
 
@@ -227,7 +299,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
                     newCard.id = $scope.count;
-                    newCard.pass = true;
+                    newCard.status = 3;
                     $scope.count ++;
                     console.log(newCard);
                     $scope.Cards= ServiceArray.addCard(newCard);
