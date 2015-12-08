@@ -30,7 +30,7 @@
 </div>
         <div class="costume-cards" ng-show="filterValueLevel != 'start'">
 
-            <div class="" ng-repeat="selectedCard in Cards | filter: filterValueStatus == '2' ? {status:'2'} : {status:'3', monitorLevel:filterValueLevel, monitorSystem:filterValue}">
+            <div class="" ng-repeat="selectedCard in Cards | filter: filterValueStatus == '2' ? {status:'2'} : {status:'3',monitorName:Value ,monitorLevel:filterValueLevel, monitorSystem:filterValue}">
             <div class="card-container row">
                     <div class="card-img-container">
                         <img class="card-img col-lg-12" ng-src="{{selectedCard.img}}">

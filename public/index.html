@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover"  ng-click="changeFilterValue('start')" ng-class="{'active nav-active' : $state.includes('monitors')}"  ui-sref="monitors">ניטורים</a>
+                    <a type="button" class="nav-btn nav-hover"  ng-click="changeFilterValue('start')" ng-class="($state.includes('monitors') ? 'active nav-active' : '')"  ui-sref="monitors">ניטורים</a>
                 </li>
                 <li class="nav-btn-effect">
                     <a type="button" class="nav-btn nav-hover" ng-class="{'active nav-active' : $state.includes('downloads')}" ui-sref="downloads"> הורדות </a>
@@ -109,9 +109,9 @@
         </div>
         <form class="navbar-form navbar-left" ng-show="search" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" ng-model="filterValue">
+                <input type="text" class="form-control" placeholder="Search" ng-model="Value">
             </div>
-            <button type="submit" class="btn btn-default" ng-click="search=!search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            <button type="submit" class="btn btn-default" ng-click="search=!search ;searchIt(Value)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

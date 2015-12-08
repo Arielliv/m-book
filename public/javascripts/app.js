@@ -2,7 +2,7 @@
 
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ]);
 
-
+    /*service for the cards, scripts and files*/
     app.factory('ServiceArray',function($filter){
         var Cards = [{dateHeader: "04-12-2015",
             id: 0,
@@ -104,7 +104,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             return $filter('limitTo')('...' + input, limit);
         };
     }]);
-/*have never been tested, suppase to be the filter for the monitors*/
+/*have never been tested, suppase to be the filter for the monitors
     app.filter('cardFilter', ['$filter', function($filter) {
         return function(selectedCard, status, monitorLevel,monitorSystem) {
             var selectedCard2 = null;
@@ -124,7 +124,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             return selectedCard2;
         };
     }]);
-
+ */
     /*make angular as trustfull for dom(html)*/
     app.filter('to_trusted', ['$sce', function($sce){
         return function(text) {
@@ -224,9 +224,23 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.order('-name',false);
 
         /*variables*/
+        /*page*/
         $scope.$state = $state;
+        /*level of monitor for filter and etc*/
         $scope.filterValueLevel = 'start';
+        /*status of monitor for filter*/
         $scope.filterValueStatus = '1';
+        /*system filter filter*/
+        $scope.filterValue= '';
+        /*status filter for admin*/
+        $scope.adminFilter = '1';
+        /*search filter*/
+        $scope.Value = '';
+        /*search var*/
+        $scope.search = false;
+        /*count the cards for id*/
+        $scope.count = 0;
+        /*change status for the filter*/
         $scope.changeFilterValue = function(value , status){
             $scope.filterValueLevel = value;
             if(status == '2'){
@@ -235,7 +249,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 $scope.filterValueStatus = '3';
             }
         };
-        $scope.adminFilter = '1';
+
+        /*change admin filter, between statuses*/
         $scope.adminFilterChange = function(){
             if($scope.adminFilter != '3'){
                 $scope.adminFilter ++;
@@ -243,8 +258,15 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 $scope.adminFilter = '1';
             }
         };
-        $scope.search = false;
-        $scope.count = 0;
+
+        /*search in all monitor with status 3*/
+        $scope.searchIt = function(Value){
+            $scope.Value = Value;
+            $scope.filterValueStatus = '';
+            $scope.filterValueLevel = '';
+            $scope.filterValue='';
+        };
+
 
         /*open side nav bar, its a modal-ui*/
         $scope.openAside = function(position) {
@@ -319,6 +341,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
 
                 modalInstance2.result.then(function (data) {
+                    data.id = $scope.scriptsData.length +1;
                     $scope.scriptsData =ServiceArray.addScripts(data);
                     //$scope.scriptsData.push(data);
                 });
@@ -329,7 +352,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
 
                 modalInstance3.result.then(function (data) {
-                    console.log(data);
+                    data.id = $scope.downloadsData.length +1;
                     $scope.downloadsData = ServiceArray.addDownload(data);
                     //$scope.downloadsData.push(data);
                 });
@@ -380,7 +403,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
             });
         };
-
+        /*admin monitor card view*/
         $scope.openCardAdmin = function(selectedCard){
             var modalInstance = $uibModal.open({
                 templateUrl: 'administrator/cardViewAdmin.html',
@@ -396,6 +419,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 $scope.Cards = ServiceArray.getCards();
             });
         };
+        /*del monitor*/
         $scope.delMonitor = function(selectedCard){
             $scope.Cards = ServiceArray.delCard(selectedCard);
         }
