@@ -4,9 +4,17 @@
 /**
  * Created by Ariel on 06/11/2015.
  */
-app.controller('adminController',function($scope,$modalInstance,selectedCard,ServiceArray){
-    $scope.selectedCard= selectedCard;
+app.controller('adminController',function($scope,$modalInstance,selected,ServiceArray,types,prodacts,systems){
+    $scope.selected= selected;
+    $scope.systems = systems;
+    $scope.types = types;
+    $scope.prodacts = prodacts;
     $scope.ok = function() {
+        $modalInstance.close({
+        });
+    };
+    $scope.update = function(selected) {
+        ServiceArray.upadteCard(selected);
         $modalInstance.close({
         });
     };
@@ -14,6 +22,6 @@ app.controller('adminController',function($scope,$modalInstance,selectedCard,Ser
         $modalInstance.dismiss('cancel');
     };
     $scope.updateStatus = function(){
-        $scope.Cards = ServiceArray.updateStatusCard(selectedCard.monitorName);
+        $scope.Cards = ServiceArray.updateStatusCard($scope.selected.monitorName);
     };
 });

@@ -1,33 +1,58 @@
-
-<form ng-submit="ok()" class="Mbook">
+<form novalidate ng-submit="update(selected)" name="Form">
     <div class="modal-header col-lg-12">
-        <input class="col-lg-6 col-lg-offset-3 header-costume" ng-model="monitorName">{{selectedCard.monitorName}}</input>
+        <h3 class="col-lg-4 col-lg-offset-4">עדכון ניטור</h3>
     </div>
-    <div class="modal-body ">
-        <div class="panel-body form-body-costume">
-            <div class="form-m-gup">
-                <label class="card-lable2">סוג ניטור:</label>
-                <input class="card-p" ng-model="monitorType">{{selectedCard.monitorType}}</input>
+    <div class="modal-body">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-lg-8" >
+                    <label class="control-label label-add-card" for="monitorName">שם הניטור:</label>
+                    <input class="input-add-card form-control " id="monitorName" name="monitorName" type="text"  ng-model="selected.monitorName">
+                </div>
             </div>
-            <div class="form-group">
-                <label class="card-lable2">רמת ניטור:</label>
-                <input class="card-p"  ng-model="monitorLevel">{{selectedCard.monitorLevel}}</input>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorType">סוג הניטור:</label>
+                    <select class="form-control input-add-card" id="monitorType" name="monitorType" ng-model="selected.monitorType">
+                        <option ng-repeat="type in types">{{type}}</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="card-lable2">מוצר:</label>
-                <input class="card-p" ng-model="monitorProdact">{{selectedCard.monitorProdact}}</input>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorLevel">רמת ניטור:</label>
+                    <select class="form-control input-add-card" id="monitorLevel" name="monitorType" ng-model="selected.monitorLevel">
+                        <option>בסיסי</option>
+                        <option>מתקדם</option>
+                        <option>אפליקטיבי</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="card-lable2">מערכת:</label>
-                <input class="card-p" ng-model="monitorSystem">{{selectedCard.monitorSystem}}</input>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorProdact">שם המוצר:</label>
+                    <select class="form-control input-add-card" id="monitorProdact" name="monitorProdact" ng-model="selected.monitorProdact">
+                        <option ng-repeat="prodact in prodacts">{{prodact}}</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="card-lable2">הסבר:</label>
-                <input class="card-p" ng-model="monitorExplain">{{selectedCard.monitorExplain}}</input>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorSystem">שם המערכת:</label>
+                    <select class="form-control input-add-card" id="monitorSystem" name="monitorSystem" ng-model="selected.monitorSystem">
+                        <option ng-repeat="system in systems">{{system}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorExplain">הסבר לניטור:</label>
+                    <textarea class="input-big form-control " id="monitorExplain" name="monitorExplain" type="text"  ng-model="selected.monitorExplain" ></textarea>
+                </div>
             </div>
         </div>
     </div>
-    <div class="modal-footer footer-cos">
-        <button type="submit" class="btn btn-primary col-lg-12 btn-modal-costume">עדכן</button>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume">שמור</button>
     </div>
 </form>

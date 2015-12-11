@@ -1,38 +1,39 @@
 
 <form ng-submit="ok()" class="Mbook">
     <div class="modal-header col-lg-12">
-        <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selectedCard.monitorName}}</h3>
+        <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selected.monitorName}}</h3>
     </div>
     <div class="modal-body ">
         <div class="panel-body form-body-costume">
             <div class="form-group">
                 <label class="card-lable2">סוג ניטור:</label>
-                <p class="card-p">{{selectedCard.monitorType}}</p>
+                <p class="card-p">{{selected.monitorType}}</p>
             </div>
             <div class="form-group">
                 <label class="card-lable2">רמת ניטור:</label>
-                <p class="card-p">{{selectedCard.monitorLevel}}</p>
+                <p class="card-p">{{selected.monitorLevel}}</p>
             </div>
             <div class="form-group">
                 <label class="card-lable2">מוצר:</label>
-                <p class="card-p">{{selectedCard.monitorProdact}}</p>
+                <p class="card-p">{{selected.monitorProdact}}</p>
             </div>
             <div class="form-group">
                 <label class="card-lable2">מערכת:</label>
-                <p class="card-p">{{selectedCard.monitorSystem}}</p>
+                <p class="card-p">{{selected.monitorSystem}}</p>
             </div>
             <div class="form-group">
                 <label class="card-lable2">הסבר:</label>
-                <p class="card-p">{{selectedCard.monitorExplain}}</p>
+                <p class="card-p">{{selected.monitorExplain}}</p>
             </div>
         </div>
     </div>
     <div class="modal-footer footer-cos row row-costume">
         <div  class="col-lg-6 continer-btn-admin">
             <button type="submit" ng-click="updateStatus()" class="btn btn-success btn-admin col-lg-12">מאושר</button>
+
         </div>
         <div  class="col-lg-6 continer-btn-admin">
-            <button type="submit" ng-click="" class="btn btn-danger btn-admin col-lg-12">נדחה</button>
+            <button type="submit" ng-click="" class="btn btn-danger btn-admin col-lg-12">סגור</button>
         </div>
     </div>
 </form>

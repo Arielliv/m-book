@@ -15,11 +15,7 @@
                 <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorType.$invalid}">
                     <label class="control-label label-add-card" for="monitorType">סוג הניטור:</label>
                     <select class="form-control input-add-card" id="monitorType" name="monitorType" ng-model="monitorType" ng-required="true">
-                        <option>winlog</option>
-                        <option>log</option>
-                        <option>service/process</option>
-                        <option>schedule task</option>
-                        <option>...</option>
+                        <option ng-repeat="type in types">{{type}}</option>
                     </select>
                     <p ng-show="notPass && Form.monitorType.$invalid" class="help-block">לא נבחר סוג ניטור</p>
                 </div>
@@ -39,15 +35,7 @@
                 <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorProdact.$invalid}">
                     <label class="control-label label-add-card" for="monitorProdact">שם המוצר:</label>
                     <select class="form-control input-add-card" id="monitorProdact" name="monitorProdact" ng-model="monitorProdact" ng-required="true">
-                        <option>oracleDB</option>
-                        <option>mongoDB</option>
-                        <option>windows</option>
-                        <option>linux</option>
-                        <option>netapp</option>
-                        <option>vmware</option>
-                        <option>hp</option>
-                        <option>IBM-MainFrame</option>
-                        <option>not exist here</option>
+                        <option ng-repeat="prodact in prodacts">{{prodact}}</option>
                     </select>
                     <p ng-show="notPass && Form.monitorProdact.$invalid" class="help-block">לא נבחר מוצר</p>
                 </div>
@@ -56,13 +44,7 @@
                 <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorSystem.$invalid}">
                     <label class="control-label label-add-card" for="monitorSystem">שם המערכת:</label>
                     <select class="form-control input-add-card" id="monitorSystem" name="monitorSystem" ng-model="monitorSystem" ng-required="true">
-                        <option>מערכת1</option>
-                        <option>מערכת2</option>
-                        <option>מערכת3</option>
-                        <option>מערכת4</option>
-                        <option>מערכת5</option>
-                        <option>מערכת6</option>
-                        <option>לא קיים כאן</option>
+                        <option ng-repeat="system in systems">{{system}}</option>
                     </select>
                     <p ng-show="notPass && Form.monitorSystem.$invalid" class="help-block">לא נבחרה מערכת</p>
                 </div>

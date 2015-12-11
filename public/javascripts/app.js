@@ -50,6 +50,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 views: 0}];
         var Downloads = [];
         var Scripts = [];
+        var types = ['winlog','log','service/process','schedule task','...'];
+        var prodacts = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
+        var systems = ['מערכת1','מערכת2','מערכת3','מערכת4','מערכת5','מערכת6','לא קיים כאן'];
         return{
             getCards : function(){
                 return Cards;
@@ -62,12 +65,23 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 return $filter('filter')(Cards, { monitorName: monitorName})[0];
             },
             updateStatusCard: function(monitorName){
-                ($filter('filter')(Cards, { monitorName: monitorName})[0]).status ++;
+                if(($filter('filter')(Cards, { monitorName: monitorName})[0]).status < 3) {
+                    ($filter('filter')(Cards, {monitorName: monitorName})[0]).status++;
+                }
                 return Cards;
             },
             delCard: function(card){
                 var index = Cards.indexOf(card);
                 Cards.splice(index, 1);
+                return Cards;
+            },
+            upadteCard: function(card){
+                ($filter('filter')(Cards, {id: card.id})[0]).monitorName = card.monitorName;
+                ($filter('filter')(Cards, {id: card.id})[0]).monitorType = card.monitorType;
+                ($filter('filter')(Cards, {id: card.id})[0]).monitorLevel = card.monitorLevel;
+                ($filter('filter')(Cards, {id: card.id})[0]).monitorProdact = card.monitorProdact;
+                ($filter('filter')(Cards, {id: card.id})[0]).monitorSystem = card.monitorSystem;
+                ($filter('filter')(Cards, {id: card.id})[0]).monitorExplain = card.monitorExplain;
                 return Cards;
             },
             getDownloads: function(){
@@ -80,6 +94,11 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             getDownload: function(downloadName){
                 return $filter('filter')(Downloads, { fileName: downloadName})[0];
             },
+            delDownload: function(Download){
+                var index = Downloads.indexOf(Download);
+                Downloads.splice(index, 1);
+                return Downloads;
+            },
             getScripts: function(){
                 return Scripts;
             },
@@ -89,6 +108,32 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             },
             getScript: function(scriptName){
                 return $filter('filter')(Scripts, { scriptName: scriptName})[0];
+            },
+            delScript: function(Script){
+                var index = Scripts.indexOf(Script);
+                Scripts.splice(index, 1);
+                return Scripts;
+            },
+            getTypes: function(){
+                return types;
+            },
+            addType: function(type){
+                types.push(type);
+                return types;
+            },
+            getProdacts: function(){
+                return prodacts;
+            },
+            addProdact: function(prodact){
+                prodacts.push(prodact);
+                return prodacts;
+            },
+            getSystems: function(){
+                return systems;
+            },
+            addSystem : function(system){
+                systems.push(system);
+                return systems;
             }
 
         }
@@ -214,6 +259,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.downloadsData = ServiceArray.getDownloads();
         $scope.scriptsData = ServiceArray.getScripts();
         $scope.Cards = ServiceArray.getCards();
+        $scope.types = ServiceArray.getTypes();
+        $scope.prodacts = ServiceArray.getProdacts();
+        $scope.systems = ServiceArray.getSystems();
 
         /*order cards*/
         var orderBy = $filter('orderBy');
@@ -316,11 +364,22 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             if( $scope.$state.includes('monitors')) {
                 var modalInstance1 = $uibModal.open({
                     templateUrl: 'monitors/addCardView.html',
-                    controller: 'addCardController'
+                    controller: 'addCardController',
+                    resolve: {
+                        types: function () {
+                            return $scope.types;
+                        },
+                        prodacts: function () {
+                            return $scope.prodacts;
+                        },
+                        systems: function () {
+                            return $scope.systems;
+                        }
+                    }
                 });
 
                 modalInstance1.result.then(function (newCard) {
-                    if (newCard.monitorProdact == "not exist here") {
+                    if (newCard.monitorProdact == "not exist here" || $scope.prodacts.indexOf(newCard.monitorProdact)) {
                         newCard.monitorProdact = "default";
                         newCard.img = "images/background4.jpg"
                     } else {
@@ -403,14 +462,24 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
             });
         };
+        /*admin stuff*/
         /*admin monitor card view*/
-        $scope.openCardAdmin = function(selectedCard){
+        $scope.openCardAdmin = function(selected){
             var modalInstance = $uibModal.open({
                 templateUrl: 'administrator/cardViewAdmin.html',
                 controller: 'adminController',
                 resolve: {
-                    selectedCard: function () {
-                        return selectedCard;
+                    selected: function () {
+                        return selected;
+                    },
+                    types: function () {
+                        return $scope.types;
+                    },
+                    prodacts: function () {
+                        return $scope.prodacts;
+                    },
+                    systems: function () {
+                        return $scope.systems;
                     }
                 }
 
@@ -419,11 +488,82 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 $scope.Cards = ServiceArray.getCards();
             });
         };
-        /*del monitor*/
-        $scope.delMonitor = function(selectedCard){
-            $scope.Cards = ServiceArray.delCard(selectedCard);
-        }
+        $scope.openFileAdmin = function(selected){
+            var modalInstance = $uibModal.open({
+                templateUrl: 'administrator/fileViewAdmin.html',
+                controller: 'adminController',
+                resolve: {
+                    selected: function () {
+                        return selected;
+                    }
+                }
 
+            });
+            modalInstance.result.then(function () {
+                $scope.downloadsData = ServiceArray.getDownloads();
+            });
+        };
+        $scope.openScriptAdmin = function(selected){
+            var modalInstance = $uibModal.open({
+                templateUrl: 'administrator/scriptViewAdmin.html',
+                controller: 'adminController',
+                resolve: {
+                    selected: function () {
+                        return selected;
+                    }
+                }
+
+            });
+            modalInstance.result.then(function () {
+                $scope.scriptsData = ServiceArray.getScripts();
+            });
+        };
+        $scope.openUpdateMonitor = function(selected){
+            var modalInstance = $uibModal.open({
+                templateUrl: 'administrator/updateMonitor.html',
+                controller: 'adminController',
+                resolve: {
+                    selected: function () {
+                        return selected;
+                    },
+                    types: function () {
+                        return $scope.types;
+                    },
+                    prodacts: function () {
+                        return $scope.prodacts;
+                    },
+                    systems: function () {
+                        return $scope.systems;
+                    }
+                }
+
+            });
+            modalInstance.result.then(function () {
+                $scope.scriptsData = ServiceArray.getScripts();
+            });
+        };
+        /*del monitor*/
+        $scope.delMonitor = function(selected){
+            $scope.Cards = ServiceArray.delCard(selected);
+        };
+        /*del download*/
+        $scope.delDownload = function(selectedCard){
+            $scope.downloadsData = ServiceArray.delDownload(selectedCard);
+        };
+        /*del script*/
+        $scope.delScript = function(selectedCard){
+            $scope.scriptsData = ServiceArray.delScript(selectedCard);
+        };
+
+        $scope.addType = function(newType){
+            $scope.types = ServiceArray.addType(newType);
+        };
+        $scope.addSystem = function(newSystem){
+            $scope.systems = ServiceArray.addSystem(newSystem);
+        };
+        $scope.addProdact = function(newProdact){
+            $scope.prodacts = ServiceArray.addProdact(newProdact);
+        };
     });
 
 

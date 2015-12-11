@@ -1,4 +1,7 @@
-app.controller('addCardController',function($scope,$modalInstance ){
+app.controller('addCardController',function($scope,$modalInstance,types,prodacts,systems){
+    $scope.systems = systems;
+    $scope.types = types;
+    $scope.prodacts = prodacts;
     $scope.ok = function(valid){
         if(valid){
             $scope.notPass = false;

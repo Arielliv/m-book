@@ -527,14 +527,14 @@ body{
 }
 /*admin style*/
 .continer-admin{
-    position: fixed;
-    top: 100px;
+    position: absolute;
     width: 100%;
 }
 .table-continer-out{
     text-align: center;
     color:white;
     margin-top: 30px;
+    margin-bottom: 15px;
 }
 .table-continer-in-spaciel{
     margin-left: 15px;
@@ -569,6 +569,13 @@ body{
     border-radius: 0;
 }
 
+.continer-btn-admin:nth-child(even) > .btn-admin{
+    border-bottom-left-radius: 3px;
+}
+
+.continer-btn-admin:nth-child(odd) > .btn-admin{
+    border-bottom-right-radius: 3px;
+}
 .test-body{
     z-index: -1000;
     background-image: url("../images/stardust.png") !important;
@@ -609,7 +616,6 @@ body{
     -webkit-animation-name: cardIntro;
     -webkit-animation-duration: 2s;
     -webkit-animation-fill-mode:forwards;
-    box-shadow: 0 20px 20px -2px black;
 }
 
 @-webkit-keyframes cardIntro {
@@ -828,4 +834,11 @@ body{
     width: 100%;
     height: 100%;
     position: fixed;
+}
+.btn-group-costume {
+    position: relative;
+}
+
+.choose-admin{
+    color: black;
 }
