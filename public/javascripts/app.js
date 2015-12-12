@@ -495,6 +495,15 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 resolve: {
                     selected: function () {
                         return selected;
+                    },
+                    types: function () {
+                        return $scope.types;
+                    },
+                    prodacts: function () {
+                        return $scope.prodacts;
+                    },
+                    systems: function () {
+                        return $scope.systems;
                     }
                 }
 
@@ -510,6 +519,15 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 resolve: {
                     selected: function () {
                         return selected;
+                    },
+                    types: function () {
+                        return $scope.types;
+                    },
+                    prodacts: function () {
+                        return $scope.prodacts;
+                    },
+                    systems: function () {
+                        return $scope.systems;
                     }
                 }
 
