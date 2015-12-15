@@ -576,7 +576,7 @@ body{
 .continer-btn-admin:nth-child(odd) > .btn-admin{
     border-bottom-right-radius: 3px;
 }
-.test-body{
+.enter-page-body {
     z-index: -1000;
     background-image: url("../images/stardust.png") !important;
     width: 100%;
@@ -586,7 +586,7 @@ body{
 
 }
 
-.test-row{
+.enter-page-row {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -594,13 +594,13 @@ body{
     top: 150px;
 }
 
-.test-outbox{
+.enter-page-outbox {
 
     height:350px;
 
 }
 
-.test-inbox-center {
+.enter-page-inbox-center {
     height: 300px;         /*your login box height*/
     position: absolute;
     top: 50%;
@@ -612,7 +612,7 @@ body{
     box-shadow: 0 10px 10px -2px black;
     -webkit-filter:grayscale(100%);
 }
-.test-inbox-center:hover{
+.enter-page-inbox-center:hover{
     -webkit-animation-name: cardIntro;
     -webkit-animation-duration: 2s;
     -webkit-animation-fill-mode:forwards;
@@ -659,130 +659,8 @@ body{
     background-position: center;
     background-size: auto 100%;
 }
-/*.mainOuterDiv{
-    height:300px;
-    overflow:hidden;
-    background-image: url("../images/M.png") ;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto 100%;
-}
-.middDiv{
-    width:80%;
-    height:75px;
-    margin:0px auto;
-    position:relative;
-    margin-top:50%;
-}
-.innerLeft{
-    position: absolute;
-    left: -60px;
-    top: -20px;
-    width: 60px;
-    height: 100%;
-    z-index: 1;
-    transform: skew(180deg,215deg);
-    background-color: #262F31;
-    -webkit-filter: brightness(300%);
-}
-.innerRight{
-    position: absolute;
-    right: -60px;
-    top: -20px;
-    width: 60px;
-    height: 100%;
-    z-index: 1;
-    transform: skew(180deg,145deg);
-    background-color: #262F31;
-    -webkit-filter: brightness(300%);
-}
 
-.textDiv:before{
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -2;
-    background-color: #262F3E;
-    -webkit-filter: brightness(400%);
-    display: block;
-    min-height: 100%;
-}
-.textDiv{
-    z-index:120;
-    width:100%;
-    height:100%;
-    position:absolute;
-    color: white;
-    text-align: center;
-}
-*/
-
-
-
-/*
-.container
-{
-    position:relative;
-    width:380px;
-    height:300px;
-    overflow:hidden;
-}
-.mainDiv
-{
-    height:300px; width:300px;
-    background-color:white;
-    border:solid 1px black;
-    position:absolute;
-    left:0;right:0;margin:auto;
-}
-.middDiv
-{
-    height:55px; width:70%;
-    background-color:lightblue;
-    position:absolute;
-    bottom:0;left:0;right:0;
-    margin:auto;
-    z-index:10;
-}
-.leftDiv, .rightDiv
-{
-    position:absolute;
-    bottom:30px;
-    width:30%;height:50px;
-    background-color:blue;
-    z-index:10;
-}
-.leftDiv
-{
-    left:-13%;
-    transform:rotate(30deg) skew(30deg);
-}
-.rightDiv
-{
-    right:-13%;
-    transform:rotate(-30deg) skew(-30deg);
-}
-.leftBDiv, .rightBDiv
-{
-    position:absolute;
-    width:13%; height:47px;
-    bottom:72px;
-    background-color:black;
-    z-index:9;
-}
-.leftBDiv
-{
-    left:-12%;
-    transform:rotate(-30deg) skew(-30deg);
-}
-.rightBDiv
-{
-    right:-12%;
-    transform:rotate(30deg) skew(30deg);
-}
-*/
-.text-div-test:before{
+.enter-page-text-div:before{
     content: "";
     position: absolute;
     left: 0;
@@ -797,7 +675,7 @@ body{
     border-bottom:3px black solid;
     border-left:3px black solid;
 }
-.text-div-test{
+.enter-page-text-div {
     bottom:0 ;
     z-index:120;
     width:100%;
@@ -828,7 +706,7 @@ body{
     -webkit-filter:grayscale(70%);
 }
 
-.test-background-costume{
+.enter-page-background-costume {
     z-index: -1000;
     background-image: url("../images/stardust.png") !important;
     width: 100%;
@@ -841,4 +719,69 @@ body{
 
 .choose-admin{
     color: black;
+}
+
+
+.test-outerbox{
+    height: 220px;
+    background-color: white;
+}
+
+.test-midbox{
+    height: 170px;
+    background-color: white ;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 0;
+    margin-left: 0;
+    border: solid none 2px;
+    border-radius: 5px;
+}
+
+
+
+.test-inbox{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 0;
+    margin-left: 0;
+    background-image: url("../images/oracleDB.jpg") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 80%;
+    height: 170px;
+    border-top:solid #F8F3F3 10px;
+    border-left:solid #F8F3F3 10px;
+    border-right:solid #F8F3F3 10px;
+    border-bottom:solid #F8F3F3 40px;
+    border-radius: 5px;
+}
+
+.monitor-name:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -2;
+    height: 30px;
+    display: block;
+    height: 100%;
+    background: black;
+    border-radius: 3px;
+    -webkit-filter: blur(2px);
+}
+.monitor-name{
+    z-index: 100;
+    position: absolute;
+    height: 40px;
+    bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    border:gray 1px solid;
+}
+
+.monitor-name-text{
+    top:1px;
+    text-align: center;
 }
