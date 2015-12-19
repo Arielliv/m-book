@@ -2,6 +2,10 @@
 <form ng-submit="ok()" class="Mbook">
     <div class="modal-header col-lg-12">
         <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selectedCard.monitorName}}</h3>
+        <div class="col-lg-3 col-lg-pull-10 view-costume" title="צפיות" data-toggle="tooltip" tooltip>
+            <div class="glyphicon glyphicon-eye-open"></div>
+            <div>{{selectedCard.views}}</div>
+        </div>
     </div>
     <div class="modal-body ">
         <div class="panel-body form-body-costume">
@@ -28,6 +32,6 @@
         </div>
     </div>
     <div class="modal-footer footer-cos">
-        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume">יציאה</button>
+        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume" ng-click="test2()">יציאה</button>
     </div>
 </form>

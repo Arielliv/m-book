@@ -53,6 +53,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         var types = ['winlog','log','service/process','schedule task','...'];
         var prodacts = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
         var systems = ['מערכת1','מערכת2','מערכת3','מערכת4','מערכת5','מערכת6','לא קיים כאן'];
+        var classBtn = '';
+        var classText = '';
         return{
             getCards : function(){
                 return Cards;
@@ -135,10 +137,19 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 systems.push(system);
                 return systems;
             }
-
         }
     });
-
+    /*set the img for the monitor*/
+    app.directive('myBackgroundImage', function () {
+        return function (scope, element, attrs) {
+            element.css({
+                'background-image': 'url(' + attrs.myBackgroundImage + ')',
+                'background-size': 'auto 90%',
+                'background-repeat': 'no-repeat',
+                'background-position': 'center center'
+            });
+        };
+    });
     /*make limit to characters in line' and add ...*/
     app.filter('strLimit', ['$filter', function($filter) {
         return function(input, limit) {
@@ -263,6 +274,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.prodacts = ServiceArray.getProdacts();
         $scope.systems = ServiceArray.getSystems();
 
+        $scope.test=function(selected){
+            selected.classBtn = 'col-lg-push-10';
+            selected.classText = 'hidden';
+        };
         /*order cards*/
         var orderBy = $filter('orderBy');
         $scope.order = function(predicate, reverse) {
@@ -288,6 +303,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.search = false;
         /*count the cards for id*/
         $scope.count = 0;
+        /*class for monitor card*/
+        $scope.classBtn = '';
+        $scope.classText = '';
         /*change status for the filter*/
         $scope.changeFilterValue = function(value , status){
             $scope.filterValueLevel = value;
@@ -379,7 +397,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
 
                 modalInstance1.result.then(function (newCard) {
-                    if (newCard.monitorProdact == "not exist here" || $scope.prodacts.indexOf(newCard.monitorProdact)) {
+                    if (newCard.monitorProdact == "not exist here") {
                         newCard.monitorProdact = "default";
                         newCard.img = "images/background4.jpg"
                     } else {
@@ -389,8 +407,11 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
                     newCard.id = $scope.count;
                     newCard.status = 3;
+                    newCard.classBtn = '';
+                    newCard.classText = '';
                     $scope.count ++;
                     $scope.Cards= ServiceArray.addCard(newCard);
+
                     //$scope.Cards.push(newCard);
                 });
             } else if( $scope.$state.includes('scripts')){
@@ -432,6 +453,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     }
                 }
 
+            });
+            modalInstance.result.then(function (a) {
+                selectedCard.classBtn = '';
+                selectedCard.classText = '';
             });
         };
 

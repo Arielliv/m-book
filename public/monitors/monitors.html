@@ -1,61 +1,39 @@
 
 <div class="main " ui-sref="monitors">
     <div class="row row-costume-setup " ui-view>
-
-<div class="enter-page-body" ng-show="filterValueLevel == 'start'">
-        <div class="row enter-page-row">
-            <div class="col-lg-3 enter-page-outbox">
-                <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-basic" ng-click="changeFilterValue('בסיסי' , '3')">
-                    <div class="enter-page-text-div"><h1>בסיסי</h1></div>
+        <div class="enter-page-body" ng-show="filterValueLevel == 'start'">
+            <div class="row enter-page-row">
+                <div class="col-lg-3 enter-page-outbox">
+                    <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-basic" ng-click="changeFilterValue('בסיסי' , '3')">
+                        <div class="enter-page-text-div"><h1>בסיסי</h1></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 enter-page-outbox">
-                <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-applicative" ng-click="changeFilterValue('אפליקטיבי' , '3')">
-                    <div class="enter-page-text-div"><h1>אפליקטיבי</h1></div>
+                <div class="col-lg-3 enter-page-outbox">
+                    <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-applicative" ng-click="changeFilterValue('אפליקטיבי' , '3')">
+                        <div class="enter-page-text-div"><h1>אפליקטיבי</h1></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 enter-page-outbox">
-                <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-advance" ng-click="changeFilterValue('מתקדם' , '3')">
-                    <div class="enter-page-text-div"><h1>מתקדם</h1></div>
+                <div class="col-lg-3 enter-page-outbox">
+                    <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-advance" ng-click="changeFilterValue('מתקדם' , '3')">
+                        <div class="enter-page-text-div"><h1>מתקדם</h1></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 enter-page-outbox">
-                <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-construction" ng-click="changeFilterValue('בבניה', '2')">
-                    <div class="enter-page-text-div"><h1>בבנייה</h1></div>
+                <div class="col-lg-3 enter-page-outbox">
+                    <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-construction" ng-click="changeFilterValue('בבניה', '2')">
+                        <div class="enter-page-text-div"><h1>בבנייה</h1></div>
+                    </div>
                 </div>
+                <div class="col-xs-12 shelf"></div>
             </div>
-            <div class="col-xs-12 shelf"></div>
+            <div class="enter-page-background-costume" ></div>
         </div>
-        <div class="enter-page-background-costume" ></div>
-</div>
         <div class="costume-cards" ng-show="filterValueLevel != 'start'">
-
             <div class="" ng-repeat="selectedCard in Cards | filter: filterValueStatus == '2' ? {status:'2'} : {status:'3',monitorName:Value ,monitorLevel:filterValueLevel, monitorSystem:filterValue}">
-            <div class="card-container row">
-                    <div class="card-img-container">
-                        <img class="card-img col-lg-12" ng-src="{{selectedCard.img}}">
-                    </div>
-                    <div class="card-label-container">
-                        <div class="col-lg-12 card-text">{{selectedCard.monitorName | strLimit: 25}}</div>
-                    </div>
-                    <div class="card-extra-info-container">
-                        <ul class="card-ul-costume col-lg-12">
-                            <li class="col-lg-4 " title="מוניטין" data-toggle="tooltip" data-placement="top" tooltip>
-                                <span CLASS="card-li-costume-sides" ><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
-                                <div class="card-extra-info-text">13</div>
-                            </li>
-                            <li class="col-lg-4 card-li-costume-mid" title="צפיות" data-toggle="tooltip" data-placement="top" tooltip>
-                                <span CLASS="card-li-costume-sides" ><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span></span>
-                                <div class="card-extra-info-text">{{selectedCard.views}}</div>
-                            </li>
-                            <li class="col-lg-4" title="תאריך יצירה" data-toggle="tooltip" data-placement="top" tooltip>
-                                <span CLASS="card-li-costume-sides" ><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-                                <div class="card-extra-info-text row">{{selectedCard.dateHeader}}</div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-button-footer-container">
-                        <button type="submit" class="btn btn-success card-li-costume-sides col-lg-12" ng-click="openCard(selectedCard)">פתח ניטור</button>
+                <div class="col-lg-3 monitor-card-outerbox">
+                    <div class="monitor-card-midbox col-lg-12">
+                        <div class="col-lg-12 col-lg-offset-1 monitor-card-inbox" my-background-image="{{selectedCard.img}}"></div>
+                        <button class="col-lg-2 col-lg-pull-9 monitor-card-btn-open btn" ng-class="selectedCard.classBtn" ng-click="test(selectedCard);openCard(selectedCard)">פתח</button>
+                        <div class="monitor-card-name col-lg-10 col-lg-push-2 " ng-class="selectedCard.classText"><h4 class="monitor-card-name-text">{{selectedCard.monitorName | strLimit: 25}}</h4></div>
                     </div>
                 </div>
             </div>

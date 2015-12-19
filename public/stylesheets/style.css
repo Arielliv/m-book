@@ -11,7 +11,7 @@ form{
 }
 body{
     width: 100%;
-    background-image: url("../images/stardust.png");
+    background-image: url("../images/diagonal_striped_brick.png");
     background-color: #e9eaed;
 }
 
@@ -258,52 +258,8 @@ body{
 }
 /*dynamic background classes*/
 /*########################################################################################################################################################################################################################################*/
-.oracleDB:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/oracleDB.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.oracleDB{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;    border-radius: 3px; background-color: white;
-}
 
-.mongoDB:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/mongoDB.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.mongoDB{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px; background-color: white;
-}
-
-.windows:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/windows.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.windows{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px; background-color: white;
-}
-
-.linux:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/linux.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.linux{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;   border-radius: 3px; background-color: white;
-}
-
-.netapp:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/netapp.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.netapp{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px; background-color: white;
-}
-
-.vmware:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/vmware.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.vmware{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px; background-color: white;
-}
-
-.hp:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/hp.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.hp{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;  border-radius: 3px; background-color: white;
-}
-
-.IBM-MainFrame:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/IBM-MainFrame.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.IBM-MainFrame{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black;   border-radius: 3px; background-color: white;
-}
-
-.default:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -1;  display: block;  background-image: url("../images/background4.jpg");min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;    -webkit-filter:  saturate(10%);  filter:  saturate(10%);
-}
-.default{  position: fixed;  left: 0;  right: 0;  z-index: 0;  color:black; border-radius: 3px; background-color: white;
-}
-
-.Mbook:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -2;  display: block;  background-image: url("../images/M.png") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;
+.Mbook:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -2;  display: block;  background-image: url("../images/MBOOK1.png") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;
 }
 .Mbook{  position: fixed;   top:75px;   left: 0;  right: 0;  z-index: 0;  color:black;    border-radius: 3px; background-color: #262F3E;
 }
@@ -312,85 +268,85 @@ body{
 
 
 /*card classes*/
-.card-container {
+
+.monitor-card-outerbox {
     height: 250px;
-    width: 16%;
-    margin-right:2%;
-    margin-left:2%;
-    margin-top:2%;
-    margin-bottom:2%;
-    border:solid 1px #D8D8D8;
-    float: left;
+
 }
 
-.card-container:hover{
-    border: solid 1px #D8D8D8;
+.monitor-card-midbox {
+    height: 200px;
+    background-color: white ;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 0;
+    margin-left: 0;
+    border: solid black 1px;
+    top: 20px;
+
+}
+
+.monitor-card-midbox:hover{
+
     box-shadow: 3px 3px 3px black;
 }
-.card-img-container {
-    position: static;
-    display: block;
-    width: 100%;
-    height: 50%;
-    padding: 0;
+
+.monitor-card-inbox {
     margin-right: 0;
     margin-left: 0;
-    top: 0%;
+    height: 170px;
+    padding-top:10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:40px;
 }
-.card-img {
-    padding: 0;
+
+.monitor-card-name:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -2;
+    display: block;
     height: 100%;
+    background: black;
+    opacity: 0.7;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+
 }
-.card-label-container {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 20%;
-    background:white;
-}
-.card-text {
+
+.monitor-card-name {
+    z-index: 100;
+    position: absolute;
+    height: 40px;
+    bottom: 20px;
     text-align: center;
-    top: 30%;
-}
-.card-extra-info-container {
-    border-top:#D8D8D8 solid 1px;
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 20%;
-    float: left;
-    margin-right: 0;
-    margin-left: 0;
-    background: #F0F0F0;
+    color: white;
+    border:black 1px solid;
+    border-left: none;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 0;
 }
 
-.card-ul-costume {
-    list-style-type: none;
+.monitor-card-name-text {
+    top:1px;
     text-align: center;
-    top:12%;
 }
 
-.card-button-footer-container {
-    position: relative;
-    display: block;
-    padding: 0;
-    width: 100%;
-    height: 10%;
-}
-
-.card-li-costume-mid {
-    border-right:#D8D8D8 solid 1px;
-    border-left:#D8D8D8 solid 1px;
-}
-
-.card-li-costume-sides {
-    padding: 0;
-    height: 100%;
+.monitor-card-btn-open {
+    z-index: 300;
     border-radius: 0;
-}
-.card-extra-info-text {
-    font-size: 10px;
-    text-align: center;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #f5bd35;
+    font-size:18px;
+    color:white;
+    position: absolute;
+    height: 40px;
+    bottom: 20px;
+
 }
 
 /*****/
@@ -578,11 +534,11 @@ body{
 }
 .enter-page-body {
     z-index: -1000;
-    background-image: url("../images/stardust.png") !important;
+    background-image: url("../images/arches.png") !important;
     width: 100%;
     height: 65%;
     position: fixed;
-    top: 0%;
+    top: 0;
 
 }
 
@@ -614,7 +570,7 @@ body{
 }
 .enter-page-inbox-center:hover{
     -webkit-animation-name: cardIntro;
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 1s;
     -webkit-animation-fill-mode:forwards;
 }
 
@@ -624,7 +580,17 @@ body{
     }
     to{
         -webkit-filter:grayscale(0);
-        -webkit-transform: scale(1.1);
+        -webkit-transform: scale(1.07);
+    }
+
+}
+@-webkit-keyframes cardAnime {
+    from{
+        -webkit-filter:grayscale(100%);
+    }
+    to{
+        -webkit-filter:grayscale(0);
+        -webkit-transform: scale(1.07);
     }
 
 }
@@ -667,19 +633,16 @@ body{
     right: 0;
     z-index: -2;
     background-color: #1F2631;
-    -webkit-filter:blur(3px);
+    opacity: 0.9;
     display: block;
     min-height: 100%;
-    box-shadow: 2px 1px 2px 1px black;
-    border-right:3px black solid;
-    border-bottom:3px black solid;
-    border-left:3px black solid;
+
 }
 .enter-page-text-div {
     bottom:0 ;
     z-index:120;
     width:100%;
-    height:30%;
+    height:25%;
     position:absolute;
     color: white;
     text-align: center;
@@ -708,7 +671,7 @@ body{
 
 .enter-page-background-costume {
     z-index: -1000;
-    background-image: url("../images/stardust.png") !important;
+    background-image: url("../images/diagonal_striped_brick.png") !important;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -721,67 +684,8 @@ body{
     color: black;
 }
 
-
-.test-outerbox{
-    height: 220px;
-    background-color: white;
-}
-
-.test-midbox{
-    height: 170px;
-    background-color: white ;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin-right: 0;
-    margin-left: 0;
-    border: solid none 2px;
-    border-radius: 5px;
-}
-
-
-
-.test-inbox{
-    padding-left: 0px;
-    padding-right: 0px;
-    margin-right: 0;
-    margin-left: 0;
-    background-image: url("../images/oracleDB.jpg") !important;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto 80%;
-    height: 170px;
-    border-top:solid #F8F3F3 10px;
-    border-left:solid #F8F3F3 10px;
-    border-right:solid #F8F3F3 10px;
-    border-bottom:solid #F8F3F3 40px;
-    border-radius: 5px;
-}
-
-.monitor-name:before{
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -2;
-    height: 30px;
-    display: block;
-    height: 100%;
-    background: black;
-    border-radius: 3px;
-    -webkit-filter: blur(2px);
-}
-.monitor-name{
-    z-index: 100;
-    position: absolute;
-    height: 40px;
-    bottom: 15px;
-    border-radius: 5px;
-    text-align: center;
-    color: white;
-    border:gray 1px solid;
-}
-
-.monitor-name-text{
-    top:1px;
+.view-costume{
+    color:white;
+    top: 0;
     text-align: center;
 }
