@@ -1,7 +1,7 @@
 
 <div class="main " ui-sref="monitors">
     <div class="row row-costume-setup " ui-view>
-        <div class="enter-page-body" ng-show="filterValueLevel == 'start'">
+        <div class="enter-page-body" ng-show="filterValueLevel == 'start'" >
             <div class="row enter-page-row">
                 <div class="col-lg-3 enter-page-outbox">
                     <div class="enter-page-inbox-center col-lg-10 col-lg-offset-1 background-img-basic" ng-click="changeFilterValue('בסיסי' , '3')">
@@ -23,12 +23,12 @@
                         <div class="enter-page-text-div"><h1>בבנייה</h1></div>
                     </div>
                 </div>
-                <div class="col-xs-12 shelf"></div>
+                <div class="col-xs-12 shelf" ></div>
             </div>
             <div class="enter-page-background-costume" ></div>
         </div>
         <div class="costume-cards" ng-show="filterValueLevel != 'start'">
-            <div class="" ng-repeat="selectedCard in Cards | filter: filterValueStatus == '2' ? {status:'2'} : {status:'3',monitorName:Value ,monitorLevel:filterValueLevel, monitorSystem:filterValue}">
+            <div class="bouncy-slide-down" ng-repeat="selectedCard in Cards | filter: filterValueStatus == '2' ? {status:'2'} : {status:'3',monitorName:ValueSearch ,monitorLevel:filterValueLevel, monitorSystem:filterValue}">
                 <div class="col-lg-3 monitor-card-outerbox">
                     <div class="monitor-card-midbox col-lg-12">
                         <div class="col-lg-12 col-lg-offset-1 monitor-card-inbox" my-background-image="{{selectedCard.img}}"></div>

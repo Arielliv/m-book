@@ -21,9 +21,10 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var myapp = angular.module('myapp', []);
+var myapp = angular.module('myapp', ['ngAnimate']);
 
 myapp.controller('MainCtrl', function ($scope) {
+    $scope.d = ['1','2','3','4','5'];
     $scope.showContent = function($fileContent){
         $scope.content = $fileContent;
     };

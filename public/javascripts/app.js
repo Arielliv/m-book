@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ]);
+var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ,'ngAnimate']);
 
     /*service for the cards, scripts and files*/
     app.factory('ServiceArray',function($filter){
@@ -47,7 +47,84 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 monitorSystem: "מערכת4",
                 monitorType: "service/process",
                 status: '1',
-                views: 0}];
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},
+            {dateHeader: "04-12-2015",
+                id: 0,
+                img: "images/windows.jpg",
+                monitorExplain: "s",
+                monitorLevel: "בסיסי",
+                monitorName: "azsa",
+                monitorProdact: "windows",
+                monitorSystem: "מערכת4",
+                monitorType: "service/process",
+                status: '3',
+                views: 0},];
         var Downloads = [];
         var Scripts = [];
         var types = ['winlog','log','service/process','schedule task','...'];
@@ -327,7 +404,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
         /*search in all monitor with status 3*/
         $scope.searchIt = function(Value){
-            $scope.Value = Value;
+            $scope.ValueSearch = Value;
             $scope.filterValueStatus = '';
             $scope.filterValueLevel = '';
             $scope.filterValue='';
