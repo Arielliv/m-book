@@ -2,7 +2,7 @@
 <div ui-sref="scripts">
     <div ui-view>
         <div class="row-costume-files col-lg-8 col-lg-offset-2">
-            <div ng-repeat="script in scriptsData">
+            <div ng-repeat="script in scriptsData" class="bouncy-slide-down">
                 <button class="btn btn-primary file-continer" ng-click="openCardScript(script)">
                     <span class="glyphicon glyphicon-floppy-save "></span>
                     <label class="file-label">{{script.scriptName | strLimit: 10}}</label>

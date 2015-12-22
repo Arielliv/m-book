@@ -2,7 +2,7 @@
 <div ui-sref="downloads">
     <div ui-view>
         <div class="row-costume-files col-lg-8 col-lg-offset-2">
-            <div ng-repeat="download in downloadsData">
+            <div ng-repeat="download in downloadsData" class="bouncy-slide-down">
                 <button class="btn btn-primary file-continer"  ng-click="openCardDownload(download)">
                     <span class="glyphicon glyphicon-floppy-save"></span>
                     <label class="file-label">{{download.fileName | strLimit: 10}}</label>
