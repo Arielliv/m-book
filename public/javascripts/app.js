@@ -13,6 +13,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             monitorProdact: "windows",
             monitorSystem: "מערכת4",
             monitorType: "service/process",
+            classText:"",
+            classBtn : "",
             status: '2',
             views: 0},
             {dateHeader: "04-12-2015",
@@ -25,6 +27,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 monitorSystem: "מערכת4",
                 monitorType: "service/process",
                 status: '3',
+                classText:"",
+                classBtn : "",
                 views: 0},
             {dateHeader: "04-12-2015",
                 id: 0,
@@ -36,95 +40,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 monitorSystem: "מערכת4",
                 monitorType: "service/process",
                 status: '3',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "ariel",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '1',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                views: 0},];
+                classText:"",
+                classBtn : "",
+                views: 0}];
         var Downloads = [];
         var Scripts = [];
         var types = ['winlog','log','service/process','schedule task','...'];
@@ -351,9 +269,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.prodacts = ServiceArray.getProdacts();
         $scope.systems = ServiceArray.getSystems();
 
-        $scope.test=function(selected){
+        $scope.changeClass=function(selected){
             selected.classBtn = 'col-lg-push-10';
-            selected.classText = 'hidden';
+            selected.classText = 'ng-enter';
+            selected.text = 'פתוח';
         };
         /*order cards*/
         var orderBy = $filter('orderBy');
@@ -403,6 +322,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         };
 
         /*search in all monitor with status 3*/
+        $scope.setUpFilter = function(){
+            $scope.ValueSearch = '';
+        };
         $scope.searchIt = function(Value){
             $scope.ValueSearch = Value;
             $scope.filterValueStatus = '';
@@ -486,6 +408,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.status = 3;
                     newCard.classBtn = '';
                     newCard.classText = '';
+                    newCard.text = "פתח";
                     $scope.count ++;
                     $scope.Cards= ServiceArray.addCard(newCard);
 
@@ -533,7 +456,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             });
             modalInstance.result.then(function (a) {
                 selectedCard.classBtn = '';
-                selectedCard.classText = '';
+                selectedCard.classText = "ng-leave";
+                selectedCard.text = 'פתח';
             });
         };
 

@@ -32,8 +32,8 @@
                 <div class="col-lg-3 monitor-card-outerbox ">
                     <div class="monitor-card-midbox col-lg-12">
                         <div class="col-lg-12 col-lg-offset-1 monitor-card-inbox" my-background-image="{{selectedCard.img}}"></div>
-                        <button class="col-lg-2 col-lg-pull-9 monitor-card-btn-open btn" ng-class="selectedCard.classBtn" ng-click="test(selectedCard);openCard(selectedCard)">פתח</button>
-                        <div class="monitor-card-name col-lg-10 col-lg-push-2" ng-class="selectedCard.classText"><h4 class="monitor-card-name-text">{{selectedCard.monitorName | strLimit: 25}}</h4></div>
+                        <button class="col-lg-2 col-lg-pull-9 monitor-card-btn-open btn" ng-class="selectedCard.classBtn" ng-click="changeClass(selectedCard);openCard(selectedCard)">{{selectedCard.text}}</button>
+                        <div class="monitor-card-name col-lg-10 col-lg-push-2 slide-left"  ng-class="selectedCard.classText"><h4 class="monitor-card-name-text">{{selectedCard.monitorName | strLimit: 25}}</h4></div>
                     </div>
                 </div>
             </div>
