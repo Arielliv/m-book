@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="vendors/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/angular-aside/src/styles/animate.css" rel="stylesheet">
-    <link href="vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
-    <link href="vendors/angular-aside/dist/css/angular-aside.min.css" rel="stylesheet">
-    <link href="stylesheets/style.css" rel="stylesheet">
-    <link href="stylesheets/ng-animation.css" rel="stylesheet">
+    <link href="/public/vendors/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/vendors/angular-aside/src/styles/animate.css" rel="stylesheet">
+    <link href="/public/vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
+    <link href="/public/vendors/angular-aside/dist/css/angular-aside.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/style.css" rel="stylesheet">
+    <link href="/public/stylesheets/ng-animation.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>M-BOOK</title>
 </head>
@@ -23,14 +23,14 @@
         </div>
         <div class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover"  ng-click="changeFilterValue('start');setUpFilter()" ng-class="($state.includes('monitors') ? 'active nav-active' : '')"  ui-sref="monitors">ניטורים</a>
+                <li class="nav-btn-effect" ng-class="{'active nav-active' : $state.includes('monitors')}">
+                    <a type="button" class="nav-btn"  ng-click="changeFilterValue('start');setUpFilter()" ui-sref="monitors">ניטורים</a>
                 </li>
-                <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover" ng-class="{'active nav-active' : $state.includes('downloads')}" ui-sref="downloads"> הורדות </a>
+                <li class="nav-btn-effect" ng-class="{'active nav-active' : $state.includes('downloads')}">
+                    <a type="button" class="nav-btn" ui-sref="downloads"> הורדות </a>
                 </li>
-                <li class="nav-btn-effect">
-                    <a type="button" class="nav-btn nav-hover" ng-class="{'active nav-active' : $state.includes('scripts')}" ui-sref="scripts"> סקריפטים </a>
+                <li class="nav-btn-effect" ng-class="{'active nav-active' : $state.includes('scripts')}">
+                    <a type="button" class="nav-btn" ui-sref="scripts"> סקריפטים </a>
                 </li>
             </ul>
         </div>
@@ -81,7 +81,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-left" ng-init="bool=false">
             <ul class="nav navbar-nav" >
-                <li class="nav-btn-effect has">
+                <li class="nav-btn-effect" ng-class="{'hidden' : !($state.includes('monitors'))}">
                     <a type="button" ng-click="search=!search; bool=!bool;" ng-show="!search" class="nav-hover" title="חיפוש ניטור" data-toggle="tooltip" data-placement="bottom" tooltip>
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </a>
@@ -102,7 +102,7 @@
                     </a>
                 </li>
                 <li class="nav-btn-effect">
-                    <a type="button" class="nav-hover"  title="הגדרות" data-toggle="tooltip" data-placement="bottom" tooltip>
+                    <a type="button" class="nav-hover hidden"  title="הגדרות" data-toggle="tooltip" data-placement="bottom" tooltip>
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </a>
                 </li>
@@ -120,23 +120,23 @@
 </div>
 </body>
 <footer>
-    <script src="vendors/angular/angular.min.js"></script>
-    <script src="vendors/angular-aside/dist/js/angular-aside.min.js"></script>
-    <script src="vendors/angular-ui/ui-bootstrap-tpls-0.14.2.min.js"></script>
-    <script src="vendors/restangular/restangular.min.js"></script>
-    <script src="vendors/underscore/underscore.js"></script>
-    <script src="vendors/jquery/jquery-2.1.4.min.js"></script>
-    <script src="vendors/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-    <script src="javascripts/app.js"></script>
-    <script src="monitors/monitorViewController.js"></script>
-    <script src="monitors/addCardController.js"></script>
-    <script src="scripts/uploadScriptsController.js"></script>
-    <script src="files/uploadDownloadsController.js"></script>
-    <script src="files/DownloadViewController.js"></script>
-    <script src="scripts/scriptViewController.js"></script>
-    <script src="administrator/adminController.js"></script>
-    <script src="vendors/angular/angular-sanitize.js"></script>
-    <script src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="vendors/angular/angular-animate.js"></script>
+    <script src="/public/vendors/angular/angular.min.js"></script>
+    <script src="/public/vendors/angular-aside/dist/js/angular-aside.min.js"></script>
+    <script src="/public/vendors/angular-ui/ui-bootstrap-tpls-0.14.2.min.js"></script>
+    <script src="/public/vendors/restangular/restangular.min.js"></script>
+    <script src="/public/vendors/underscore/underscore.js"></script>
+    <script src="/public/vendors/jquery/jquery-2.1.4.min.js"></script>
+    <script src="/public/vendors/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/app.js"></script>
+    <script src="/public/monitors/monitorViewController.js"></script>
+    <script src="/public/monitors/addCardController.js"></script>
+    <script src="/public/scripts/uploadScriptsController.js"></script>
+    <script src="/public/files/uploadDownloadsController.js"></script>
+    <script src="/public/files/DownloadViewController.js"></script>
+    <script src="/public/scripts/scriptViewController.js"></script>
+    <script src="/public/administrator/adminController.js"></script>
+    <script src="/public/vendors/angular/angular-sanitize.js"></script>
+    <script src="/public/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/public/vendors/angular/angular-animate.js"></script>
 </footer>
 </html>

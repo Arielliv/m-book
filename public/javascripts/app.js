@@ -5,8 +5,8 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     /*service for the cards, scripts and files*/
     app.factory('ServiceArray',function($filter){
         var Cards = [{dateHeader: "04-12-2015",
-            id: 0,
-            img: "images/windows.jpg",
+            id: 1,
+            img: "/public/images/windows.jpg",
             monitorExplain: "s",
             monitorLevel: "מתקדם",
             monitorName: "scscscscscscscs",
@@ -15,11 +15,12 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             monitorType: "service/process",
             classText:"",
             classBtn : "",
+            text : "פתח",
             status: '2',
             views: 0},
             {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
+                id: 2,
+                img: "/public/images/windows.jpg",
                 monitorExplain: "s",
                 monitorLevel: "מתקדם",
                 monitorName: "asssa",
@@ -29,10 +30,11 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 status: '3',
                 classText:"",
                 classBtn : "",
+                text : "פתח",
                 views: 0},
             {dateHeader: "04-12-2015",
-                id: 0,
-                img: "images/windows.jpg",
+                id: 3,
+                img: "/public/images/windows.jpg",
                 monitorExplain: "s",
                 monitorLevel: "בסיסי",
                 monitorName: "azsa",
@@ -42,9 +44,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 status: '3',
                 classText:"",
                 classBtn : "",
+                text : "פתח",
                 views: 0}];
         var Downloads = [];
-        var Scripts = [];
+        var Scripts = [{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1}];
         var types = ['winlog','log','service/process','schedule task','...'];
         var prodacts = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
         var systems = ['מערכת1','מערכת2','מערכת3','מערכת4','מערכת5','מערכת6','לא קיים כאן'];
@@ -225,19 +228,19 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $stateProvider
             .state('monitors', {
                 url: "/monitors/monitors",
-                templateUrl: "monitors/monitors.html"
+                templateUrl: "/public/monitors/monitors.html"
             })
             .state('downloads', {
                 url: "/files/downloads",
-                templateUrl: "files/downloads.html"
+                templateUrl: "/public/files/downloads.html"
             })
             .state('scripts', {
                 url: "/scripts/scripts",
-                templateUrl: "scripts/scripts.html"
+                templateUrl: "/public/scripts/scripts.html"
             })
             .state('administrator', {
                 url: "/administrator/administratorView",
-                templateUrl: "administrator/administratorView.html"
+                templateUrl: "/public/administrator/administratorView.html"
             })
             /*
             .state('scriptsView', {
@@ -299,9 +302,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.search = false;
         /*count the cards for id*/
         $scope.count = 0;
-        /*class for monitor card*/
-        $scope.classBtn = '';
-        $scope.classText = '';
         /*change status for the filter*/
         $scope.changeFilterValue = function(value , status){
             $scope.filterValueLevel = value;
@@ -336,7 +336,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*open side nav bar, its a modal-ui*/
         $scope.openAside = function(position) {
             $aside.open({
-                templateUrl: 'aside.html',
+                templateUrl: '/public/view/aside.html',
                 placement: position,
                 backdrop: true,
                 size: 'sm',
@@ -372,7 +372,11 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.openRandom = function(){
             if($scope.Cards.length >0){
                 var random = Math.floor(Math.random() * $scope.Cards.length)/*you can add (+ num) to set start point to random*/;
-                $scope.openCard($scope.Cards[random]);
+                if(($filter('filter')($scope.Cards, { id: $scope.Cards[random].id})[0]).status == 3) {
+                    $scope.openCard($scope.Cards[random]);
+                } else {
+                    $scope.openRandom();
+                }
             }
         };
 
@@ -380,7 +384,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.addCard = function(){
             if( $scope.$state.includes('monitors')) {
                 var modalInstance1 = $uibModal.open({
-                    templateUrl: 'monitors/addCardView.html',
+                    templateUrl: '/public/monitors/addCardView.html',
                     controller: 'addCardController',
                     resolve: {
                         types: function () {
@@ -400,7 +404,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                         newCard.monitorProdact = "default";
                         newCard.img = "images/background4.jpg"
                     } else {
-                        newCard.img = "images/" + newCard.monitorProdact + ".jpg";
+                        newCard.img = "/public/images/" + newCard.monitorProdact + ".jpg";
                     }
                     newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
@@ -416,18 +420,19 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
             } else if( $scope.$state.includes('scripts')){
                 var modalInstance2 = $uibModal.open({
-                    templateUrl: 'scripts/uploadScripts.html',
+                    templateUrl: '/public/scripts/uploadScripts.html',
                     controller: 'uploadScriptsController'
                 });
 
                 modalInstance2.result.then(function (data) {
                     data.id = $scope.scriptsData.length +1;
                     $scope.scriptsData =ServiceArray.addScripts(data);
+                    console.log(data);
                     //$scope.scriptsData.push(data);
                 });
             } else if( $scope.$state.includes('downloads')){
                 var modalInstance3 = $uibModal.open({
-                    templateUrl: 'files/uploadDownloads.html',
+                    templateUrl: '/public/files/uploadDownloads.html',
                     controller: 'uploadDownloadsController'
                 });
 
@@ -445,7 +450,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.openCard = function(selectedCard){
             selectedCard.views ++;
             var modalInstance = $uibModal.open({
-                templateUrl: 'monitors/cardView.html',
+                templateUrl: '/public/monitors/cardView.html',
                 controller: 'monitorViewController',
                 resolve: {
                     selectedCard: function () {
@@ -464,7 +469,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*open scripts view to download, its a modal*/
         $scope.openCardScript = function(script){
             var modalInstance = $uibModal.open({
-                templateUrl: 'scripts/scriptView.html',
+                templateUrl: '/public/scripts/scriptView.html',
                 controller: 'scriptViewController',
                 resolve: {
                     script: function () {
@@ -478,7 +483,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*open file view to download, its a modal*/
         $scope.openCardDownload = function(download){
             var modalInstance = $uibModal.open({
-                templateUrl: 'files/DownloadView.html',
+                templateUrl: '/public/files/DownloadView.html',
                 controller: 'DownloadViewController',
                 resolve: {
                     download: function () {
@@ -492,7 +497,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*admin monitor card view*/
         $scope.openCardAdmin = function(selected){
             var modalInstance = $uibModal.open({
-                templateUrl: 'administrator/cardViewAdmin.html',
+                templateUrl: '/public/administrator/cardViewAdmin.html',
                 controller: 'adminController',
                 resolve: {
                     selected: function () {
@@ -516,7 +521,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         };
         $scope.openFileAdmin = function(selected){
             var modalInstance = $uibModal.open({
-                templateUrl: 'administrator/fileViewAdmin.html',
+                templateUrl: '/public/administrator/fileViewAdmin.html',
                 controller: 'adminController',
                 resolve: {
                     selected: function () {
@@ -540,7 +545,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         };
         $scope.openScriptAdmin = function(selected){
             var modalInstance = $uibModal.open({
-                templateUrl: 'administrator/scriptViewAdmin.html',
+                templateUrl: '/public/administrator/scriptViewAdmin.html',
                 controller: 'adminController',
                 resolve: {
                     selected: function () {
@@ -564,7 +569,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         };
         $scope.openUpdateMonitor = function(selected){
             var modalInstance = $uibModal.open({
-                templateUrl: 'administrator/updateMonitor.html',
+                templateUrl: '/public/administrator/updateMonitor.html',
                 controller: 'adminController',
                 resolve: {
                     selected: function () {

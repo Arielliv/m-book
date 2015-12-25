@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <link href="../vendors/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
+    <link href="../stylesheets/style.css" rel="stylesheet">
+    <link href="../stylesheets/ng-animation.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>M-BOOK-test</title>
+</head>
+<body  ng-controller="MainCtrl">
+<button ng-click="bool=true">Fade In!</button>
+<button ng-click="bool=false">Fade Out!</button>
+    <input type="text" ng-model="test">
+    <div ng-repeat="slected in d | filter:test" class="bouncy-scale-in" style="background-color: blue; width:20%;border:solid 2px black;">{{slected}}</div>
+</body>
+<footer>
+    <script src="../vendors/angular/angular.min.js"></script>
+    <script src="../vendors/angular-ui/ui-bootstrap-tpls-0.14.2.min.js"></script>
+    <script src="../vendors/restangular/restangular.min.js"></script>
+    <script src="../vendors/underscore/underscore.js"></script>
+    <script src="../vendors/jquery/jquery-2.1.4.min.js"></script>
+    <script src="../vendors/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script src="../javascripts/test.js"></script>
+    <script src="../vendors/angular/angular-animate.js"></script>
+</footer>
+</html>
