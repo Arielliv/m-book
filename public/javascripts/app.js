@@ -2,57 +2,39 @@
 
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ,'ngAnimate']);
 
+
+
     /*service for the cards, scripts and files*/
-    app.factory('ServiceArray',function($filter){
-        var Cards = [{dateHeader: "04-12-2015",
-            id: 1,
-            img: "/public/images/windows.jpg",
-            monitorExplain: "s",
-            monitorLevel: "מתקדם",
-            monitorName: "scscscscscscscs",
-            monitorProdact: "windows",
-            monitorSystem: "מערכת4",
-            monitorType: "service/process",
-            classText:"",
-            classBtn : "",
-            text : "פתח",
-            status: '2',
-            views: 0},
-            {dateHeader: "04-12-2015",
-                id: 2,
-                img: "/public/images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "מתקדם",
-                monitorName: "asssa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                classText:"",
-                classBtn : "",
-                text : "פתח",
-                views: 0},
-            {dateHeader: "04-12-2015",
-                id: 3,
-                img: "/public/images/windows.jpg",
-                monitorExplain: "s",
-                monitorLevel: "בסיסי",
-                monitorName: "azsa",
-                monitorProdact: "windows",
-                monitorSystem: "מערכת4",
-                monitorType: "service/process",
-                status: '3',
-                classText:"",
-                classBtn : "",
-                text : "פתח",
-                views: 0}];
+    app.factory('ServiceArray',function($filter,$q,Restangular){
+
+        var Cards;
+        getC().then(function(c){
+            console.log(c);
+            Cards = c;
+            console.log(Cards);
+        });
+        function getC() {
+            var Accounts = Restangular.all('api');
+            var baseAccounts = Accounts.one('get');
+            var deferred = $q.defer();
+            var Cards = [];
+                if(baseAccounts.get()){
+                    baseAccounts.getList().then(function(b) {
+
+                        Cards = b.plain();
+                        deferred.resolve(Cards);
+                    });
+                } else {
+                    deferred.resolve([{}]);
+                }
+            return deferred.promise;
+        }
+
         var Downloads = [];
         var Scripts = [{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1}];
         var types = ['winlog','log','service/process','schedule task','...'];
         var prodacts = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
         var systems = ['מערכת1','מערכת2','מערכת3','מערכת4','מערכת5','מערכת6','לא קיים כאן'];
-        var classBtn = '';
-        var classText = '';
         return{
             getCards : function(){
                 return Cards;
@@ -263,15 +245,26 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     });
 
 
-    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window ,Restangular,$sce) {
+    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window,Restangular ) {
         /*arrays of input*/
         $scope.downloadsData = ServiceArray.getDownloads();
         $scope.scriptsData = ServiceArray.getScripts();
-        $scope.Cards = ServiceArray.getCards();
+        var Accounts = Restangular.all('api');
+        var baseAccounts = Accounts.one('get');
+        baseAccounts.getList().then(function(b) {
+
+            $scope.Cards = b.plain();
+
+        });
+
+        console.log($scope.Cards);
         $scope.types = ServiceArray.getTypes();
         $scope.prodacts = ServiceArray.getProdacts();
         $scope.systems = ServiceArray.getSystems();
 
+        $scope.b = function(){
+            console.log($scope.Cards);
+        };
         $scope.changeClass=function(selected){
             selected.classBtn = 'col-lg-push-10';
             selected.classText = 'ng-enter';

@@ -7,5 +7,4 @@ GET     /                           controllers.Assets.at(path="/public/view",fi
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /public/*file               controllers.Assets.at(path="/public", file)
-
-    
+GET     /api/get                    controllers.monitorCardController.getCards()
