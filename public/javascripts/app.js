@@ -11,7 +11,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         getC().then(function(c){
             console.log(c);
             Cards = c;
-            console.log(Cards);
         });
         function getC() {
             var Accounts = Restangular.all('api');
@@ -20,7 +19,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             var Cards = [];
                 if(baseAccounts.get()){
                     baseAccounts.getList().then(function(b) {
-
+                        console.log(b.plain());
                         Cards = b.plain();
                         deferred.resolve(Cards);
                     });
@@ -29,7 +28,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 }
             return deferred.promise;
         }
-
+        console.log(Cards);
         var Downloads = [];
         var Scripts = [{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1}];
         var types = ['winlog','log','service/process','schedule task','...'];
@@ -245,18 +244,11 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     });
 
 
-    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window,Restangular ) {
+    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window ) {
         /*arrays of input*/
         $scope.downloadsData = ServiceArray.getDownloads();
         $scope.scriptsData = ServiceArray.getScripts();
-        var Accounts = Restangular.all('api');
-        var baseAccounts = Accounts.one('get');
-        baseAccounts.getList().then(function(b) {
-
-            $scope.Cards = b.plain();
-
-        });
-
+        $scope.Cards = ServiceArray.getCards();
         console.log($scope.Cards);
         $scope.types = ServiceArray.getTypes();
         $scope.prodacts = ServiceArray.getProdacts();
