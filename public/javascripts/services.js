@@ -1,67 +1,93 @@
-/**
- * Created by Ariel on 25/12/2015.
- */
-
-app.factory('restAngularService',function($filter,Restangular){
-    var Accounts = Restangular.all('api');
-    var baseAccounts = Accounts.one('get');
-    return{
-        getC : function(){
+/*monitorCard service for restangular functions*/
+app.factory('restAngularService', function($filter, Restangular, $q) {
+    var api = Restangular.all('api');
+    var getCards = api.one('get');
+    var deferred = $q.defer();
+    return {
+        getCards: function() {
             var Cards = [];
-            if(baseAccounts.get()){
-                baseAccounts.getList().then(function(b) {
-                    console.log(b.plain()[0]);
-                    Cards = b.plain()[0];
-                    return Cards;
-
+            if (getCards.get()) {
+                getCards.getList().then(function(b) {
+                    Cards = b.plain();
+                    deferred.resolve(Cards);
                 });
-
             } else {
-                return Cards = [{}];
+                deferred.resolve([{}]);
             }
+
+            return deferred.promise;
+        },
+        delCard : function(id){
+            var delCard = api.one('delete',id);
+            delCard.remove();
+        },
+        addCard : function(card){
+            var addCard = api.one('post');
+            addCard.post("card",card);
+        },
+        updateCard : function(card){
+            var addCard = api.one('update');
+            addCard.post("card",card);
+        },
+        updateStatusCard : function(id){
+            var incStatus = api.one('incStatus',id);
+            incStatus.put("card");
+        },
+        updateViewCard : function(id){
+            var incStatus = api.one('incView',id);
+            incStatus.put("card");
         }
     }
-
 });
+
 /*service for the cards, scripts and files*/
 app.factory('ServiceArray',function($filter,restAngularService){
 
-    var Cards = restAngularService.getC();
-    console.log(Cards);
+    var Cards = restAngularService.getCards();
     var Downloads = [];
     var Scripts = [{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1}];
     var types = ['winlog','log','service/process','schedule task','...'];
     var prodacts = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
-    var systems = ['îòøëú1','îòøëú2','îòøëú3','îòøëú4','îòøëú5','îòøëú6','ìà ÷ééí ëàï'];
+    var systems = ['××¢×¨×›×ª1','××¢×¨×›×ª2','××¢×¨×›×ª3','××¢×¨×›×ª4','××¢×¨×›×ª5','××¢×¨×›×ª6','×œ× ×§×™×™× ×›××Ÿ'];
     return{
-        getCards : function(){
+        getCards: function() {
             return Cards;
         },
         addCard: function(card){
-            Cards.push(card);
+            restAngularService.addCard(card);
+            //Cards.push(card);
             return Cards;
         },
         getCard: function(monitorName){
             return $filter('filter')(Cards, { monitorName: monitorName})[0];
         },
-        updateStatusCard: function(monitorName){
-            if(($filter('filter')(Cards, { monitorName: monitorName})[0]).status < 3) {
-                ($filter('filter')(Cards, {monitorName: monitorName})[0]).status++;
+        updateViewCard: function(card){
+            restAngularService.updateViewCard(card.id);
+            return Cards;
+        },
+        updateStatusCard: function(card){
+            if(card.status < 3){
+                restAngularService.updateStatusCard(card.id);
+                /*if(($filter('filter')(Cards, { monitorName: monitorName})[0]).status < 3) {
+                 ($filter('filter')(Cards, {monitorName: monitorName})[0]).status++;
+                 }*/
             }
             return Cards;
         },
-        delCard: function(card){
-            var index = Cards.indexOf(card);
-            Cards.splice(index, 1);
+        delCard: function(id){
+            restAngularService.delCard(id);
+            //Cards.splice(index, 1);
             return Cards;
         },
         upadteCard: function(card){
-            ($filter('filter')(Cards, {id: card.id})[0]).monitorName = card.monitorName;
+            var uCard = {id:card.id,monitorName:card.monitorName,monitorType:card.monitorType,monitorLevel:card.monitorLevel,monitorProdact:card.monitorProdact,monitorSystem:card.monitorSystem,monitorExplain:card.monitorExplain}
+            restAngularService.updateCard(uCard);
+            /*($filter('filter')(Cards, {id: card.id})[0]).monitorName = card.monitorName;
             ($filter('filter')(Cards, {id: card.id})[0]).monitorType = card.monitorType;
             ($filter('filter')(Cards, {id: card.id})[0]).monitorLevel = card.monitorLevel;
             ($filter('filter')(Cards, {id: card.id})[0]).monitorProdact = card.monitorProdact;
             ($filter('filter')(Cards, {id: card.id})[0]).monitorSystem = card.monitorSystem;
-            ($filter('filter')(Cards, {id: card.id})[0]).monitorExplain = card.monitorExplain;
+            ($filter('filter')(Cards, {id: card.id})[0]).monitorExplain = card.monitorExplain;*/
             return Cards;
         },
         getDownloads: function(){

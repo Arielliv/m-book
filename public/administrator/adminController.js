@@ -22,6 +22,8 @@ app.controller('adminController',function($scope,$modalInstance,selected,Service
         $modalInstance.dismiss('cancel');
     };
     $scope.updateStatus = function(){
-        $scope.Cards = ServiceArray.updateStatusCard($scope.selected.monitorName);
+        ServiceArray.updateStatusCard($scope.selected).then(function(cards) {
+            $scope.Cards = cards;
+        });
     };
 });

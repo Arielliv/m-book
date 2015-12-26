@@ -8,3 +8,8 @@ GET     /                           controllers.Assets.at(path="/public/view",fi
 # Map static resources from the /public folder to the /assets URL path
 GET     /public/*file               controllers.Assets.at(path="/public", file)
 GET     /api/get                    controllers.monitorCardController.getCards()
+DELETE  /api/delete/:id             controllers.monitorCardController.delCard(id)
+POST    /api/post/card              controllers.monitorCardController.addCard()
+POST    /api/update/card            controllers.monitorCardController.editCard()
+PUT     /api/incStatus/:id          controllers.monitorCardController.incCardStatus(id)
+PUT     /api/incView/:id            controllers.monitorCardController.incCsrdView(id)
