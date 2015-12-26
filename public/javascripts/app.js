@@ -1,41 +1,37 @@
 'use strict';
 
 var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui.router', 'ngAside' ,'ngAnimate']);
-
-
-
-    /*service for the cards, scripts and files*/
-    app.factory('ServiceArray',function($filter,$q,Restangular){
-
-        var Cards;
-        getC().then(function(c){
-            console.log(c);
-            Cards = c;
-        });
-        function getC() {
-            var Accounts = Restangular.all('api');
-            var baseAccounts = Accounts.one('get');
-            var deferred = $q.defer();
+app.factory('restAngularService', function($filter, Restangular, $q) {
+    var Accounts = Restangular.all('api');
+    var baseAccounts = Accounts.one('get');
+    var deferred = $q.defer();
+    return {
+        getCards: function() {
             var Cards = [];
-                if(baseAccounts.get()){
-                    baseAccounts.getList().then(function(b) {
-                        console.log(b.plain());
-                        Cards = b.plain();
-                        deferred.resolve(Cards);
-                    });
-                } else {
-                    deferred.resolve([{}]);
-                }
+            if (baseAccounts.get()) {
+                baseAccounts.getList().then(function(b) {
+                    Cards = b.plain();
+                    deferred.resolve(Cards);
+                });
+            } else {
+                deferred.resolve([{}]);
+            }
+
             return deferred.promise;
         }
-        console.log(Cards);
+    }
+});
+
+    /*service for the cards, scripts and files*/
+    app.factory('ServiceArray',function($filter,restAngularService){
+        var Cards = restAngularService.getCards();
         var Downloads = [];
         var Scripts = [{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1},{data:"sadsadasdasdas", scriptName: "scscscscscscsc", scriptExplain: "sss", id: 1}];
         var types = ['winlog','log','service/process','schedule task','...'];
         var prodacts = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
         var systems = ['מערכת1','מערכת2','מערכת3','מערכת4','מערכת5','מערכת6','לא קיים כאן'];
         return{
-            getCards : function(){
+            getCards: function() {
                 return Cards;
             },
             addCard: function(card){
@@ -244,12 +240,14 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     });
 
 
-    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window ) {
+    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window,Restangular ) {
         /*arrays of input*/
         $scope.downloadsData = ServiceArray.getDownloads();
         $scope.scriptsData = ServiceArray.getScripts();
-        $scope.Cards = ServiceArray.getCards();
-        console.log($scope.Cards);
+        $scope.Cards = null;
+        ServiceArray.getCards().then(function(cards) {
+            $scope.Cards = cards;
+        });
         $scope.types = ServiceArray.getTypes();
         $scope.prodacts = ServiceArray.getProdacts();
         $scope.systems = ServiceArray.getSystems();

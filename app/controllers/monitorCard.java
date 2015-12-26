@@ -19,13 +19,14 @@ public class monitorCard extends Controller{
     private String monitorLevel;
     private String monitorProdact;
     private String monitorSystem;
+    private String monitorExplain;
     private String monitorType;
     private String classText;
     private String classBtn;
     private String text;
     private int status;
     private int views;
-    public monitorCard (int id,String dateHeader,String img,String monitorName,String monitorLevel,String monitorProdact,String monitorSystem,String monitorType,String classText,String classBtn,String text,int status,int views){
+    public monitorCard (int id,String dateHeader,String img,String monitorName,String monitorLevel,String monitorProdact,String monitorSystem,String monitorExplain,String monitorType,String classText,String classBtn,String text,int status,int views){
         this.id = id;
         this.dateHeader = dateHeader;
         this.img = img;
@@ -33,6 +34,7 @@ public class monitorCard extends Controller{
         this.monitorLevel = monitorLevel;
         this.monitorProdact = monitorProdact;
         this.monitorSystem = monitorSystem;
+        this.monitorExplain = monitorExplain;
         this.monitorType = monitorType;
         this.classText = classText;
         this.classBtn = classBtn;
@@ -67,6 +69,10 @@ public class monitorCard extends Controller{
 
     public String getMonitorSystem(){
         return this.monitorSystem;
+    }
+
+    public String getMonitorExplain(){
+        return this.monitorExplain;
     }
 
     public String getMonitorType(){

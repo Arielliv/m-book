@@ -14,8 +14,8 @@ import java.util.List;
 public class monitorCardController extends Controller {
     private static ArrayList<monitorCard> cards = new ArrayList()
     {{
-            add(new monitorCard(1,"04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "service/process", "",  "",  "פתח",  3,  0));
-            add(new monitorCard(2,"04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "service/process", "",  "",  "פתח",  3,  0));
+            add(new monitorCard(1,"04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" ,"sds", "service/process", "",  "",  "פתח",  3,  0));
+            add(new monitorCard(2,"04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", "",  "",  "פתח",  3,  0));
     }};
     public ArrayList<monitorCard> getMonitorCards(){
         return cards;
