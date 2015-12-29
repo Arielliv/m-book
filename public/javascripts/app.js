@@ -465,21 +465,45 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 });
             });
         };
-        /*del monitor*/
-        $scope.delMonitor = function(selected){
-
-            ServiceArray.delCard(selected.id).then(function(cards) {
-                $scope.Cards = cards;
+        /*opendelete*/
+        $scope.openDelMonitor = function(selected) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'deleteMonitor.html',
+                controller: 'deleteController',
+                resolve: {
+                    selected: function () {
+                        return selected;
+                    }
+                }
             });
         };
-        /*del download*/
-        $scope.delDownload = function(selectedCard){
-            $scope.downloadsData = ServiceArray.delDownload(selectedCard);
+        /*opendelete*/
+        $scope.openDelFile = function(selected) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'deleteFile.html',
+                controller: 'deleteController',
+                resolve: {
+                    selected: function () {
+                        return selected;
+                    }
+                }
+            });
         };
-        /*del script*/
-        $scope.delScript = function(selectedCard){
-            $scope.scriptsData = ServiceArray.delScript(selectedCard);
+        /*opendelete*/
+        $scope.openDelScript = function(selected) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'deleteScript.html',
+                controller: 'deleteController',
+                resolve: {
+                    selected: function () {
+                        return selected;
+                    }
+                }
+            });
         };
+
+
+
 
         $scope.addType = function(newType){
             $scope.types = ServiceArray.addType(newType);

@@ -20,7 +20,7 @@
                         <td class="table-text">{{selected.status}}</td>
                         <td class="table-text">
                             <button class="btn btn-success" ng-click="openCardAdmin(selected)">פתח</button>
-                            <button class="btn btn-danger" ng-click="delMonitor(selected)">מחק</button>
+                            <button class="btn btn-danger" ng-click="openDelMonitor(selected)">מחק</button>
                             <button class="btn btn-primary " ng-click="openUpdateMonitor(selected)" >עדכן</button>
                         </td>
                     </tr>
@@ -45,7 +45,7 @@
                             <td class="table-text">{{selected.fileName | strLimit: 15}}</td>
                             <td class="table-text">
                                 <button class="btn btn-success" ng-click="openFileAdmin(selected)">פתח</button>
-                                <button class="btn btn-danger" ng-click="delDownload(selected)">מחק</button>
+                                <button class="btn btn-danger" ng-click="openDelFile(selected)">מחק</button>
                             </td>
                         </tr>
                         </tbody>
@@ -66,7 +66,7 @@
                             <td class="table-text">{{selected.scriptName | strLimit: 15}}</td>
                             <td class="table-text">
                                 <button class="btn btn-success" ng-click="openScriptAdmin(selected)">פתח</button>
-                                <button class="btn btn-danger" ng-click="delScript(selected)">מחק</button>
+                                <button class="btn btn-danger" ng-click="openDelScript(selected)">מחק</button>
                             </td>
                         </tr>
                         </tbody>
@@ -137,4 +137,70 @@
             </div>
         </div>
     </div>
+    <script type="text/ng-template" id="deleteMonitor.html">
+
+        <form ng-submit="ok()" class="Mbook">
+            <div class="modal-header col-lg-12">
+                <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selected.monitorName}}</h3>
+            </div>
+            <div class="modal-body ">
+                <div class="panel-body form-body-costume">
+                    <p><h3 style="text-align: center;">האם אתה בטוח שברצונך למחוק ניטור זה ?</h3></p>
+                </div>
+            </div>
+            <div class="modal-footer footer-cos row row-costume">
+                <div  class="col-lg-6 continer-btn-admin">
+                    <button type="submit" class="btn btn-success btn-admin col-lg-12">ביטול</button>
+
+                </div>
+                <div  class="col-lg-6 continer-btn-admin">
+                    <button type="submit" ng-click="delMonitor(selected)" class="btn btn-danger btn-admin col-lg-12">מחק</button>
+                </div>
+            </div>
+        </form>
+    </script>
+    <script type="text/ng-template" id="deleteScript.html">
+
+        <form ng-submit="ok()" class="Mbook">
+            <div class="modal-header col-lg-12">
+                <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selected.scriptName}}</h3>
+            </div>
+            <div class="modal-body ">
+                <div class="panel-body form-body-costume">
+                    <p><h3 style="text-align: center;">האם אתה בטוח שברצונך למחוק סקריפט זה ?</h3></p>
+                </div>
+            </div>
+            <div class="modal-footer footer-cos row row-costume">
+                <div  class="col-lg-6 continer-btn-admin">
+                    <button type="submit" class="btn btn-success btn-admin col-lg-12">ביטול</button>
+
+                </div>
+                <div  class="col-lg-6 continer-btn-admin">
+                    <button type="submit" ng-click="delScript(selected)" class="btn btn-danger btn-admin col-lg-12">מחק</button>
+                </div>
+            </div>
+        </form>
+    </script>
+    <script type="text/ng-template" id="deleteFile.html">
+
+        <form ng-submit="ok()" class="Mbook">
+            <div class="modal-header col-lg-12">
+                <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selected.fileName}}</h3>
+            </div>
+            <div class="modal-body ">
+                <div class="panel-body form-body-costume">
+                    <p><h3 style="text-align: center;">האם אתה בטוח שברצונך למחוק קובץ זה?</h3></p>
+                </div>
+            </div>
+            <div class="modal-footer footer-cos row row-costume">
+                <div  class="col-lg-6 continer-btn-admin">
+                    <button type="submit" class="btn btn-success btn-admin col-lg-12">ביטול</button>
+
+                </div>
+                <div  class="col-lg-6 continer-btn-admin">
+                    <button type="submit" ng-click="delDownload(selected)" class="btn btn-danger btn-admin col-lg-12">מחק</button>
+                </div>
+            </div>
+        </form>
+    </script>
 </div>
