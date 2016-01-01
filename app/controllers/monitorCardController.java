@@ -2,6 +2,7 @@ package controllers;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
+import play.libs.EventSource;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -117,6 +118,7 @@ public class monitorCardController extends Controller {
         int status = requestBody.get("status").asInt();
         int views = requestBody.get("views").asInt();
         addMonitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,classText,classBtn,text,status,views);
+        SSE.sendSSEMassge();
         return ok("added");
     }
     public static Result delCard(String id){

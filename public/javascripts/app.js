@@ -168,6 +168,21 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         $scope.search = false;
         /*count the cards for id*/
         $scope.count = 0;
+
+
+        $scope.msg = {};
+
+        // handles the callback from the received event
+        var handleCallback = function (msg) {
+            $scope.$apply(function () {
+                $scope.msg = JSON.parse(msg.data)
+                console.log($scope.msg);
+            });
+        };
+
+        var source = new EventSource('/api/post/card');
+        source.addEventListener('message', handleCallback, false);
+
         /*change status for the filter*/
         $scope.changeFilterValue = function(value , status){
             $scope.filterValueLevel = value;

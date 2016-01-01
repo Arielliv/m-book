@@ -259,14 +259,17 @@ body{
 /*dynamic background classes*/
 /*########################################################################################################################################################################################################################################*/
 
-.Mbook:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -2;  display: block;  background-image: url("../images/MBOOK1.png") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 100%;
+.Mbook:before{  content: "";  position: absolute;  left: 0;  right: 0;  z-index: -2;  display: block;  background-image: url("../images/10.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 120%;
 }
 .Mbook{  position: fixed;   top:75px;   left: 0;  right: 0;  z-index: 0;  color:black;    border-radius: 3px; background-color: #262F3E;
 }
 
 /*########################################################################################################################################################################################################################################*/
 
-
+.navbar-brand{
+    min-width: 135px;
+    background-image: url("../images/5.jpg") ;min-height: 100%;     background-repeat: no-repeat;     background-position: center; background-size: auto 170%;
+}
 /*card classes*/
 
 .monitor-card-outerbox {
@@ -596,7 +599,7 @@ body{
 
 }
 .background-img-basic{
-    background-image: url("../images/basic2.png") ;
+    background-image: url("../images/basic.jpg") ;
 
     background-repeat: no-repeat;
     background-position: center;
@@ -604,7 +607,7 @@ body{
 }
 
 .background-img-advance{
-    background-image: url("../images/advance.png") ;
+    background-image: url("../images/advenced.jpg") ;
 
     background-repeat: no-repeat;
     background-position: center;
@@ -612,7 +615,7 @@ body{
 }
 
 .background-img-applicative{
-    background-image: url("../images/applicative.png") ;
+    background-image: url("../images/app2.jpg") ;
 
     background-repeat: no-repeat;
     background-position: center;
@@ -620,7 +623,7 @@ body{
 }
 
 .background-img-construction{
-    background-image: url("../images/Construction.png") ;
+    background-image: url("../images/constructions.jpg") ;
 
     background-repeat: no-repeat;
     background-position: center;
