@@ -42,6 +42,23 @@ public class monitorCard extends Controller{
         this.status = status;
         this.views = views;
     }
+    public monitorCard(monitorCard card){
+        this.id = card.getId();
+        this.dateHeader = card.getDateHeader();
+        this.img = card.getImg();
+        this.monitorName = card.getMonitorName();
+        this.monitorLevel = card.getMonitorLevel();
+        this.monitorProdact = card.getMonitorProdact();
+        this.monitorSystem = card.getMonitorSystem();
+        this.monitorExplain = card.getMonitorExplain();
+        this.monitorType = card.getMonitorType();
+        this.classText = card.getClassText();
+        this.classBtn = card.getClassBtn();
+        this.text = card.getText();
+        this.status = card.getStatus();
+        this.views = card.status;
+    }
+
 
     public String getId(){
         return this.id;

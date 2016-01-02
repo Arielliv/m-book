@@ -129,11 +129,18 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
     app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window,Restangular ) {
         /*arrays of input*/
-        $scope.downloadsData = ServiceArray.getDownloads();
-        $scope.scriptsData = ServiceArray.getScripts();
+        $scope.downloadsData = ServiceArray.getDownloads().then(function(files){
+            $scope.downloadsData = files;
+            console.log($scope.downloadsData);
+        });
+        $scope.scriptsData = ServiceArray.getScripts().then(function(scripts){
+            $scope.scriptsData = scripts;
+            console.log($scope.scriptsData);
+        });
         $scope.Cards = null;
         ServiceArray.getCards().then(function(cards) {
             $scope.Cards = cards;
+            console.log($scope.Cards);
         });
         $scope.types = ServiceArray.getTypes();
         $scope.prodacts = ServiceArray.getProdacts();
@@ -169,19 +176,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         /*count the cards for id*/
         $scope.count = 0;
 
-
-        $scope.msg = {};
-
-        // handles the callback from the received event
-        var handleCallback = function (msg) {
-            $scope.$apply(function () {
-                $scope.msg = JSON.parse(msg.data)
-                console.log($scope.msg);
-            });
-        };
-
-        var source = new EventSource('/api/post/card');
-        source.addEventListener('message', handleCallback, false);
 
         /*change status for the filter*/
         $scope.changeFilterValue = function(value , status){
@@ -295,7 +289,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.classText = '';
                     newCard.text = "פתח";
                     $scope.count ++;
-                    ServiceArray.addCard(newCard).then(function(cards) {
+                    ServiceArray.addCard(newCard).then(function(cards){
                         $scope.Cards = cards;
                         console.log($scope.Cards);
                     });
@@ -309,7 +303,11 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
                 modalInstance2.result.then(function (data) {
                     data.id = $scope.scriptsData.length +1;
-                    $scope.scriptsData =ServiceArray.addScripts(data);
+                    console.log(data);
+                    ServiceArray.addScripts(data).then(function(scripts){
+                        $scope.scriptsData = scripts;
+                        console.log($scope.scriptsData);
+                    });
                     console.log(data);
                     //$scope.scriptsData.push(data);
                 });
@@ -321,7 +319,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
                 modalInstance3.result.then(function (data) {
                     data.id = $scope.downloadsData.length +1;
-                    $scope.downloadsData = ServiceArray.addDownload(data);
+                    ServiceArray.addDownload(data).then(function(files){
+                        $scope.downloadsData = files;
+                        console.log($scope.downloadsData);
+                    });
                     //$scope.downloadsData.push(data);
                 });
             } else {

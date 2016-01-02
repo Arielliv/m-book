@@ -1,53 +1,56 @@
-/*
- * Copyright (c) 2015 Alejandro Such Berenguer
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the
- * "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish,
- * distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to
- * the following conditions:
+'use strict';
 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+'use strict';
 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+/** app level module which depends on services and controllers */
+angular.module('sseChat', ['sseChat.services', 'sseChat.controllers']);
 
-var myapp = angular.module('myapp', ['ngAnimate']);
+/** Controllers */
+angular.module('sseChat.controllers', ['sseChat.services']).
+    controller('ChatCtrl', function ($scope, $http, chatModel) {
+        $scope.rooms = chatModel.getRooms();
+        $scope.msgs = [];
+        $scope.inputText = "";
+        $scope.user = "Jane Doe #" + Math.floor((Math.random() * 100) + 1);
+        $scope.currentRoom = $scope.rooms[0];
 
-myapp.controller('MainCtrl', function ($scope) {
-    $scope.d = ['1','2','3','4','5'];
-    $scope.showContent = function($fileContent){
-        $scope.content = $fileContent;
+        /** change current room, restart EventSource connection */
+        $scope.setCurrentRoom = function (room) {
+            $scope.currentRoom = room;
+            $scope.chatFeed.close();
+            $scope.msgs = [];
+            $scope.listen();
+        };
+
+        /** posting chat text to server */
+        $scope.submitMsg = function () {
+            $http.post("/chat", { text: $scope.inputText, user: $scope.user,
+                time: (new Date()).toUTCString(), room: $scope.currentRoom.value });
+            $scope.inputText = "";
+        };
+
+        /** handle incoming messages: add to messages array */
+        $scope.addMsg = function (msg) {
+            $scope.$apply(function () { $scope.msgs.push(JSON.parse(msg.data)); });
+        };
+
+        /** start listening on messages from selected room */
+        $scope.listen = function () {
+            $scope.chatFeed = new EventSource("/chatFeed/" + $scope.currentRoom.value);
+            $scope.chatFeed.addEventListener("message", $scope.addMsg, false);
+        };
+
+        $scope.listen();
+    });
+
+'use strict';
+
+/** chatModel service, provides chat rooms (could as well be loaded from server) */
+angular.module('sseChat.services', []).service('chatModel', function () {
+    var getRooms = function () {
+        return [ {name: 'Room 1', value: 'room1'}, {name: 'Room 2', value: 'room2'},
+            {name: 'Room 3', value: 'room3'}, {name: 'Room 4', value: 'room4'},
+            {name: 'Room 5', value: 'room5'} ];
     };
-});
-
-myapp.directive('onReadFile', function ($parse) {
-    return {
-        restrict: 'A',
-        scope: false,
-        link: function(scope, element, attrs) {
-            var fn = $parse(attrs.onReadFile);
-
-            element.on('change', function(onChangeEvent) {
-                var reader = new FileReader();
-
-                reader.onload = function(onLoadEvent) {
-                    scope.$apply(function() {
-                        fn(scope, {$fileContent:onLoadEvent.target.result});
-                    });
-                };
-
-                reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
-            });
-        }
-    };
+    return { getRooms: getRooms };
 });

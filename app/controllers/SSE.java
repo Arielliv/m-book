@@ -1,38 +1,79 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import play.*;
+import play.mvc.*;
+import play.libs.*;
 
-import play.Logger;
-import play.libs.EventSource;
-import play.mvc.Controller;
-import play.mvc.Result;
+import akka.actor.*;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.text.*;
+import scala.concurrent.duration.Duration;
+
+import static java.util.concurrent.TimeUnit.*;
+import static play.libs.EventSource.Event.event;
 
 
-/**
- * Created by Ariel on 01/01/2016.
- */
 public class SSE extends Controller {
-    private static ArrayList<EventSource> sockets  = new ArrayList<>();
-    public static Result cardFeed(){
-        String remoteAdders = request().remoteAddress();
-        return ok(new EventSource(){
-            public void onConnected(){
-                sockets.add(this);
-                this.onDisconnected(()->{
-                    Logger.info(remoteAdders + "sse disconected");
-                    sockets.remove(this);
-                });
+    final static ActorRef clock = Clock.instance;
+
+    public static Result index() {
+        return ok("");
+    }
+
+    public static Result liveClock() {
+        return ok(EventSource.whenConnected(es -> clock.tell(es, null)));
+    }
+
+
+    public static class Clock extends UntypedActor {
+
+        final static ActorRef instance = Akka.system().actorOf(Props.create(Clock.class));
+
+        // Send a TICK message every 100 millis
+        static {
+            Akka.system().scheduler().schedule(
+                    Duration.Zero(),
+                    Duration.create(100, MILLISECONDS),
+                    instance, "TICK",  Akka.system().dispatcher(),
+                    null
+            );
+        }
+
+        List<EventSource> sockets = new ArrayList<EventSource>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH mm ss");
+
+        public void onReceive(Object message) {
+
+            // Handle connections
+            if (message instanceof EventSource) {
+                final EventSource eventSource = (EventSource) message;
+
+                if (sockets.contains(eventSource)) {
+                    // Browser is disconnected
+                    sockets.remove(eventSource);
+                    Logger.info("Browser disconnected (" + sockets.size() + " browsers currently connected)");
+
+                } else {
+                    // Register disconnected callback
+                    eventSource.onDisconnected(() -> self().tell(eventSource, null));
+                    // New browser connected
+                    sockets.add(eventSource);
+                    Logger.info("New browser connected (" + sockets.size() + " browsers currently connected)");
+
+                }
+
             }
-        });
-    }
+            // Tick, send time to all connected browsers
+            if ("TICK".equals(message)) {
+                for (EventSource es : sockets) {
+                    es.send(event(dateFormat.format(new Date())));
+                }
+            }
 
-    public static void sendSSEMassge(){
-        sendMessage("SSE","cardBack");
-    }
+        }
 
-    public static void sendMessage(String data, String type){
-        sockets.stream().forEach(es -> es.send(new EventSource.Event(data,null,type)));
     }
 
 }

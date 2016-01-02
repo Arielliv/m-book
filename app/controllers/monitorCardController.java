@@ -1,18 +1,16 @@
 package controllers;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import play.Logger;
 import play.libs.EventSource;
 import play.libs.Json;
-import play.mvc.Controller;
-import play.mvc.Result;
+import play.mvc.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/**
- * Created by Ariel on 25/12/2015.
- */
 public class monitorCardController extends Controller {
     private static ArrayList<monitorCard> cards = new ArrayList()
     {{
@@ -22,23 +20,136 @@ public class monitorCardController extends Controller {
             add(new monitorCard("4","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", "",  "",  "פתח",  2,  0));
 
         }};
-    public ArrayList<monitorCard> getMonitorCards(){
-        return cards;
+
+
+    /** Keeps track of all connected browsers per room **/
+    private static Map<String, List<EventSource>> socketsPerRoom = new HashMap<String, List<EventSource>>();
+
+    /**
+     * Controller action serving AngularJS chat page
+     */
+    public static Result index() {
+        return ok("Chat using Server Sent Events and AngularJS");
     }
 
-    public static void delMonitorCard(String id){
-        for (int i = 0; i < cards.size();i++) {
-            if (cards.get(i).getId().equals(id)) {
-                cards.remove(i);
-                break;
-            }
+    /**
+     * Controller action for POSTing chat messages
+     */
+    public static Result incCsrdView(){
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode dataTable = mapper.createObjectNode();
+        ArrayNode aa = dataTable.putArray("aaData");
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        incMonitorCardView(id);
+        sendEventCard(aa);
+        return ok("view inc");
+    }
+    public static Result incCardStatus(){
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode dataTable = mapper.createObjectNode();
+        ArrayNode aa = dataTable.putArray("aaData");
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        incMonitorCardStatus(id);
+        sendEventCard(aa);
+        return ok("status inc");
+    }
+    public static Result delCard(String id){
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode dataTable = mapper.createObjectNode();
+        ArrayNode aa = dataTable.putArray("aaData");
+        delMonitorCard(id);
+        sendEventCard(aa);
+        return ok("deleted");
+    }
+    public static Result editCard() {
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        String monitorName = requestBody.get("monitorName").asText();
+        String monitorLevel = requestBody.get("monitorLevel").asText();
+        String monitorProdact = requestBody.get("monitorProdact").asText();
+        String monitorSystem = requestBody.get("monitorSystem").asText();
+        String monitorExplain = requestBody.get("monitorExplain").asText();
+        String monitorType = requestBody.get("monitorType").asText();
+        editMonitorCard(id, monitorName, monitorLevel, monitorProdact, monitorSystem, monitorExplain, monitorType);
+        sendEventCard(requestBody);
+        return ok("edited");
+    }
+    public static Result addMonitorCard() {
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        String dateHeader = requestBody.get("dateHeader").asText();
+        String img = requestBody.get("img").asText();
+        String monitorName = requestBody.get("monitorName").asText();
+        String monitorLevel = requestBody.get("monitorLevel").asText();
+        String monitorProdact = requestBody.get("monitorProdact").asText();
+        String monitorSystem = requestBody.get("monitorSystem").asText();
+        String monitorExplain = requestBody.get("monitorExplain").asText();
+        String monitorType = requestBody.get("monitorType").asText();
+        String classText = requestBody.get("classText").asText();
+        String classBtn = requestBody.get("classBtn").asText();
+        String text = requestBody.get("text").asText();
+        int status = requestBody.get("status").asInt();
+        int views = requestBody.get("views").asInt();
+        cards.add(new monitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,classText,classBtn,text,status,views));
+        sendEventCard(requestBody);
+        return ok("added");
+    }
+
+    /**
+     * Send event to all channels (browsers) which are connected to the room
+     */
+    public static void sendEventCard(JsonNode msg) {
+        String room  = "1";
+        if(socketsPerRoom.containsKey(room)) {
+            socketsPerRoom.get(room).stream().forEach(es -> es.send(EventSource.Event.event(msg)));
         }
     }
 
-    public static void addMonitorCard(String id,String dateHeader,String img,String monitorName,String monitorLevel,String monitorProdact,String monitorSystem,String monitorExplain,String monitorType,String classText,String classBtn,String text,int status,int views){
-        cards.add(new monitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,classText,classBtn,text,status,views));
+
+    /**
+     * Establish the SSE HTTP 1.1 connection.
+     * The new EventSource socket is stored in the socketsPerRoom Map
+     * to keep track of which browser is in which room.
+     *
+     * onDisconnected removes the browser from the socketsPerRoom Map if the
+     * browser window has been exited.
+     * @return
+     */
+    public static Result getRoom(String room) {
+        String remoteAddress = request().remoteAddress();
+        Logger.info(remoteAddress + " - SSE conntected");
+
+        return ok(new EventSource() {
+            @Override
+            public void onConnected() {
+                EventSource currentSocket = this;
+
+                this.onDisconnected(() -> {
+                    Logger.info(remoteAddress + " - SSE disconntected");
+                    socketsPerRoom.compute(room, (key, value) -> {
+                        if(value.contains(currentSocket))
+                            value.remove(currentSocket);
+                        return value;
+                    });
+                });
+
+                // Add socket to room
+                socketsPerRoom.compute(room, (key, value) -> {
+                    if(value == null)
+                        return new ArrayList<EventSource>() {{ add(currentSocket); }};
+                    else
+                        value.add(currentSocket); return value;
+                });
+            }
+        });
     }
 
+    public static Result getCards()
+    {
+        return ok(Json.toJson(cards));
+    }
     public static void editMonitorCard(String id,String monitorName,String monitorLevel,String monitorProdact,String monitorSystem,String monitorExplain,String monitorType){
         for (int i = 0; i < cards.size();i++) {
             if (cards.get(i).getId().equals(id)) {
@@ -64,6 +175,16 @@ public class monitorCardController extends Controller {
             }
         }
     }
+
+    public static void delMonitorCard(String id){
+        for (int i = 0; i < cards.size();i++) {
+            if (cards.get(i).getId().equals(id)) {
+                cards.remove(i);
+                break;
+            }
+        }
+    }
+
     public static void incMonitorCardStatus(String id){
         for (int i = 0; i < cards.size();i++) {
             if (cards.get(i).getId().equals(id)) {
@@ -81,54 +202,4 @@ public class monitorCardController extends Controller {
             }
         }
     }
-    public static Result incCsrdView(String id){
-        incMonitorCardView(id);
-        return ok("view inc");
-    }
-    public static Result incCardStatus(String id){
-        incMonitorCardStatus(id);
-        return ok("status inc");
-    }
-    public static  Result editCard(){
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        String monitorName = requestBody.get("monitorName").asText();
-        String monitorLevel = requestBody.get("monitorLevel").asText();
-        String monitorProdact = requestBody.get("monitorProdact").asText();
-        String monitorSystem = requestBody.get("monitorSystem").asText();
-        String monitorExplain = requestBody.get("monitorExplain").asText();
-        String monitorType = requestBody.get("monitorType").asText();
-        editMonitorCard(id, monitorName, monitorLevel, monitorProdact, monitorSystem, monitorExplain, monitorType);
-        return ok("edited");
-    }
-    public static Result addCard(){
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        String dateHeader = requestBody.get("dateHeader").asText();
-        String img = requestBody.get("img").asText();
-        String monitorName = requestBody.get("monitorName").asText();
-        String monitorLevel = requestBody.get("monitorLevel").asText();
-        String monitorProdact = requestBody.get("monitorProdact").asText();
-        String monitorSystem = requestBody.get("monitorSystem").asText();
-        String monitorExplain = requestBody.get("monitorExplain").asText();
-        String monitorType = requestBody.get("monitorType").asText();
-        String classText = requestBody.get("classText").asText();
-        String classBtn = requestBody.get("classBtn").asText();
-        String text = requestBody.get("text").asText();
-        int status = requestBody.get("status").asInt();
-        int views = requestBody.get("views").asInt();
-        addMonitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,classText,classBtn,text,status,views);
-        SSE.sendSSEMassge();
-        return ok("added");
-    }
-    public static Result delCard(String id){
-        delMonitorCard(id);
-        return ok("deleted");
-    }
-    public static Result getCards()
-    {
-        return ok(Json.toJson(cards));
-    }
-
 }
-

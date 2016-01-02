@@ -25,11 +25,15 @@ app.controller('deleteController',function($scope,$modalInstance,selected,Servic
 
     /*del download*/
     $scope.delDownload = function(selectedCard){
-        $scope.downloadsData = ServiceArray.delDownload(selectedCard);
+        ServiceArray.delDownload(selectedCard).then(function(files) {
+            $scope.downloadsData = files;
+        });
     };
 
     /*del script*/
     $scope.delScript = function(selectedCard){
-        $scope.scriptsData = ServiceArray.delScript(selectedCard);
+        ServiceArray.delScript(selectedCard).then(function(scripts) {
+            $scope.scriptsData = scripts;
+        });
     };
 });
