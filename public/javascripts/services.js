@@ -188,7 +188,7 @@ app.factory('ServiceArray',function($filter,restAngularService){
         delScript: function(Script){
             restAngularService.delScript(Script.id);
             //Scripts.splice(index, 1);
-            return restAngularService.delScript();
+            return restAngularService.getScripts();
         },
         getTypes: function(){
             return types;
