@@ -3,9 +3,13 @@
  */
 app.controller('deleteController',function($scope,$modalInstance,selected,ServiceArray){
     $scope.selected= selected;
+
     $scope.ok = function() {
-        $modalInstance.close({
-        });
+        $modalInstance.close({});
+    };
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss({});
     };
     $scope.update = function(selected) {
         ServiceArray.upadteCard(selected);
@@ -17,9 +21,9 @@ app.controller('deleteController',function($scope,$modalInstance,selected,Servic
     };
     /*del monitor*/
     $scope.delMonitor = function(selected){
-
         ServiceArray.delCard(selected.id).then(function(cards) {
             $scope.Cards = cards;
+            $modalInstance.close({a : "b"});
         });
     };
 
@@ -27,6 +31,7 @@ app.controller('deleteController',function($scope,$modalInstance,selected,Servic
     $scope.delDownload = function(selectedCard){
         ServiceArray.delDownload(selectedCard).then(function(files) {
             $scope.downloadsData = files;
+            $modalInstance.close({});
         });
     };
 
@@ -34,6 +39,7 @@ app.controller('deleteController',function($scope,$modalInstance,selected,Servic
     $scope.delScript = function(selectedCard){
         ServiceArray.delScript(selectedCard).then(function(scripts) {
             $scope.scriptsData = scripts;
+            $modalInstance.close({});
         });
     };
 });

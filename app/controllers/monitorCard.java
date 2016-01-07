@@ -21,12 +21,9 @@ public class monitorCard extends Controller{
     private String monitorSystem;
     private String monitorExplain;
     private String monitorType;
-    private String classText;
-    private String classBtn;
-    private String text;
     private int status;
     private int views;
-    public monitorCard (String id,String dateHeader,String img,String monitorName,String monitorLevel,String monitorProdact,String monitorSystem,String monitorExplain,String monitorType,String classText,String classBtn,String text,int status,int views){
+    public monitorCard (String id,String dateHeader,String img,String monitorName,String monitorLevel,String monitorProdact,String monitorSystem,String monitorExplain,String monitorType,int status,int views){
         this.id = id;
         this.dateHeader = dateHeader;
         this.img = img;
@@ -36,9 +33,6 @@ public class monitorCard extends Controller{
         this.monitorSystem = monitorSystem;
         this.monitorExplain = monitorExplain;
         this.monitorType = monitorType;
-        this.classText = classText;
-        this.classBtn = classBtn;
-        this.text = text;
         this.status = status;
         this.views = views;
     }
@@ -52,9 +46,6 @@ public class monitorCard extends Controller{
         this.monitorSystem = card.getMonitorSystem();
         this.monitorExplain = card.getMonitorExplain();
         this.monitorType = card.getMonitorType();
-        this.classText = card.getClassText();
-        this.classBtn = card.getClassBtn();
-        this.text = card.getText();
         this.status = card.getStatus();
         this.views = card.status;
     }
@@ -121,27 +112,6 @@ public class monitorCard extends Controller{
     }
     public void setMonitorType(String monitorType){
         this.monitorType = monitorType;
-    }
-
-    public String getClassText(){
-        return this.classText;
-    }
-    public void setClassText(String classText){
-        this.classText = classText;
-    }
-
-    public String getClassBtn(){
-        return this.classBtn;
-    }
-    public void setClassBtn(String classBtn){
-        this.classBtn = classBtn;
-    }
-
-    public String getText(){
-        return this.text;
-    }
-    public void setText(String text){
-        this.text = text;
     }
 
     public int getStatus(){

@@ -14,10 +14,13 @@ import java.util.*;
 public class monitorCardController extends Controller {
     private static ArrayList<monitorCard> cards = new ArrayList()
     {{
-            add(new monitorCard("1","04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" ,"sds", "service/process", "",  "",  "פתח",  1,  0));
-            add(new monitorCard("2","04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", "",  "",  "פתח",  3,  0));
-            add(new monitorCard("3","04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", "",  "",  "פתח",  3,  0));
-            add(new monitorCard("4","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", "",  "",  "פתח",  2,  0));
+            add(new monitorCard("1","04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" ,"sds", "service/process",  1,  0));
+            add(new monitorCard("2","04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process",  3,  0));
+            add(new monitorCard("3","04-12-2015", "/public/images/windows.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process",  3,  0));
+            add(new monitorCard("4","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process",  2,  0));
+            add(new monitorCard("5","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process",  2,  0));
+            add(new monitorCard("6","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process",  2,  0));
+            add(new monitorCard("7","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", 2,  0));
 
         }};
 
@@ -36,32 +39,20 @@ public class monitorCardController extends Controller {
      * Controller action for POSTing chat messages
      */
     public static Result incCsrdView(){
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode dataTable = mapper.createObjectNode();
-        ArrayNode aa = dataTable.putArray("aaData");
         JsonNode requestBody = request().body().asJson();
         String id = requestBody.get("id").asText();
         incMonitorCardView(id);
-        sendEventCard(aa);
         return ok("view inc");
     }
     public static Result incCardStatus(){
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode dataTable = mapper.createObjectNode();
-        ArrayNode aa = dataTable.putArray("aaData");
         JsonNode requestBody = request().body().asJson();
         String id = requestBody.get("id").asText();
         incMonitorCardStatus(id);
-        sendEventCard(aa);
         return ok("status inc");
     }
     public static Result delCard(String id){
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode dataTable = mapper.createObjectNode();
-        ArrayNode aa = dataTable.putArray("aaData");
         delMonitorCard(id);
-        sendEventCard(aa);
-        return ok("deleted");
+        return ok(Json.toJson(cards));
     }
     public static Result editCard() {
         JsonNode requestBody = request().body().asJson();
@@ -87,12 +78,9 @@ public class monitorCardController extends Controller {
         String monitorSystem = requestBody.get("monitorSystem").asText();
         String monitorExplain = requestBody.get("monitorExplain").asText();
         String monitorType = requestBody.get("monitorType").asText();
-        String classText = requestBody.get("classText").asText();
-        String classBtn = requestBody.get("classBtn").asText();
-        String text = requestBody.get("text").asText();
         int status = requestBody.get("status").asInt();
         int views = requestBody.get("views").asInt();
-        cards.add(new monitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,classText,classBtn,text,status,views));
+        cards.add(new monitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,status,views));
         sendEventCard(requestBody);
         return ok("added");
     }

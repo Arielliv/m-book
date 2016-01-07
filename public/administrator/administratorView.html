@@ -137,9 +137,10 @@
             </div>
         </div>
     </div>
+</div>
     <script type="text/ng-template" id="deleteMonitor.html">
 
-        <form ng-submit="ok()" class="Mbook">
+        <form class="Mbook" >
             <div class="modal-header col-lg-12">
                 <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selected.monitorName}}</h3>
             </div>
@@ -150,7 +151,7 @@
             </div>
             <div class="modal-footer footer-cos row row-costume">
                 <div  class="col-lg-6 continer-btn-admin">
-                    <button type="submit" class="btn btn-success btn-admin col-lg-12">ביטול</button>
+                    <button type="submit" ng-click="cancel()" class="btn btn-success btn-admin col-lg-12">ביטול</button>
 
                 </div>
                 <div  class="col-lg-6 continer-btn-admin">
@@ -161,7 +162,7 @@
     </script>
     <script type="text/ng-template" id="deleteScript.html">
 
-        <form ng-submit="ok()" class="Mbook">
+        <form class="Mbook">
             <div class="modal-header col-lg-12">
                 <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selected.scriptName}}</h3>
             </div>
@@ -183,7 +184,7 @@
     </script>
     <script type="text/ng-template" id="deleteFile.html">
 
-        <form ng-submit="ok()" class="Mbook">
+        <form class="Mbook">
             <div class="modal-header col-lg-12">
                 <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selected.fileName}}</h3>
             </div>
@@ -203,4 +204,4 @@
             </div>
         </form>
     </script>
-</div>
+

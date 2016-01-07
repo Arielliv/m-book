@@ -22,27 +22,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             return $filter('limitTo')('...' + input, limit);
         };
     }]);
-/*have never been tested, suppase to be the filter for the monitors
-    app.filter('cardFilter', ['$filter', function($filter) {
-        return function(selectedCard, status, monitorLevel,monitorSystem) {
-            var selectedCard2 = null;
-            if (selectedCard.status == status) {
-                if(selectedCard.status == '2'){
-                    selectedCard2 = selectedCard;
-                }
-                if (selectedCard.status == '3') {
-                    if(selectedCard.monitorLevel.include(monitorLevel)){
-                        selectedCard2 = selectedCard;
-                        if(selectedCard.monitorSystem.include(monitorSystem)){
-                            selectedCard2 = selectedCard;
-                        }
-                    }
-                }
-            }
-            return selectedCard2;
-        };
-    }]);
- */
+
     /*make angular as trustfull for dom(html)*/
     app.filter('to_trusted', ['$sce', function($sce){
         return function(text) {
@@ -73,9 +53,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             link:function(scope, element, attrs) {
                 $timeout(element.on('change', function(evt) {
                     var files = evt.target.files;
-                    console.log(files[0].name);
-                    console.log(files[0].size);
-
                     scope.fileNames = files[0].name;
                     scope.$apply();
                 }),0);
@@ -127,29 +104,24 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     });
 
 
-    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,$window,Restangular ) {
+    app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,restAngularService,$window,Restangular ) {
         /*arrays of input*/
         $scope.downloadsData = ServiceArray.getDownloads().then(function(files){
             $scope.downloadsData = files;
-            console.log($scope.downloadsData);
         });
         $scope.scriptsData = ServiceArray.getScripts().then(function(scripts){
             $scope.scriptsData = scripts;
-            console.log($scope.scriptsData);
         });
         $scope.Cards = null;
-        ServiceArray.getCards().then(function(cards) {
-            $scope.Cards = cards;
-            console.log($scope.Cards);
+        $scope.$watch('Cards', function(newValue, oldValue) {
+            ServiceArray.getCards().then(function(cards) {
+                $scope.Cards = cards;
+                console.log($scope.Cards);
+            });
         });
         $scope.types = ServiceArray.getTypes();
         $scope.prodacts = ServiceArray.getProdacts();
         $scope.systems = ServiceArray.getSystems();
-        $scope.changeClass=function(selected){
-            selected.classBtn = 'col-lg-push-10';
-            selected.classText = 'ng-enter';
-            selected.text = 'פתוח';
-        };
         /*order cards*/
         var orderBy = $filter('orderBy');
         $scope.order = function(predicate, reverse) {
@@ -285,13 +257,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
                     newCard.id = $scope.count;
                     newCard.status = 3;
-                    newCard.classBtn = '';
-                    newCard.classText = '';
-                    newCard.text = "פתח";
                     $scope.count ++;
                     ServiceArray.addCard(newCard).then(function(cards){
                         $scope.Cards = cards;
-                        console.log($scope.Cards);
                     });
                     //$scope.Cards.push(newCard);
                 });
@@ -303,12 +271,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
                 modalInstance2.result.then(function (data) {
                     data.id = $scope.scriptsData.length +1;
-                    console.log(data);
                     ServiceArray.addScripts(data).then(function(scripts){
                         $scope.scriptsData = scripts;
-                        console.log($scope.scriptsData);
                     });
-                    console.log(data);
                     //$scope.scriptsData.push(data);
                 });
             } else if( $scope.$state.includes('downloads')){
@@ -321,7 +286,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     data.id = $scope.downloadsData.length +1;
                     ServiceArray.addDownload(data).then(function(files){
                         $scope.downloadsData = files;
-                        console.log($scope.downloadsData);
                     });
                     //$scope.downloadsData.push(data);
                 });
@@ -345,10 +309,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 }
 
             });
-            modalInstance.result.then(function (a) {
-                selectedCard.classBtn = '';
-                selectedCard.classText = "ng-leave";
-                selectedCard.text = 'פתח';
+            modalInstance.result.then(function () {
+                ServiceArray.getCards().then(function(cards) {
+                    $scope.Cards = cards;
+                });
             });
         };
 
@@ -492,6 +456,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     }
                 }
             });
+            modalInstance.result.then(function(x) {
+                var index = $scope.Cards.indexOf(selected);
+                $scope.Cards.splice(index, 1);
+            });
         };
         /*opendelete*/
         $scope.openDelFile = function(selected) {
@@ -503,6 +471,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                         return selected;
                     }
                 }
+            });
+            modalInstance.result.then(function(x) {
+                var index = $scope.downloadsData.indexOf(selected);
+                $scope.downloadsData.splice(index, 1);
             });
         };
         /*opendelete*/
@@ -516,8 +488,11 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     }
                 }
             });
+            modalInstance.result.then(function(x) {
+                var index = $scope.scriptsData.indexOf(selected);
+                $scope.scriptsData.splice(index, 1);
+            });
         };
-
 
 
 

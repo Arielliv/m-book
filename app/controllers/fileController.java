@@ -23,11 +23,7 @@ public class fileController extends Controller {
         }};
 
     public static Result delFileR(String id){
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode dataTable = mapper.createObjectNode();
-        ArrayNode aa = dataTable.putArray("aaData");
         delFile(id);
-        sendEventCard(aa);
         return ok("deleted");
     }
     public static void delFile(String id){

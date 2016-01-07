@@ -23,11 +23,7 @@ public class scriptController extends Controller {
     }};
 
     public static Result delScriptR(String id){
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode dataTable = mapper.createObjectNode();
-        ArrayNode aa = dataTable.putArray("aaData");
         delscript(id);
-        sendEventCard(aa);
         return ok("deleted");
     }
     public static void delscript(String id){
