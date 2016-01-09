@@ -105,6 +105,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
 
     app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,restAngularService,$window,Restangular ) {
+
         /*arrays of input*/
         $scope.downloadsData = ServiceArray.getDownloads().then(function(files){
             $scope.downloadsData = files;
@@ -256,7 +257,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
                     newCard.id = $scope.count;
-                    newCard.status = 3;
+                    newCard.status = 1;
                     $scope.count ++;
                     ServiceArray.addCard(newCard).then(function(cards){
                         $scope.Cards = cards;
@@ -310,9 +311,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
             });
             modalInstance.result.then(function () {
-                ServiceArray.getCards().then(function(cards) {
-                    $scope.Cards = cards;
-                });
+                ($filter('filter')($scope.Cards, {id: selectedCard.id})[0]).views++;
             });
         };
 
@@ -366,9 +365,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
             });
             modalInstance.result.then(function () {
-                ServiceArray.getCards().then(function(cards) {
-                    $scope.Cards = cards;
-                });
+                ($filter('filter')($scope.Cards, {id: selected.id})[0]).status++;
             });
         };
         $scope.openFileAdmin = function(selected){
@@ -440,9 +437,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
             });
             modalInstance.result.then(function () {
-                ServiceArray.getCards().then(function(cards) {
-                    $scope.Cards = cards;
-                });
+                if(($filter('filter')(Cards, { id: selected.id})[0]).status < 3) {
+                    ($filter('filter')(Cards, {id: selected.id})[0]).status++;
+                }
             });
         };
         /*opendelete*/

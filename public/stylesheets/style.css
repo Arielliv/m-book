@@ -508,6 +508,13 @@ body{
     border:2px solid #72A0C1;
     box-shadow: 0 10px 10px -2px black;
 }
+.table-scroll {
+    height:300px;
+    overflow:auto;
+    margin-top:20px;
+    width:100%;
+}
+
 .table{
     background-color: #72A0C1;
     border-radius: 5px;
