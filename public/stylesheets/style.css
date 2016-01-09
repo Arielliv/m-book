@@ -581,7 +581,7 @@ body{
 }
 .enter-page-inbox-center:hover{
     -webkit-animation-name: cardIntro;
-    -webkit-animation-duration: 1s;
+    -webkit-animation-duration: 200ms;
     -webkit-animation-fill-mode:forwards;
 }
 

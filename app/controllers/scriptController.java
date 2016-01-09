@@ -9,6 +9,7 @@ import play.libs.EventSource;
 import play.libs.Json;
 import play.mvc.*;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -34,6 +35,21 @@ public class scriptController extends Controller {
             }
         }
     }
+
+    public static play.mvc.Result upload() {
+        play.mvc.Http.MultipartFormData body = request().body().asMultipartFormData();
+        play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("picture");
+        if (picture != null) {
+            String fileName = picture.getFilename();
+            String contentType = picture.getContentType();
+            java.io.File file = picture.getFile();
+            return ok("File uploaded");
+        } else {
+            flash("error", "Missing file");
+            return badRequest();
+        }
+    }
+
     public static Result addScript() {
         JsonNode requestBody = request().body().asJson();
         String id = requestBody.get("id").asText();

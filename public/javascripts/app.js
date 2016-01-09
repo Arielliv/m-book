@@ -83,6 +83,10 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 url: "/administrator/administratorView",
                 templateUrl: "/public/administrator/administratorView.html"
             })
+            .state('test', {
+                url: "/view/test",
+                templateUrl: "/public/view/test.html"
+            })
             /*
             .state('scriptsView', {
                 url: "/scriptView",
@@ -272,9 +276,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
                 modalInstance2.result.then(function (data) {
                     data.id = $scope.scriptsData.length +1;
-                    ServiceArray.addScripts(data).then(function(scripts){
+                    /*ServiceArray.addScripts(data).then(function(scripts){
                         $scope.scriptsData = scripts;
-                    });
+                    });*/
                     //$scope.scriptsData.push(data);
                 });
             } else if( $scope.$state.includes('downloads')){

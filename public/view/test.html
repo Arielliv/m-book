@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myapp">
 <head>
-
+    <meta charset="UTF-8">
     <title>M-BOOK-test</title>
 </head>
-<!DOCTYPE HTML>
-<html>
-<body>
-Time: <span id="foo"></span>
+<body  ng-controller="MainCtrl" >
+<form style="display:block;position: absolute; top:200px;" action = "upload" method="post" enctype="multipart/form-data">
+<input type="file" name="picture">
 
-<br><br>
-<button onclick="start()">Start</button>
-
-<script type="text/javascript">
-    function start() {
-
-        var eventSource = new EventSource("HelloServlet");
-
-        eventSource.onmessage = function(event) {
-
-            document.getElementById('foo').innerHTML = event.data;
-
-        };
-
-    }
-</script>
+<p>
+    <input type="submit">
+</p>
+</form>
 </body>
+<footer>
+</footer>
 </html>

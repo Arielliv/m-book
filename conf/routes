@@ -20,3 +20,4 @@ POST    /api/postScript/script      controllers.scriptController.addScript()
 GET     /api/getFiles               controllers.fileController.getFiles
 DELETE  /api/deleteFile/:id         controllers.fileController.delFileR(id)
 POST    /api/postFile/file          controllers.fileController.addFile()
+POST    /upload                     controllers.scriptController.upload()
