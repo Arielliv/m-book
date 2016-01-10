@@ -2,6 +2,7 @@
  * Created by Ariel on 22/11/2015.
  */
 app.controller('uploadScriptsController',function($scope,$modalInstance ){
+
     $scope.fileNames = '';
     $scope.choose = function(){
         $('#uploadScripts').trigger('click');
@@ -12,7 +13,9 @@ app.controller('uploadScriptsController',function($scope,$modalInstance ){
                 var f = document.getElementById('uploadScripts').files[0];
                 var r = new FileReader();
                 r.onloadend = function(e){
-                    $scope.data = e.target.result;
+                    console.log(e);
+                    console.log(e.target);
+                    $scope.data = e.target;
                     $scope.notPass = false;
                     $modalInstance.close({
                         'data':$scope.data,

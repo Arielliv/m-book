@@ -7,11 +7,11 @@ import play.mvc.Controller;
  */
 public class script extends Controller {
     private String id;
-    private String data;
+    private java.io.File data;
     private String scriptName;
     private String scriptExplain;
 
-    public script(String id,String data,String scriptName,String scriptExplain){
+    public script(String id,java.io.File data,String scriptName,String scriptExplain){
         this.id = id;
         this.data = data;
         this.scriptName = scriptName;
@@ -20,10 +20,10 @@ public class script extends Controller {
     public String getId(){
         return this.id;
     }
-    public String getData(){
+    public java.io.File getData(){
         return this.data;
     }
-    public void setData(String data){
+    public void setData(java.io.File data){
         this.data = data;
     }
     public String getScriptName(){

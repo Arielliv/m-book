@@ -74,9 +74,13 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             delScript.remove();
         },
         addScript : function(script){
-            var addScript = api.one('postScript');
+            var addScript = Restangular.all('upload');
+            addScript
+                .withHttpConfig({transformRequest: angular.identity})
+                .customPOST(script, undefined, undefined,
+                { 'Content-Type': undefined });
             console.log(script);
-            addScript.post("script",script);
+            //addScript.post("script",script);
         },
         getFiles: function() {
             var getFiles = api.one('getFiles');

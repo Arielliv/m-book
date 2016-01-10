@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.Logger;
+import play.api.mvc.MultipartFormData;
 import play.libs.EventSource;
 import play.libs.Json;
 import play.mvc.*;
 
+import javax.servlet.annotation.MultipartConfig;
 import java.io.File;
 import java.util.*;
 
@@ -16,13 +18,7 @@ import java.util.*;
  * Created by Ariel on 27/12/2015.
  */
 public class scriptController extends Controller {
-    private static ArrayList<script> scripts = new ArrayList()
-    {{
-            add(new script("1","sadsadasdasdas", "scscscscscscsc", "sss"));
-            add(new script("2","sadsadasdasdas", "scscscscscscsc", "sss"));
-            add(new script("3","sadsadasdasdas", "scscscscscscsc", "sss"));
-    }};
-
+    private static ArrayList<script> scripts = new ArrayList();
     public static Result delScriptR(String id){
         delscript(id);
         return ok("deleted");
@@ -38,27 +34,25 @@ public class scriptController extends Controller {
 
     public static play.mvc.Result upload() {
         play.mvc.Http.MultipartFormData body = request().body().asMultipartFormData();
+        String[] scriptName = body.asFormUrlEncoded().get("scriptName");
+        String[] scriptExplain = body.asFormUrlEncoded().get("scriptExplain");
         play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("picture");
+        int count = scripts.size() + 1 ;
+        String id = "count";
         if (picture != null) {
             String fileName = picture.getFilename();
             String contentType = picture.getContentType();
             java.io.File file = picture.getFile();
+            scripts.add(new script(id,file,scriptName[0],scriptExplain[0]));
+            sendEventCard(Json.toJson(scriptName));
             return ok("File uploaded");
         } else {
             flash("error", "Missing file");
             return badRequest();
         }
     }
-
-    public static Result addScript() {
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        String data = requestBody.get("data").asText();
-        String scriptName = requestBody.get("scriptName").asText();
-        String scriptExplain = requestBody.get("scriptExplain").asText();
-        scripts.add(new script(id,data,scriptName,scriptExplain));
-        sendEventCard(requestBody);
-        return ok("added");
+    public static Result download() {
+        return ok(new java.io.File("/tmp/fileToServe.pdf"));
     }
 
     public static Result getScripts()

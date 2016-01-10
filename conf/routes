@@ -16,7 +16,7 @@ POST    /api/incView/card           controllers.monitorCardController.incCsrdVie
 GET     /clock/:room                controllers.monitorCardController.getRoom(room: String)
 GET     /api/getScripts             controllers.scriptController.getScripts()
 DELETE  /api/deleteScript/:id       controllers.scriptController.delScriptR(id)
-POST    /api/postScript/script      controllers.scriptController.addScript()
+
 GET     /api/getFiles               controllers.fileController.getFiles
 DELETE  /api/deleteFile/:id         controllers.fileController.delFileR(id)
 POST    /api/postFile/file          controllers.fileController.addFile()
