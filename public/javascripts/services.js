@@ -108,6 +108,78 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
         addFile : function(file){
             var addFile = api.one('postFile');
             addFile.post("file",file);
+        },
+        getTypes : function(){
+            var getTypes = api.one('getTypes');
+            var types = [];
+            if (getTypes.get()) {
+                getTypes.getList().then(function(b) {
+                    types = b.plain();
+                    source1.addEventListener('message', function(e) {
+                        var d = JSON.parse(e.data);
+                        types.push(d);
+                        console.log(types);
+                    });
+                    deferred1.resolve(types);
+                });
+            } else {
+                deferred1.resolve([{}]);
+            }
+
+            return deferred1.promise;
+        },
+        addType : function(type){
+            var addType = api.one('postType');
+            console.log(type);
+            addType.post("type",type);
+        },
+        getSystems : function(){
+            var getSystems = api.one('getSystems');
+            var systems = [];
+            if (getSystems.get()) {
+                getSystems.getList().then(function(b) {
+                    systems = b.plain();
+                    source1.addEventListener('message', function(e) {
+                        var d = JSON.parse(e.data);
+                        systems.push(d);
+                        console.log(systems);
+                    });
+                    deferred1.resolve(systems);
+                });
+            } else {
+                deferred1.resolve([{}]);
+            }
+
+            return deferred1.promise;
+        },
+        addSystem : function(system){
+            var addSystem = api.one('postSystem');
+            console.log(system);
+            addSystem.post("system",system);
+        },
+        getProducts : function(){
+            var getProducts = api.one('getProducts');
+            var products = [];
+            if (getProducts.get()) {
+                getProducts.getList().then(function(b) {
+                    products = b.plain();
+                    source1.addEventListener('message', function(e) {
+                        var d = JSON.parse(e.data);
+                        products.push(d);
+                        console.log(products);
+                    });
+                    deferred1.resolve(products);
+                });
+            } else {
+                deferred1.resolve([{}]);
+            }
+
+            return deferred1.promise;
+        },
+        addProduct : function(product){
+            var addProduct = api.one('postProduct');
+            console.log(product);
+            addProduct.post("product",product);
         }
     }
 });
@@ -119,7 +191,7 @@ app.factory('ServiceArray',function($filter,restAngularService){
     var Downloads = restAngularService.getFiles();
     var Scripts = restAngularService.getScripts();
     var types = ['winlog','log','service/process','schedule task','...'];
-    var prodacts = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
+    var products = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
     var systems = ['מערכת1','מערכת2','מערכת3','מערכת4','מערכת5','מערכת6','לא קיים כאן'];
     return{
         getCards: function() {
@@ -195,25 +267,31 @@ app.factory('ServiceArray',function($filter,restAngularService){
             return restAngularService.getScripts();
         },
         getTypes: function(){
-            return types;
+            return restAngularService.getTypes();
+            //return types;
         },
         addType: function(type){
-            types.push(type);
-            return types;
+            return restAngularService.addType(type);
+            //types.push(type);
+            //return types;
         },
         getProdacts: function(){
-            return prodacts;
+            return restAngularService.getProducts();
+            //return products;
         },
         addProdact: function(prodact){
-            prodacts.push(prodact);
-            return prodacts;
+            return restAngularService.addProduct(prodact);
+            //products.push(prodact);
+            //return products;
         },
         getSystems: function(){
-            return systems;
+            return restAngularService.getSystems;
+            //return systems;
         },
         addSystem : function(system){
-            systems.push(system);
-            return systems;
+            return restAngularService.addSystem(system);
+            //systems.push(system);
+            //return systems;
         }
     }
 });

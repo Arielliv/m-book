@@ -23,7 +23,9 @@ public class monitorCardController extends Controller {
             add(new monitorCard("7","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", 2,  0));
 
         }};
-
+    private static ArrayList<String> products = new ArrayList<String>();
+    private static ArrayList<String> systems = new ArrayList<String>();
+    private static ArrayList<String> types = new ArrayList<String>();
 
     /** Keeps track of all connected browsers per room **/
     private static Map<String, List<EventSource>> socketsPerRoom = new HashMap<String, List<EventSource>>();
@@ -38,52 +40,7 @@ public class monitorCardController extends Controller {
     /**
      * Controller action for POSTing chat messages
      */
-    public static Result incCsrdView(){
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        incMonitorCardView(id);
-        return ok("view inc");
-    }
-    public static Result incCardStatus(){
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        incMonitorCardStatus(id);
-        return ok("status inc");
-    }
-    public static Result delCard(String id){
-        delMonitorCard(id);
-        return ok(Json.toJson(cards));
-    }
-    public static Result editCard() {
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        String monitorName = requestBody.get("monitorName").asText();
-        String monitorLevel = requestBody.get("monitorLevel").asText();
-        String monitorProdact = requestBody.get("monitorProdact").asText();
-        String monitorSystem = requestBody.get("monitorSystem").asText();
-        String monitorExplain = requestBody.get("monitorExplain").asText();
-        String monitorType = requestBody.get("monitorType").asText();
-        editMonitorCard(id, monitorName, monitorLevel, monitorProdact, monitorSystem, monitorExplain, monitorType);
-        sendEventCard(requestBody);
-        return ok("edited");
-    }
-    public static Result addMonitorCard() {
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        String dateHeader = requestBody.get("dateHeader").asText();
-        String img = requestBody.get("img").asText();
-        String monitorName = requestBody.get("monitorName").asText();
-        String monitorLevel = requestBody.get("monitorLevel").asText();
-        String monitorProdact = requestBody.get("monitorProdact").asText();
-        String monitorSystem = requestBody.get("monitorSystem").asText();
-        String monitorExplain = requestBody.get("monitorExplain").asText();
-        String monitorType = requestBody.get("monitorType").asText();
-        int status = requestBody.get("status").asInt();
-        int views = requestBody.get("views").asInt();
-        cards.add(new monitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,status,views));
-        sendEventCard(requestBody);
-        return ok("added");
-    }
+
 
     /**
      * Send event to all channels (browsers) which are connected to the room
@@ -133,7 +90,83 @@ public class monitorCardController extends Controller {
             }
         });
     }
+    public static Result getTypes(){
+        return ok(Json.toJson(types));
+    }
+    public static Result addTypes(){
+        JsonNode requestBody = request().body().asJson();
+        String type = requestBody.get("type").asText();
+        types.add(type);
+        sendEventCard(requestBody);
+        return ok("type has been added");
+    }
+    public static Result getSystems(){
+        return ok(Json.toJson(systems));
+    }
+    public static Result addSystems(){
+        JsonNode requestBody = request().body().asJson();
+        String system = requestBody.get("system").asText();
+        systems.add(system);
+        sendEventCard(requestBody);
+        return ok("system has been added");
+    }
+    public static Result getProducts(){
+        return ok(Json.toJson(products));
+    }
+    public static Result addProducts(){
+        JsonNode requestBody = request().body().asJson();
+        String product = requestBody.get("product").asText();
+        products.add(product);
+        sendEventCard(requestBody);
+        return ok("product has been added");
+    }
 
+    public static Result incCsrdView(){
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        incMonitorCardView(id);
+        return ok("view inc");
+    }
+    public static Result incCardStatus(){
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        incMonitorCardStatus(id);
+        return ok("status inc");
+    }
+    public static Result delCard(String id){
+        delMonitorCard(id);
+        return ok(Json.toJson(cards));
+    }
+    public static Result editCard() {
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        String monitorName = requestBody.get("monitorName").asText();
+        String monitorLevel = requestBody.get("monitorLevel").asText();
+        String monitorProdact = requestBody.get("monitorProdact").asText();
+        String monitorSystem = requestBody.get("monitorSystem").asText();
+        String monitorExplain = requestBody.get("monitorExplain").asText();
+        String monitorType = requestBody.get("monitorType").asText();
+        editMonitorCard(id, monitorName, monitorLevel, monitorProdact, monitorSystem, monitorExplain, monitorType);
+        sendEventCard(requestBody);
+        return ok("edited");
+    }
+    public static Result addMonitorCard() {
+        JsonNode requestBody = request().body().asJson();
+        String id = requestBody.get("id").asText();
+        String dateHeader = requestBody.get("dateHeader").asText();
+        String img = requestBody.get("img").asText();
+        String monitorName = requestBody.get("monitorName").asText();
+        String monitorLevel = requestBody.get("monitorLevel").asText();
+        String monitorProdact = requestBody.get("monitorProdact").asText();
+        String monitorSystem = requestBody.get("monitorSystem").asText();
+        String monitorExplain = requestBody.get("monitorExplain").asText();
+        String monitorType = requestBody.get("monitorType").asText();
+        int status = requestBody.get("status").asInt();
+        int views = requestBody.get("views").asInt();
+        cards.add(new monitorCard(id,dateHeader,img,monitorName,monitorLevel,monitorProdact,monitorSystem,monitorExplain,monitorType,status,views));
+        sendEventCard(requestBody);
+        return ok("added");
+    }
     public static Result getCards()
     {
         return ok(Json.toJson(cards));

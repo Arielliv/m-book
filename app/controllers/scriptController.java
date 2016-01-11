@@ -38,7 +38,7 @@ public class scriptController extends Controller {
         String[] scriptExplain = body.asFormUrlEncoded().get("scriptExplain");
         play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("picture");
         int count = scripts.size() + 1 ;
-        String id = "count";
+        String id = String.valueOf(count);
         if (picture != null) {
             String fileName = picture.getFilename();
             String contentType = picture.getContentType();
