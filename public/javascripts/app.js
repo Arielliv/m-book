@@ -111,22 +111,27 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
     app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,restAngularService,$window,Restangular ) {
 
         /*arrays of input*/
-        $scope.downloadsData = ServiceArray.getDownloads().then(function(files){
+        ServiceArray.getDownloads().then(function(files){
             $scope.downloadsData = files;
         });
-        $scope.scriptsData = ServiceArray.getScripts().then(function(scripts){
+        ServiceArray.getScripts().then(function(scripts){
             $scope.scriptsData = scripts;
         });
         $scope.Cards = null;
         $scope.$watch('Cards', function(newValue, oldValue) {
             ServiceArray.getCards().then(function(cards) {
                 $scope.Cards = cards;
-                console.log($scope.Cards);
             });
         });
-        $scope.types = ServiceArray.getTypes();
-        $scope.prodacts = ServiceArray.getProdacts();
-        $scope.systems = ServiceArray.getSystems();
+        ServiceArray.getTypes().then(function(types){
+            $scope.types = types;
+        });
+        ServiceArray.getProdacts().then(function(prodacts){
+            $scope.prodacts = prodacts;
+        });
+        ServiceArray.getSystems().then(function(systems){
+            $scope.systems = systems;
+        });
         /*order cards*/
         var orderBy = $filter('orderBy');
         $scope.order = function(predicate, reverse) {
@@ -276,9 +281,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
                 modalInstance2.result.then(function (data) {
                     data.id = $scope.scriptsData.length +1;
-                    /*ServiceArray.addScripts(data).then(function(scripts){
+                    ServiceArray.addScripts(data).then(function(scripts){
                         $scope.scriptsData = scripts;
-                    });*/
+                    });
                     //$scope.scriptsData.push(data);
                 });
             } else if( $scope.$state.includes('downloads')){

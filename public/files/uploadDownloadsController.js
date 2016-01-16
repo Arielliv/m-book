@@ -8,20 +8,16 @@ app.controller('uploadDownloadsController',function($scope,$modalInstance,$timeo
     };
     $scope.add = function(valid){
         if(valid){
-                $scope.data = 'none';
-                var f = document.getElementById('uploadDownloads').files[0];
-                var r = new FileReader();
-                r.onloadend = function(e){
-                    $scope.data = e.target.result;
-                    $scope.notPass = false;
-                    $modalInstance.close({
-                        'data':$scope.data,
-                        'fileName':$scope.fileName,
-                        'fileExplain':$scope.fileExplain
-                    });
-                };
-            /*activate the onloadend to catch the file*/
-                r.readAsBinaryString(f);
+            $scope.data = 'none';
+            $scope.notPass = false;
+            var fileInput = document.getElementById('uploadDownloads');
+            var file = fileInput.files[0];
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('fileName', $scope.fileName);
+            formData.append('fileExplain', $scope.fileExplain);
+            console.log(formData);
+            $modalInstance.close(formData);
         } else {
             $scope.notPass = true;
         }

@@ -10,21 +10,16 @@ app.controller('uploadScriptsController',function($scope,$modalInstance ){
     $scope.add = function(valid){
         if(valid){
                 $scope.data = 'none';
-                var f = document.getElementById('uploadScripts').files[0];
-                var r = new FileReader();
-                r.onloadend = function(e){
-                    console.log(e);
-                    console.log(e.target);
-                    $scope.data = e.target;
-                    $scope.notPass = false;
-                    $modalInstance.close({
-                        'data':$scope.data,
-                        'scriptName':$scope.scriptName,
-                        'scriptExplain':$scope.scriptExplain
-                    });
-                };
+                $scope.notPass = false;
+                var fileInput = document.getElementById('uploadScripts');
+                var file = fileInput.files[0];
+                var formData = new FormData();
+                formData.append('file', file);
+                formData.append('scriptName', $scope.scriptName);
+                formData.append('scriptExplain', $scope.scriptExplain);
+                console.log(formData);
+                $modalInstance.close(formData);
             /*activate the onloadend to catch the file*/
-                r.readAsBinaryString(f);
         } else {
             $scope.notPass = true;
         }

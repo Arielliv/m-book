@@ -4,6 +4,9 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
     var deferred1 = $q.defer();
     var deferred2 = $q.defer();
     var deferred3 = $q.defer();
+    var deferred4 = $q.defer();
+    var deferred5 = $q.defer();
+    var deferred6 = $q.defer();
     var source1 = new EventSource("/clock/1");
     var source2 = new EventSource("/clock/2");
     var source3 = new EventSource("/clock/3");
@@ -33,7 +36,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
         },
         addCard : function(card){
             var addCard = api.one('post');
-            console.log(card);
             addCard.post("card",card);
         },
         updateCard : function(card){
@@ -50,7 +52,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
         },
         getScripts: function() {
             var getScripts = api.one('getScripts');
-
             var Scripts = [];
             if (getScripts.get()) {
                 getScripts.getList().then(function(b) {
@@ -65,7 +66,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             } else {
                 deferred2.resolve([{}]);
             }
-
             return deferred2.promise;
         },
         delScript : function(id){
@@ -74,12 +74,15 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             delScript.remove();
         },
         addScript : function(script){
-            var addScript = Restangular.all('upload');
+            /*var fd = new FormData();
+            fd.append("data", script.data);
+            fd.append("scriptName", script.scriptName);
+            fd.append("scriptExplain", script.scriptExplain);*/
+            var addScript = Restangular.all('uploadScript');
             addScript
                 .withHttpConfig({transformRequest: angular.identity})
                 .customPOST(script, undefined, undefined,
                 { 'Content-Type': undefined });
-            console.log(script);
             //addScript.post("script",script);
         },
         getFiles: function() {
@@ -106,8 +109,11 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             delFile.remove();
         },
         addFile : function(file){
-            var addFile = api.one('postFile');
-            addFile.post("file",file);
+            var addFile = Restangular.all('uploadFile');
+            addFile
+                .withHttpConfig({transformRequest: angular.identity})
+                .customPOST(file, undefined, undefined,
+                { 'Content-Type': undefined });
         },
         getTypes : function(){
             var getTypes = api.one('getTypes');
@@ -115,18 +121,13 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             if (getTypes.get()) {
                 getTypes.getList().then(function(b) {
                     types = b.plain();
-                    source1.addEventListener('message', function(e) {
-                        var d = JSON.parse(e.data);
-                        types.push(d);
-                        console.log(types);
-                    });
-                    deferred1.resolve(types);
+                    console.log(types);
+                    deferred4.resolve(types);
                 });
             } else {
-                deferred1.resolve([{}]);
+                deferred4.resolve([{}]);
             }
-
-            return deferred1.promise;
+            return deferred4.promise;
         },
         addType : function(type){
             var addType = api.one('postType');
@@ -139,18 +140,15 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             if (getSystems.get()) {
                 getSystems.getList().then(function(b) {
                     systems = b.plain();
-                    source1.addEventListener('message', function(e) {
-                        var d = JSON.parse(e.data);
-                        systems.push(d);
-                        console.log(systems);
-                    });
-                    deferred1.resolve(systems);
+                    console.log(systems);
+
+                    deferred5.resolve(systems);
                 });
             } else {
-                deferred1.resolve([{}]);
+                deferred5.resolve([{}]);
             }
 
-            return deferred1.promise;
+            return deferred5.promise;
         },
         addSystem : function(system){
             var addSystem = api.one('postSystem');
@@ -163,18 +161,15 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             if (getProducts.get()) {
                 getProducts.getList().then(function(b) {
                     products = b.plain();
-                    source1.addEventListener('message', function(e) {
-                        var d = JSON.parse(e.data);
-                        products.push(d);
-                        console.log(products);
-                    });
-                    deferred1.resolve(products);
+                    console.log(products);
+
+                    deferred6.resolve(products);
                 });
             } else {
-                deferred1.resolve([{}]);
+                deferred6.resolve([{}]);
             }
 
-            return deferred1.promise;
+            return deferred6.promise;
         },
         addProduct : function(product){
             var addProduct = api.one('postProduct');
@@ -285,7 +280,7 @@ app.factory('ServiceArray',function($filter,restAngularService){
             //return products;
         },
         getSystems: function(){
-            return restAngularService.getSystems;
+            return restAngularService.getSystems();
             //return systems;
         },
         addSystem : function(system){

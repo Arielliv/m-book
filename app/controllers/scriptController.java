@@ -34,9 +34,9 @@ public class scriptController extends Controller {
 
     public static play.mvc.Result upload() {
         play.mvc.Http.MultipartFormData body = request().body().asMultipartFormData();
+        play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("file");
         String[] scriptName = body.asFormUrlEncoded().get("scriptName");
         String[] scriptExplain = body.asFormUrlEncoded().get("scriptExplain");
-        play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("picture");
         int count = scripts.size() + 1 ;
         String id = String.valueOf(count);
         if (picture != null) {
@@ -44,13 +44,14 @@ public class scriptController extends Controller {
             String contentType = picture.getContentType();
             java.io.File file = picture.getFile();
             scripts.add(new script(id,file,scriptName[0],scriptExplain[0]));
-            sendEventCard(Json.toJson(scriptName));
+            sendEventCard(Json.toJson(new script(id,file,scriptName[0],scriptExplain[0])));
             return ok("File uploaded");
         } else {
             flash("error", "Missing file");
             return badRequest();
         }
     }
+
     public static Result download() {
         return ok(new java.io.File("/tmp/fileToServe.pdf"));
     }

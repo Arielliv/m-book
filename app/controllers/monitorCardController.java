@@ -23,9 +23,20 @@ public class monitorCardController extends Controller {
             add(new monitorCard("7","04-12-2015", "/public/images/oracle.jpg",  "scscscscscscscs",  "מתקדם","windows" ,"מערכת4" , "dsdsds","service/process", 2,  0));
 
         }};
-    private static ArrayList<String> products = new ArrayList<String>();
-    private static ArrayList<String> systems = new ArrayList<String>();
-    private static ArrayList<String> types = new ArrayList<String>();
+    private static ArrayList<String> products = new ArrayList<String>()
+    {{
+            add("netApp");
+            add("windows");
+        }};
+    private static ArrayList<String> systems = new ArrayList<String>()
+    {{
+            add("מערכת1");
+            add("מערכת2");
+        }};
+    private static ArrayList<String> types = new ArrayList<String>(){{
+        add("winlog");
+        add("service");
+    }};
 
     /** Keeps track of all connected browsers per room **/
     private static Map<String, List<EventSource>> socketsPerRoom = new HashMap<String, List<EventSource>>();

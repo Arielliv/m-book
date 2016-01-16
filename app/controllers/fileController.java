@@ -17,9 +17,7 @@ import java.util.*;
 public class fileController extends Controller {
     private static ArrayList<file> files = new ArrayList()
     {{
-            add(new file("1","sadsadasdasdas", "scscscscscscsc", "sss"));
-            add(new file("2","sadsadasdasdas", "scscscscscscsc", "sss"));
-            add(new file("3","sadsadasdasdas", "scscscscscscsc", "sss"));
+
         }};
 
     public static Result delFileR(String id){
@@ -34,16 +32,26 @@ public class fileController extends Controller {
             }
         }
     }
-    public static Result addFile() {
-        JsonNode requestBody = request().body().asJson();
-        String id = requestBody.get("id").asText();
-        String data = requestBody.get("data").asText();
-        String scriptName = requestBody.get("scriptName").asText();
-        String scriptExplain = requestBody.get("scriptExplain").asText();
-        files.add(new file(id, data, scriptName, scriptExplain));
-        sendEventCard(requestBody);
-        return ok("added");
+    public static play.mvc.Result upload() {
+        play.mvc.Http.MultipartFormData body = request().body().asMultipartFormData();
+        play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("file");
+        String[] fileName = body.asFormUrlEncoded().get("fileName");
+        String[] fileExplain = body.asFormUrlEncoded().get("fileExplain");
+        int count = files.size() + 1 ;
+        String id = String.valueOf(count);
+        if (picture != null) {
+            String fileName2 = picture.getFilename();
+            String contentType = picture.getContentType();
+            java.io.File file = picture.getFile();
+            files.add(new file(id,file,fileName[0],fileExplain[0]));
+            sendEventCard(Json.toJson(new file(id,file,fileName[0],fileExplain[0])));
+            return ok("File uploaded");
+        } else {
+            flash("error", "Missing file");
+            return badRequest();
+        }
     }
+
 
     public static Result getFiles()
     {
