@@ -5,13 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.Logger;
+import play.Play;
 import play.api.mvc.MultipartFormData;
 import play.libs.EventSource;
 import play.libs.Json;
 import play.mvc.*;
 
 import javax.servlet.annotation.MultipartConfig;
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -32,7 +33,7 @@ public class scriptController extends Controller {
         }
     }
 
-    public static play.mvc.Result upload() {
+    public static play.mvc.Result upload() throws IOException {
         play.mvc.Http.MultipartFormData body = request().body().asMultipartFormData();
         play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("file");
         String[] scriptName = body.asFormUrlEncoded().get("scriptName");
@@ -43,6 +44,16 @@ public class scriptController extends Controller {
             String fileName = picture.getFilename();
             String contentType = picture.getContentType();
             java.io.File file = picture.getFile();
+            String fullfilename = fileName;
+            String filmeId = "2";
+            String imagem = filmeId + fullfilename;
+            String path = "\\c:\\temp";
+            String type = "text/plain";
+
+            if (contentType.equals(type)) {
+
+                file.renameTo(new File(path, imagem));
+            }
             scripts.add(new script(id,file,scriptName[0],scriptExplain[0]));
             sendEventCard(Json.toJson(new script(id,file,scriptName[0],scriptExplain[0])));
             return ok("File uploaded");
