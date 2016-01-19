@@ -46,7 +46,7 @@ public class scriptController extends Controller {
             java.io.File file = picture.getFile();
             String fullfilename = fileName;
             String filmeId = "2";
-            String imagem = filmeId + fullfilename;
+            String imagem = scriptName[0] + ".txt";
             String path = "\\c:\\temp";
             String type = "text/plain";
 
@@ -63,8 +63,16 @@ public class scriptController extends Controller {
         }
     }
 
-    public static Result download() {
-        return ok(new java.io.File("/tmp/fileToServe.pdf"));
+    public static Result download(String id) {
+        String name = null;
+        for (controllers.script script : scripts) {
+            if (script.getId().equals(id)){
+                name = script.getScriptName();
+            }
+        }
+        response().setContentType("text/plain");
+        response().setHeader("Content-Disposition", "attachment; filename=/temp/" + name +".txt");
+        return ok(new java.io.File("/temp/" + name +".txt"));
     }
 
     public static Result getScripts()

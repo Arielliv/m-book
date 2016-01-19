@@ -52,6 +52,9 @@ public class fileController extends Controller {
         }
     }
 
+    public static Result download() {
+        return ok(new java.io.File("/tmp/fileToServe.pdf"));
+    }
 
     public static Result getFiles()
     {

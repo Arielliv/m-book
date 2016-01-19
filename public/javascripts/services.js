@@ -68,6 +68,10 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             }
             return deferred2.promise;
         },
+        downloadScript : function(id){
+            var download = api.one('downloadScript',id);
+            download.get();
+        },
         delScript : function(id){
             console.log(id);
             var delScript = api.one('deleteScript',id);
@@ -103,6 +107,10 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             }
 
             return deferred3.promise;
+        },
+        downloadFile : function(id){
+            var download = api.one('downloadFile');
+            download.get();
         },
         delFile : function(id){
             var delFile = api.one('deleteFile',id);
