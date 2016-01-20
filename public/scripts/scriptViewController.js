@@ -12,6 +12,6 @@ app.controller('scriptViewController',function($scope,$modalInstance,script,rest
     };
 
     $scope.downloadScript = function(){
-        restAngularService.downloadScript(script.id);
+
     }
 });

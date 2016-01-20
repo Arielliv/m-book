@@ -9,6 +9,7 @@ import play.libs.EventSource;
 import play.libs.Json;
 import play.mvc.*;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -40,11 +41,21 @@ public class fileController extends Controller {
         int count = files.size() + 1 ;
         String id = String.valueOf(count);
         if (picture != null) {
-            String fileName2 = picture.getFilename();
+            String Name = picture.getFilename();
             String contentType = picture.getContentType();
             java.io.File file = picture.getFile();
+            String fullfilename = Name;
+            String filmeId = "2";
+            String imagem = fileName[0] + ".txt";
+            String path = "\\c:\\temp";
+            String type = "text/plain";
+
+            if (contentType.equals(type)) {
+
+                file.renameTo(new File(path, imagem));
+            }
             files.add(new file(id,file,fileName[0],fileExplain[0]));
-            sendEventCard(Json.toJson(new file(id,file,fileName[0],fileExplain[0])));
+            sendEventCard(Json.toJson(new script(id,file,fileName[0],fileExplain[0])));
             return ok("File uploaded");
         } else {
             flash("error", "Missing file");
@@ -52,8 +63,14 @@ public class fileController extends Controller {
         }
     }
 
-    public static Result download() {
-        return ok(new java.io.File("/tmp/fileToServe.pdf"));
+    public static Result download(String id) {
+        String name = null;
+        for (controllers.file file : files) {
+            if (file.getId().equals(id)){
+                name = file.getFileName();
+            }
+        }
+        return ok(new java.io.File("/temp/" + name + ".txt")).as("application/force-download");
     }
 
     public static Result getFiles()

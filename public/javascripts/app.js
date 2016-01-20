@@ -336,6 +336,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 }
 
             });
+            modalInstance.result.then(function (a) {
+                restAngularService.downloadScript(script.id);
+            });
         };
 
         /*open file view to download, its a modal*/

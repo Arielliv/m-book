@@ -70,9 +70,7 @@ public class scriptController extends Controller {
                 name = script.getScriptName();
             }
         }
-        response().setContentType("text/plain");
-        response().setHeader("Content-Disposition", "attachment; filename=/temp/" + name +".txt");
-        return ok(new java.io.File("/temp/" + name +".txt"));
+        return ok(new java.io.File("/temp/" + name + ".txt")).as("application/force-download");
     }
 
     public static Result getScripts()

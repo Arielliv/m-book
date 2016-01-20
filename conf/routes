@@ -23,7 +23,7 @@ GET     /api/downloadScript/:id     controllers.scriptController.download(id)
 GET     /api/getFiles               controllers.fileController.getFiles
 DELETE  /api/deleteFile/:id         controllers.fileController.delFileR(id)
 POST    /uploadFile                 controllers.fileController.upload()
-GET     /api/downloadFile           controllers.fileController.download()
+GET     /api/downloadFile/:id       controllers.fileController.download(id)
 
 GET     /api/getTypes               controllers.monitorCardController.getTypes()
 POST    /api/postType               controllers.monitorCardController.addTypes()

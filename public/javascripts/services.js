@@ -70,7 +70,10 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
         },
         downloadScript : function(id){
             var download = api.one('downloadScript',id);
-            download.get();
+            download.get().then(function(res){
+                var file = new Blob([res], { type: 'plain/text' });
+                saveAs(file, '\\c\\temp\\text.text');
+            });
         },
         delScript : function(id){
             console.log(id);
@@ -109,7 +112,7 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             return deferred3.promise;
         },
         downloadFile : function(id){
-            var download = api.one('downloadFile');
+            var download = api.one('downloadFile',id);
             download.get();
         },
         delFile : function(id){
