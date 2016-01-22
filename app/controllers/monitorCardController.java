@@ -40,6 +40,7 @@ public class monitorCardController extends Controller {
             add("vmware");
             add("IBM");
             add("hp");
+            add("not exist here");
         }};
     private static ArrayList<String> systems = new ArrayList<String>()
     {{
