@@ -27,6 +27,19 @@ public class monitorCardController extends Controller {
     {{
             add("netApp");
             add("windows");
+            add("oracle");
+            add("mongoDB");
+            add("citrix");
+            add("crm");
+            add("Exchange");
+            add("intel");
+            add("linux");
+            add("mcafee");
+            add("sharepoint");
+            add("sql");
+            add("vmware");
+            add("IBM");
+            add("hp");
         }};
     private static ArrayList<String> systems = new ArrayList<String>()
     {{
