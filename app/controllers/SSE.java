@@ -1,79 +1,79 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import play.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import play.Logger;
+import play.libs.EventSource;
+import play.libs.Json;
 import play.mvc.*;
-import play.libs.*;
-
-import akka.actor.*;
 
 import java.util.*;
-import java.text.*;
-import scala.concurrent.duration.Duration;
-
-import static java.util.concurrent.TimeUnit.*;
-import static play.libs.EventSource.Event.event;
-
 
 public class SSE extends Controller {
-    final static ActorRef clock = Clock.instance;
 
+    /** Keeps track of all connected browsers per room **/
+    private static Map<String, List<EventSource>> socketsPerRoom = new HashMap<String, List<EventSource>>();
+
+    /**
+     * Controller action serving AngularJS chat page
+     */
     public static Result index() {
-        return ok("");
+        return ok("Chat using Server Sent Events and AngularJS");
     }
 
-    public static Result liveClock() {
-        return ok(EventSource.whenConnected(es -> clock.tell(es, null)));
+    /**
+     * Controller action for POSTing chat messages
+     */
+
+
+    /**
+     * Send event to all channels (browsers) which are connected to the room
+     */
+    public static void sendEventCard(JsonNode msg,String room) {
+        if(socketsPerRoom.containsKey(room)) {
+            socketsPerRoom.get(room).stream().forEach(es -> es.send(EventSource.Event.event(msg)));
+        }
     }
 
 
-    public static class Clock extends UntypedActor {
+    /**
+     * Establish the SSE HTTP 1.1 connection.
+     * The new EventSource socket is stored in the socketsPerRoom Map
+     * to keep track of which browser is in which room.
+     *
+     * onDisconnected removes the browser from the socketsPerRoom Map if the
+     * browser window has been exited.
+     * @return
+     */
+    public static Result getRoom(String room) {
+        String remoteAddress = request().remoteAddress();
+        Logger.info(remoteAddress + " - SSE conntected");
 
-        final static ActorRef instance = Akka.system().actorOf(Props.create(Clock.class));
+        return ok(new EventSource() {
+            @Override
+            public void onConnected() {
+                EventSource currentSocket = this;
 
-        // Send a TICK message every 100 millis
-        static {
-            Akka.system().scheduler().schedule(
-                    Duration.Zero(),
-                    Duration.create(100, MILLISECONDS),
-                    instance, "TICK",  Akka.system().dispatcher(),
-                    null
-            );
-        }
+                this.onDisconnected(() -> {
+                    Logger.info(remoteAddress + " - SSE disconntected");
+                    socketsPerRoom.compute(room, (key, value) -> {
+                        if(value.contains(currentSocket))
+                            value.remove(currentSocket);
+                        return value;
+                    });
+                });
 
-        List<EventSource> sockets = new ArrayList<EventSource>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH mm ss");
-
-        public void onReceive(Object message) {
-
-            // Handle connections
-            if (message instanceof EventSource) {
-                final EventSource eventSource = (EventSource) message;
-
-                if (sockets.contains(eventSource)) {
-                    // Browser is disconnected
-                    sockets.remove(eventSource);
-                    Logger.info("Browser disconnected (" + sockets.size() + " browsers currently connected)");
-
-                } else {
-                    // Register disconnected callback
-                    eventSource.onDisconnected(() -> self().tell(eventSource, null));
-                    // New browser connected
-                    sockets.add(eventSource);
-                    Logger.info("New browser connected (" + sockets.size() + " browsers currently connected)");
-
-                }
-
+                // Add socket to room
+                socketsPerRoom.compute(room, (key, value) -> {
+                    if(value == null)
+                        return new ArrayList<EventSource>() {{ add(currentSocket); }};
+                    else
+                        value.add(currentSocket); return value;
+                });
             }
-            // Tick, send time to all connected browsers
-            if ("TICK".equals(message)) {
-                for (EventSource es : sockets) {
-                    es.send(event(dateFormat.format(new Date())));
-                }
-            }
-
-        }
-
+        });
     }
 
 }

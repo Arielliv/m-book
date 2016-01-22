@@ -13,7 +13,7 @@ POST    /api/post/card              controllers.monitorCardController.addMonitor
 POST    /api/update/card            controllers.monitorCardController.editCard()
 POST    /api/incStatus/card         controllers.monitorCardController.incCardStatus()
 POST    /api/incView/card           controllers.monitorCardController.incCsrdView()
-GET     /clock/:room                controllers.monitorCardController.getRoom(room: String)
+GET     /clock/:room                controllers.SSE.getRoom(room: String)
 
 GET     /api/getScripts             controllers.scriptController.getScripts()
 DELETE  /api/deleteScript/:id       controllers.scriptController.delScriptR(id)

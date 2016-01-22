@@ -60,6 +60,7 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
                         var d = JSON.parse(e.data);
                         Scripts.push(d);
                         console.log(Scripts);
+                        console.log("b");
                     });
                     deferred2.resolve(Scripts);
                 });
@@ -102,6 +103,7 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
                         var d = JSON.parse(e.data);
                         Files.push(d);
                         console.log(Files);
+                        console.log("d");
                     });
                     deferred3.resolve(Files);
                 });
@@ -196,9 +198,9 @@ app.factory('ServiceArray',function($filter,restAngularService){
     var Cards = restAngularService.getCards();
     var Downloads = restAngularService.getFiles();
     var Scripts = restAngularService.getScripts();
-    var types = ['winlog','log','service/process','schedule task','...'];
-    var products = ['oracleDB','mongoDB','windows','linux','netapp','vmware','hp','IBM-MainFrame','not exist here'];
-    var systems = ['מערכת1','מערכת2','מערכת3','מערכת4','מערכת5','מערכת6','לא קיים כאן'];
+    var types = restAngularService.getTypes();
+    var products = restAngularService.getProducts();
+    var systems = restAngularService.getSystems();
     return{
         getCards: function() {
             return restAngularService.getCards();

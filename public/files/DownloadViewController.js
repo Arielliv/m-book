@@ -10,7 +10,5 @@ app.controller('DownloadViewController',function($scope,$modalInstance,download,
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
-    $scope.downloadFile = function(){
-        restAngularService.downloadFile(download.id);
-    }
+
 });

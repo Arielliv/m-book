@@ -266,7 +266,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                     newCard.monitorExplain = $scope.limitCharPerLine(newCard.monitorExplain);
                     newCard.dateHeader = $filter('date')(new Date(), 'dd-MM-yyyy');
                     newCard.id = $scope.count;
-                    newCard.status = 1;
+                    newCard.status = 3;
                     $scope.count ++;
                     ServiceArray.addCard(newCard).then(function(cards){
                         $scope.Cards = cards;
@@ -282,6 +282,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 modalInstance2.result.then(function (data) {
                     data.id = $scope.scriptsData.length +1;
                     ServiceArray.addScripts(data).then(function(scripts){
+                        console.log(scripts);
                         $scope.scriptsData = scripts;
                     });
                     //$scope.scriptsData.push(data);
@@ -336,9 +337,7 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 }
 
             });
-            modalInstance.result.then(function (a) {
-                restAngularService.downloadScript(script.id);
-            });
+
         };
 
         /*open file view to download, its a modal*/

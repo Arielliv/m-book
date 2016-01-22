@@ -34,28 +34,36 @@ public class fileController extends Controller {
         }
     }
     public static play.mvc.Result upload() {
+        String content = ".txt";
         play.mvc.Http.MultipartFormData body = request().body().asMultipartFormData();
-        play.mvc.Http.MultipartFormData.FilePart picture = body.getFile("file");
+        play.mvc.Http.MultipartFormData.FilePart fileU = body.getFile("file");
         String[] fileName = body.asFormUrlEncoded().get("fileName");
         String[] fileExplain = body.asFormUrlEncoded().get("fileExplain");
         int count = files.size() + 1 ;
         String id = String.valueOf(count);
-        if (picture != null) {
-            String Name = picture.getFilename();
-            String contentType = picture.getContentType();
-            java.io.File file = picture.getFile();
-            String fullfilename = Name;
-            String filmeId = "2";
-            String imagem = fileName[0] + ".txt";
+        if (fileU != null) {
+            String contentType = fileU.getContentType();
+            java.io.File file = fileU.getFile();
             String path = "\\c:\\temp";
-            String type = "text/plain";
-
-            if (contentType.equals(type)) {
-
+            String text = "text/plain";
+            String word = "application/octet-stream";
+            String xl = "application/vnd.ms-excel";
+            if (contentType.equals(text)) {
+                String imagem = id + "file.txt";
                 file.renameTo(new File(path, imagem));
             }
-            files.add(new file(id,file,fileName[0],fileExplain[0]));
-            sendEventCard(Json.toJson(new script(id,file,fileName[0],fileExplain[0])));
+            if (contentType.equals(word)) {
+                String imagem = id + "file.docx";
+                file.renameTo(new File(path, imagem));
+                content = ".docx";
+            }
+            if (contentType.equals(xl)) {
+                String imagem = id + "file.xls";
+                file.renameTo(new File(path, imagem));
+                content = ".xls";
+            }
+            files.add(new file(id,content,fileName[0],fileExplain[0]));
+            SSE.sendEventCard(Json.toJson(new file(id,content,fileName[0],fileExplain[0])),"3");
             return ok("File uploaded");
         } else {
             flash("error", "Missing file");
@@ -64,74 +72,17 @@ public class fileController extends Controller {
     }
 
     public static Result download(String id) {
-        String name = null;
+        String content = null;
         for (controllers.file file : files) {
             if (file.getId().equals(id)){
-                name = file.getFileName();
+                content = file.getContent();
             }
         }
-        return ok(new java.io.File("/temp/" + name + ".txt")).as("application/force-download");
+        return ok(new java.io.File("/temp/" + id+ "file" + content)).as("application/force-download");
     }
 
     public static Result getFiles()
     {
         return ok(Json.toJson(files));
-    }
-    /** Keeps track of all connected browsers per room **/
-    private static Map<String, List<EventSource>> socketsPerRoom = new HashMap<String, List<EventSource>>();
-
-    /**
-     * Controller action serving AngularJS chat page
-     */
-    public static Result index() {
-        return ok("Chat using Server Sent Events and AngularJS");
-    }
-    /**
-     * Send event to all channels (browsers) which are connected to the room
-     */
-    public static void sendEventCard(JsonNode msg) {
-        String room  = "3";
-        if(socketsPerRoom.containsKey(room)) {
-            socketsPerRoom.get(room).stream().forEach(es -> es.send(EventSource.Event.event(msg)));
-        }
-    }
-
-
-    /**
-     * Establish the SSE HTTP 1.1 connection.
-     * The new EventSource socket is stored in the socketsPerRoom Map
-     * to keep track of which browser is in which room.
-     *
-     * onDisconnected removes the browser from the socketsPerRoom Map if the
-     * browser window has been exited.
-     * @return
-     */
-    public static Result getRoom(String room) {
-        String remoteAddress = request().remoteAddress();
-        Logger.info(remoteAddress + " - SSE conntected");
-
-        return ok(new EventSource() {
-            @Override
-            public void onConnected() {
-                EventSource currentSocket = this;
-
-                this.onDisconnected(() -> {
-                    Logger.info(remoteAddress + " - SSE disconntected");
-                    socketsPerRoom.compute(room, (key, value) -> {
-                        if(value.contains(currentSocket))
-                            value.remove(currentSocket);
-                        return value;
-                    });
-                });
-
-                // Add socket to room
-                socketsPerRoom.compute(room, (key, value) -> {
-                    if(value == null)
-                        return new ArrayList<EventSource>() {{ add(currentSocket); }};
-                    else
-                        value.add(currentSocket); return value;
-                });
-            }
-        });
     }
 }

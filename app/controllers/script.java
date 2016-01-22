@@ -7,24 +7,24 @@ import play.mvc.Controller;
  */
 public class script extends Controller {
     private String id;
-    private java.io.File data;
+    private String content;
     private String scriptName;
     private String scriptExplain;
 
-    public script(String id,java.io.File data,String scriptName,String scriptExplain){
+    public script(String id,String content,String scriptName,String scriptExplain){
         this.id = id;
-        this.data = data;
+        this.content = content;
         this.scriptName = scriptName;
         this.scriptExplain = scriptExplain;
     }
     public String getId(){
         return this.id;
     }
-    public java.io.File getData(){
-        return this.data;
+    public String getContent(){
+        return this.content;
     }
-    public void setData(java.io.File data){
-        this.data = data;
+    public void setContent(String content){
+        this.content = content;
     }
     public String getScriptName(){
         return this.scriptName;

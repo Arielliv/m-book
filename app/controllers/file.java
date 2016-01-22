@@ -7,24 +7,24 @@ import play.mvc.Controller;
  */
 public class file extends Controller {
     private String id;
-    private java.io.File data;
+    private String content;
     private String fileName;
     private String fileExplain;
 
-    public file(String id,java.io.File data,String fileName,String fileExplain){
+    public file(String id,String content,String fileName,String fileExplain){
         this.id = id;
-        this.data = data;
+        this.content = content;
         this.fileName = fileName;
         this.fileExplain = fileExplain;
     }
     public String getId(){
         return this.id;
     }
-    public java.io.File getData(){
-        return this.data;
+    public String getContent(){
+        return this.content;
     }
-    public void setData(java.io.File  data){
-        this.data = data;
+    public void setContent(String  data){
+        this.content = content;
     }
     public String getFileName(){
         return this.fileName;
