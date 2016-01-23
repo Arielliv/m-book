@@ -7,14 +7,14 @@
             <div class="row">
                 <div class="form-group col-lg-8" ng-class="{'has-error': notPass && Form.fileName.$invalid}">
                     <label class="control-label label-add-card" for="fileName">שם קובץ:</label>
-                    <input class="input-add-card form-control " id="fileName" name="fileName" type="text"  ng-model="fileName" ng-pattern="/^[a-z1-9]{10,}$/" ng-required="true">
-                    <p ng-show="notPass && Form.fileName.$invalid" class="help-block">שם הקובץ חייב להיות לפחות 10 אותיות/מספרים</p>
+                    <input class="input-add-card form-control " id="fileName" name="fileName" type="text"  ng-model="fileName" ng-pattern="/^[A-Za-z1-9א-ת ]{5,}$/" ng-required="true">
+                    <p ng-show="notPass && Form.fileName.$invalid" class="help-block">שם הקובץ חייב להיות לפחות 5 אותיות/מספרים</p>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.fileExplain.$invalid}">
                     <label class="control-label label-add-card" for="fileExplain">הסבר על הקובץ</label>
-                    <textarea class="input-big form-control " id="fileExplain" name="fileExplain" type="text"  ng-model="fileExplain" ng-pattern="/^[a-z1-9]{1,}$/" ng-required="true"></textarea>
+                    <textarea class="input-big form-control " id="fileExplain" name="fileExplain" type="text"  ng-model="fileExplain" ng-pattern="/^[A-Za-z1-9א-ת ]{50,}$/" ng-required="true"></textarea>
                     <p ng-show="notPass && Form.fileExplain.$invalid" class="help-block">הסבר על הקובץ חייב להיות לפחות 50 אותיות/מספרים</p>
                 </div>
             </div>

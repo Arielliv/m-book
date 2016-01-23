@@ -7,8 +7,8 @@
             <div class="row">
                 <div class="form-group col-lg-8" ng-class="{'has-error': notPass && Form.monitorName.$invalid}">
                     <label class="control-label label-add-card" for="monitorName">שם הניטור:</label>
-                    <input class="input-add-card form-control " id="monitorName" name="monitorName" type="text"  ng-model="monitorName" ng-pattern="/^[a-z1-9]{10,}$/" ng-required="true">
-                    <p ng-show="notPass && Form.monitorName.$invalid" class="help-block">שם הניטור חייב להיות לפחות 10 אותיות/מספרים</p>
+                    <input class="input-add-card form-control " id="monitorName" name="monitorName" type="text"  ng-model="monitorName" ng-pattern="/^[A-Za-z1-9א-ת ]{5,}$/" ng-required="true">
+                    <p ng-show="notPass && Form.monitorName.$invalid" class="help-block">שם הניטור חייב להיות לפחות 5 אותיות/מספרים</p>
                 </div>
             </div>
             <div class="row">
@@ -52,8 +52,8 @@
             <div class="row">
                 <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorExplain.$invalid}">
                     <label class="control-label label-add-card" for="monitorExplain">הסבר לניטור:</label>
-                    <textarea class="input-big form-control " id="monitorExplain" name="monitorExplain" type="text"  ng-model="monitorExplain" ng-pattern="/^[a-z1-9]{1,}$/" ng-required="true"></textarea>
-                    <p ng-show="notPass && Form.monitorExplain.$invalid" class="help-block">הסבר חייב להיות לפחות 150 אותיות ו/או מספרים</p>
+                    <textarea class="input-big form-control " id="monitorExplain" name="monitorExplain" type="text"  ng-model="monitorExplain" ng-pattern="/^[A-Za-z1-9א-ת ]{50,}$/" ng-required="true"></textarea>
+                    <p ng-show="notPass && Form.monitorExplain.$invalid" class="help-block">הסבר חייב להיות לפחות 50 אותיות ו/או מספרים</p>
                 </div>
             </div>
         </div>
