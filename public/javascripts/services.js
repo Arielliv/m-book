@@ -20,7 +20,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
                     source1.addEventListener('message', function(e) {
                         var d = JSON.parse(e.data);
                         Cards.push(d);
-                        console.log(Cards);
                     });
                     deferred1.resolve(Cards);
                 });
@@ -59,8 +58,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
                     source2.addEventListener('message', function(e) {
                         var d = JSON.parse(e.data);
                         Scripts.push(d);
-                        console.log(Scripts);
-                        console.log("b");
                     });
                     deferred2.resolve(Scripts);
                 });
@@ -77,7 +74,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             });
         },
         delScript : function(id){
-            console.log(id);
             var delScript = api.one('deleteScript',id);
             delScript.remove();
         },
@@ -102,8 +98,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
                     source3.addEventListener('message', function(e) {
                         var d = JSON.parse(e.data);
                         Files.push(d);
-                        console.log(Files);
-                        console.log("d");
                     });
                     deferred3.resolve(Files);
                 });
@@ -134,7 +128,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             if (getTypes.get()) {
                 getTypes.getList().then(function(b) {
                     types = b.plain();
-                    console.log(types);
                     deferred4.resolve(types);
                 });
             } else {
@@ -144,7 +137,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
         },
         addType : function(type){
             var addType = api.one('postType');
-            console.log(type);
             addType.post("type",type);
         },
         getSystems : function(){
@@ -153,8 +145,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             if (getSystems.get()) {
                 getSystems.getList().then(function(b) {
                     systems = b.plain();
-                    console.log(systems);
-
                     deferred5.resolve(systems);
                 });
             } else {
@@ -165,7 +155,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
         },
         addSystem : function(system){
             var addSystem = api.one('postSystem');
-            console.log(system);
             addSystem.post("system",system);
         },
         getProducts : function(){
@@ -174,8 +163,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
             if (getProducts.get()) {
                 getProducts.getList().then(function(b) {
                     products = b.plain();
-                    console.log(products);
-
                     deferred6.resolve(products);
                 });
             } else {
@@ -186,7 +173,6 @@ app.factory('restAngularService', function($filter, Restangular, $q) {
         },
         addProduct : function(product){
             var addProduct = api.one('postProduct');
-            console.log(product);
             addProduct.post("product",product);
         }
     }

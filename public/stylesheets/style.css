@@ -284,14 +284,15 @@ body{
     padding-right: 0px;
     margin-right: 0;
     margin-left: 0;
-    border: solid black 1px;
+    border: solid #D8D8D8 1px;
+    border-radius: 2px;
     top: 20px;
 
 }
 
 .monitor-card-midbox:hover{
-    border:solid #D8D8D8 1px ;
-    box-shadow: 3px 3px 3px black;
+
+    box-shadow: 1px 1px 1px black;
 }
 
 .monitor-card-inbox {

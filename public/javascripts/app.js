@@ -22,7 +22,19 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             return $filter('limitTo')('...' + input, limit);
         };
     }]);
-
+app.filter('orderObjectBy', function() {
+    return function(items, field, reverse) {
+        var filtered = [];
+        angular.forEach(items, function(item) {
+            filtered.push(item);
+        });
+        filtered.sort(function (a, b) {
+            return (a[field] > b[field] ? 1 : -1);
+        });
+        if(reverse) filtered.reverse();
+        return filtered;
+    };
+});
     /*make angular as trustfull for dom(html)*/
     app.filter('to_trusted', ['$sce', function($sce){
         return function(text) {
@@ -109,7 +121,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
 
 
     app.controller('mainCtrl', function($scope, $uibModal, $filter, $state ,$aside ,ServiceArray ,restAngularService,$window,Restangular ) {
-
         /*arrays of input*/
         ServiceArray.getDownloads().then(function(files){
             $scope.downloadsData = files;
@@ -131,15 +142,14 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
         });
         ServiceArray.getSystems().then(function(systems){
             $scope.systems = systems;
+            console.log($scope.systems);
         });
         /*order cards*/
         var orderBy = $filter('orderBy');
         $scope.order = function(predicate, reverse) {
             $scope.Cards = orderBy($scope.Cards, predicate, reverse);
-
         };
-        $scope.order('-name',false);
-
+        $scope.order('monitorName',false);
         /*variables*/
         /*page*/
         $scope.$state = $state;
@@ -188,7 +198,9 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
             $scope.filterValueLevel = '';
             $scope.filterValue='';
         };
-
+        $scope.filterSys = function(value){
+            $scope.filterValue = value;
+        }
 
         /*open side nav bar, its a modal-ui*/
         $scope.openAside = function(position) {
@@ -282,7 +294,6 @@ var app = angular.module('app', [ 'ui.bootstrap' ,'restangular','ngSanitize','ui
                 modalInstance2.result.then(function (data) {
                     data.id = $scope.scriptsData.length +1;
                     ServiceArray.addScripts(data).then(function(scripts){
-                        console.log(scripts);
                         $scope.scriptsData = scripts;
                     });
                     //$scope.scriptsData.push(data);
