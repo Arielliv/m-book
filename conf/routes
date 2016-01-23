@@ -7,5 +7,27 @@ GET     /                           controllers.Assets.at(path="/public/view",fi
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /public/*file               controllers.Assets.at(path="/public", file)
+GET     /api/get                    controllers.monitorCardController.getCards()
+DELETE  /api/delete/:id             controllers.monitorCardController.delCard(id)
+POST    /api/post/card              controllers.monitorCardController.addMonitorCard()
+POST    /api/update/card            controllers.monitorCardController.editCard()
+POST    /api/incStatus/card         controllers.monitorCardController.incCardStatus()
+POST    /api/incView/card           controllers.monitorCardController.incCsrdView()
+GET     /clock/:room                controllers.SSE.getRoom(room: String)
 
-    
+GET     /api/getScripts             controllers.scriptController.getScripts()
+DELETE  /api/deleteScript/:id       controllers.scriptController.delScriptR(id)
+POST    /uploadScript               controllers.scriptController.upload()
+GET     /api/downloadScript/:id     controllers.scriptController.download(id)
+
+GET     /api/getFiles               controllers.fileController.getFiles
+DELETE  /api/deleteFile/:id         controllers.fileController.delFileR(id)
+POST    /uploadFile                 controllers.fileController.upload()
+GET     /api/downloadFile/:id       controllers.fileController.download(id)
+
+GET     /api/getTypes               controllers.monitorCardController.getTypes()
+POST    /api/postType               controllers.monitorCardController.addTypes()
+GET     /api/getSystems             controllers.monitorCardController.getSystems()
+POST    /api/postSystem             controllers.monitorCardController.addSystems()
+GET     /api/getProducts            controllers.monitorCardController.getProducts
+POST    /api/postProduct            controllers.monitorCardController.addProducts()

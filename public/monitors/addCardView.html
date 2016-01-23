@@ -1,0 +1,64 @@
+<form novalidate ng-submit="ok(Form.$valid)" name="Form">
+    <div class="modal-header col-lg-12">
+        <h3 class="col-lg-4 col-lg-offset-4">הוספת ניטור</h3>
+    </div>
+    <div class="modal-body">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error': notPass && Form.monitorName.$invalid}">
+                    <label class="control-label label-add-card" for="monitorName">שם הניטור:</label>
+                    <input class="input-add-card form-control " id="monitorName" name="monitorName" type="text"  ng-model="monitorName" ng-pattern="/^[A-Za-z1-9א-ת ]{5,}$/" ng-required="true">
+                    <p ng-show="notPass && Form.monitorName.$invalid" class="help-block">שם הניטור חייב להיות לפחות 5 אותיות/מספרים</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorType.$invalid}">
+                    <label class="control-label label-add-card" for="monitorType">סוג הניטור:</label>
+                    <select class="form-control input-add-card" id="monitorType" name="monitorType" ng-model="monitorType" ng-required="true">
+                        <option ng-repeat="type in types">{{type}}</option>
+                    </select>
+                    <p ng-show="notPass && Form.monitorType.$invalid" class="help-block">לא נבחר סוג ניטור</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorLevel.$invalid}">
+                    <label class="control-label label-add-card" for="monitorLevel">רמת ניטור:</label>
+                    <select class="form-control input-add-card" id="monitorLevel" name="monitorType" ng-model="monitorLevel" ng-required="true">
+                        <option>בסיסי</option>
+                        <option>מתקדם</option>
+                        <option>אפליקטיבי</option>
+                    </select>
+                    <p ng-show="notPass && Form.monitorLevel.$invalid" class="help-block">לא נבחרה רמת ניטור</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorProdact.$invalid}">
+                    <label class="control-label label-add-card" for="monitorProdact">שם המוצר:</label>
+                    <select class="form-control input-add-card" id="monitorProdact" name="monitorProdact" ng-model="monitorProdact" ng-required="true">
+                        <option ng-repeat="prodact in prodacts">{{prodact}}</option>
+                    </select>
+                    <p ng-show="notPass && Form.monitorProdact.$invalid" class="help-block">לא נבחר מוצר</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorSystem.$invalid}">
+                    <label class="control-label label-add-card" for="monitorSystem">שם המערכת:</label>
+                    <select class="form-control input-add-card" id="monitorSystem" name="monitorSystem" ng-model="monitorSystem" ng-required="true">
+                        <option ng-repeat="system in systems">{{system}}</option>
+                    </select>
+                    <p ng-show="notPass && Form.monitorSystem.$invalid" class="help-block">לא נבחרה מערכת</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.monitorExplain.$invalid}">
+                    <label class="control-label label-add-card" for="monitorExplain">הסבר לניטור:</label>
+                    <textarea class="input-big form-control " id="monitorExplain" name="monitorExplain" type="text"  ng-model="monitorExplain" ng-pattern="/^[A-Za-z1-9א-ת ]{50,}$/" ng-required="true"></textarea>
+                    <p ng-show="notPass && Form.monitorExplain.$invalid" class="help-block">הסבר חייב להיות לפחות 50 אותיות ו/או מספרים</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume">שמור</button>
+    </div>
+</form>

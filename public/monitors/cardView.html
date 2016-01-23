@@ -1,0 +1,37 @@
+
+<form ng-submit="ok()" class="Mbook">
+    <div class="modal-header col-lg-12">
+        <h3 class="col-lg-6 col-lg-offset-3 header-costume">{{selectedCard.monitorName}}</h3>
+        <div class="col-lg-3 col-lg-pull-10 view-costume" title="צפיות" data-toggle="tooltip" tooltip>
+            <div class="glyphicon glyphicon-eye-open"></div>
+            <div>{{selectedCard.views}}</div>
+        </div>
+    </div>
+    <div class="modal-body ">
+        <div class="panel-body form-body-costume">
+            <div class="form-group">
+                <label class="card-lable2">סוג ניטור:</label>
+                <p class="card-p">{{selectedCard.monitorType}}</p>
+            </div>
+            <div class="form-group">
+                <label class="card-lable2">רמת ניטור:</label>
+                <p class="card-p">{{selectedCard.monitorLevel}}</p>
+            </div>
+            <div class="form-group">
+                <label class="card-lable2">מוצר:</label>
+                <p class="card-p">{{selectedCard.monitorProdact}}</p>
+            </div>
+            <div class="form-group">
+                <label class="card-lable2">מערכת:</label>
+                <p class="card-p">{{selectedCard.monitorSystem}}</p>
+            </div>
+            <div class="form-group">
+                <label class="card-lable2">הסבר:</label>
+                <p class="card-p">{{selectedCard.monitorExplain}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer footer-cos">
+        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume" ng-click="test2()">יציאה</button>
+    </div>
+</form>

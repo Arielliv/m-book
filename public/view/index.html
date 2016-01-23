@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="/public/vendors/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/vendors/angular-aside/src/styles/animate.css" rel="stylesheet">
+    <link href="/public/vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
+    <link href="/public/vendors/angular-aside/dist/css/angular-aside.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/style.css" rel="stylesheet">
+    <link href="/public/stylesheets/ng-animation.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>M-BOOK</title>
+</head>
+<body ng-app="app"  class="ng-cloak" ng-controller="mainCtrl">
+<div class="nav-left up" ng-click="openAside('right', true)">
+    <button type="button" class="btn btn-default btn-lg" >
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </button>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-top continer-btn-admin">
+    <div class="container-fluid">
+        <div class="navbar-header navbar-right">
+            <a type="button" class="navbar-brand"  ui-sref="monitors" >  </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="nav-btn-effect" ng-class="{'active nav-active' : $state.includes('monitors')}">
+                    <a type="button" class="nav-btn"  ng-click="changeFilterValue('start');setUpFilter()" ui-sref="monitors">ניטורים</a>
+                </li>
+                <li class="nav-btn-effect" ng-class="{'active nav-active' : $state.includes('downloads')}">
+                    <a type="button" class="nav-btn" ui-sref="downloads"> הורדות </a>
+                </li>
+                <li class="nav-btn-effect" ng-class="{'active nav-active' : $state.includes('scripts')}">
+                    <a type="button" class="nav-btn" ui-sref="scripts"> סקריפטים </a>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="nav-btn-effect" ng-show="((filterValueLevel == 'אפליקטיבי') && ($state.includes('monitors')))">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">מערכת<span class="caret"></span><span class="choose">{{filterValue}}</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a type="button" ng-click="filterValue = ''">הכל</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="menu-item " ng-repeat="system in systems">
+                            <a ng-click="filterSys(system)" >{{system}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-init="reverse=true" class="nav-btn-effect" ng-show="(($state.includes('monitors')) && (filterValueLevel != 'start'))">
+                    <a type="button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">סדר <span class="caret"></span><span class="choose">{{orderType}}</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a type="button" ng-click="reverse=!reverse;order('monitorName', reverse);orderType='שם'">שם</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a type="button" ng-click="reverse=!reverse;order('views', reverse);orderType='צפיות'">צפיות</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a type="button" ng-click="reverse=!reverse;order('dateHeader',reverse);orderType='תאריך'">תאריך</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-left" ng-init="bool=false">
+            <ul class="nav navbar-nav" >
+                <li class="nav-btn-effect" ng-class="{'hidden' : !($state.includes('monitors'))}">
+                    <a type="button" ng-click="search=!search; bool=!bool;" ng-show="!search" class="nav-hover" title="חיפוש ניטור" data-toggle="tooltip" data-placement="bottom" tooltip>
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li class="nav-btn-effect">
+                    <a type="button" class="nav-hover" ng-click="addCard()" title="הוספה" data-toggle="tooltip" data-placement="bottom" tooltip>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li class="nav-btn-effect">
+                    <a type="button" class="nav-hover" ng-click="openRandom()"  title="ניטור רנדומלי" data-toggle="tooltip" data-placement="bottom" tooltip>
+                        <span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li class="nav-btn-effect">
+                    <a type="button" class="nav-hover" title="מידע על האתר" data-toggle="tooltip" data-placement="bottom" tooltip>
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li class="nav-btn-effect">
+                    <a type="button" class="nav-hover hidden"  title="הגדרות" data-toggle="tooltip" data-placement="bottom" tooltip>
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <form  ng-show="search" class="navbar-form navbar-left slide-left" role="search">
+            <div class="form-group ">
+                <input type="text" class="form-control" placeholder="Search" ng-model="Value">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="search=!search ;searchIt(Value);Value='';bool=!bool;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </form><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div ui-view>
+</div>
+<nav class="navbar navbar-fixed-bottom">
+    <div class="col-lg-4 col-lg-offset-4" style="text-align: center;">נבנה ע"י אריאל ליבשיץ 2016</div>
+</nav>
+</body>
+<footer>
+    <script src="/public/vendors/angular/angular.min.js"></script>
+    <script src="/public/vendors/angular-aside/dist/js/angular-aside.min.js"></script>
+    <script src="/public/vendors/angular-ui/ui-bootstrap-tpls-0.14.2.min.js"></script>
+    <script src="/public/vendors/restangular/restangular.min.js"></script>
+    <script src="/public/vendors/underscore/underscore.js"></script>
+    <script src="/public/vendors/jquery/jquery-2.1.4.min.js"></script>
+    <script src="/public/vendors/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script src="/public/javascripts/app.js"></script>
+    <script src="/public/javascripts/services.js"></script>
+    <script src="/public/monitors/monitorViewController.js"></script>
+    <script src="/public/monitors/addCardController.js"></script>
+    <script src="/public/scripts/uploadScriptsController.js"></script>
+    <script src="/public/files/uploadDownloadsController.js"></script>
+    <script src="/public/files/DownloadViewController.js"></script>
+    <script src="/public/scripts/scriptViewController.js"></script>
+    <script src="/public/administrator/adminController.js"></script>
+    <script src="/public/administrator/deleteController.js"></script>
+    <script src="/public/vendors/angular/angular-sanitize.js"></script>
+    <script src="/public/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/public/vendors/angular/angular-animate.js"></script>
+</footer>
+</html>

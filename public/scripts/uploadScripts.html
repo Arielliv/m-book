@@ -1,0 +1,36 @@
+<form novalidate ng-submit="add(Form.$valid)" name="Form">
+    <div class="modal-header col-lg-12">
+        <h3 class="col-lg-4 col-lg-offset-4">הוספת סקריפט</h3>
+    </div>
+    <div class="modal-body">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error': notPass && Form.scriptName.$invalid}">
+                    <label class="control-label label-add-card" for="scriptName">שם הסקריפט:</label>
+                    <input class="input-add-card form-control " id="scriptName" name="scriptName" type="text"  ng-model="scriptName" ng-pattern="/^[a-z1-9א-ת]{5,}$/" ng-required="true">
+                    <p ng-show="notPass && Form.scriptName.$invalid" class="help-block">שם הסקריפט חייב להיות לפחות 5 אותיות/מספרים</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.scriptExplain.$invalid}">
+                    <label class="control-label label-add-card" for="scriptExplain">הסבר על הקובץ</label>
+                    <textarea class="input-big form-control " id="scriptExplain" name="scriptExplain" type="text"  ng-model="scriptExplain" ng-pattern="/^[A-Za-z1-9א-ת ]{50,}$/" ng-required="true"></textarea>
+                    <p ng-show="notPass && Form.scriptExplain.$invalid" class="help-block">הסבר על הקובץ חייב להיות לפחות 50 אותיות/מספרים</p>
+                </div>
+            </div>
+            <div>
+                <div class="form-group col-lg-8" ng-class="{'has-error':notPass && Form.uploadScripts.$invalid}">
+                    <span>
+                        <input  ng-model="uploadScripts" class="form-control-file" id="uploadScripts" type="file" fd-input file-names="fileNames" />
+                    <input  class="btn btn-primary" type="button" value="בחר קובץ" ng-click="choose()"/> <!-- on button click fire the file click event -->
+                    <span class="badge badge-important">{{fileNames}}</span>
+                    </span>
+                    <p ng-show="notPass && Form.uploadScripts.$invalid" class="help-block">עליך לבחור קובץ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume">הוספה</button>
+    </div>
+</form>

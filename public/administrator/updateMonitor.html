@@ -1,0 +1,58 @@
+<form novalidate ng-submit="update(selected)" name="Form">
+    <div class="modal-header col-lg-12">
+        <h3 class="col-lg-4 col-lg-offset-4">עדכון ניטור</h3>
+    </div>
+    <div class="modal-body">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-lg-8" >
+                    <label class="control-label label-add-card" for="monitorName">שם הניטור:</label>
+                    <input class="input-add-card form-control " id="monitorName" name="monitorName" type="text"  ng-model="selected.monitorName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorType">סוג הניטור:</label>
+                    <select class="form-control input-add-card" id="monitorType" name="monitorType" ng-model="selected.monitorType">
+                        <option ng-repeat="type in types">{{type}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorLevel">רמת ניטור:</label>
+                    <select class="form-control input-add-card" id="monitorLevel" name="monitorType" ng-model="selected.monitorLevel">
+                        <option>בסיסי</option>
+                        <option>מתקדם</option>
+                        <option>אפליקטיבי</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorProdact">שם המוצר:</label>
+                    <select class="form-control input-add-card" id="monitorProdact" name="monitorProdact" ng-model="selected.monitorProdact">
+                        <option ng-repeat="prodact in prodacts">{{prodact}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorSystem">שם המערכת:</label>
+                    <select class="form-control input-add-card" id="monitorSystem" name="monitorSystem" ng-model="selected.monitorSystem">
+                        <option ng-repeat="system in systems">{{system}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label class="control-label label-add-card" for="monitorExplain">הסבר לניטור:</label>
+                    <textarea class="input-big form-control " id="monitorExplain" name="monitorExplain" type="text"  ng-model="selected.monitorExplain" ></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success col-lg-12 btn-modal-costume">שמור</button>
+    </div>
+</form>
