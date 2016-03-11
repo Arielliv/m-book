@@ -1,9 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import play.Logger;
 import play.libs.EventSource;
 import play.libs.Json;
@@ -184,5 +182,10 @@ public class monitorCardController extends Controller {
                 break;
             }
         }
+    }
+
+    public static void main(String[] args) {
+
+
     }
 }

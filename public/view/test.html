@@ -1,18 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myapp">
+<html ng-app="appT">
 <head>
-    <meta charset="UTF-8">
-    <title>M-BOOK-test</title>
+    <meta charset=utf-8>
+    <title>How can AngularJS bind to list of checkbox values?</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
-<body  ng-controller="MainCtrl" >
-<form style="display:block;position: absolute; top:200px;" action = "upload" method="post" enctype="multipart/form-data">
-<input type="file" name="picture">
 
-<p>
-    <input type="submit">
-</p>
-</form>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1><a href="http://stackoverflow.com/q/14514461/697154">How can AngularJS bind to list of checkbox values?</a></h1>
+    </div>
+
+    <hr>
+
+    <div ng-controller="ObjectArrayCtrl">
+        <h3>With an object array as input data</h3>
+
+        <dl>
+            <dt>Pros</dt>
+            <dd>add/remove is very easy</dd>
+
+            <dt>Cons</dt>
+            <dd>somewhat more complex data structure and toggling by name is cumbersome or requires a helper method</dd>
+        </dl>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>selectables</h4>
+                <div class="form-group">
+                    <label ng-repeat="fruit in fruits" class="checkbox-inline">
+                        <!--
+                          - use `value="{{fruit.name}}"` to give the input a real value, in case the form gets submitted
+                            traditionally
+
+                          - use `ng-checked="fruit.selected"` to have the checkbox checked based on some angular expression
+                            (no two-way-data-binding)
+
+                          - use `ng-model="fruit.selected"` to utilize two-way-data-binding. Note that `.selected`
+                            is arbitrary. The property name could be anything and will be created on the object if not present.
+                        -->
+                        <input type="checkbox" name="selectedFruits[]" value="{{fruitName}}" ng-model="fruit.selected"> {{fruit.name}}
+                        <input type="text" class="input-group" ng-model="fruit.version">
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <p><strong>Toggling</strong> by name is not so easy in this case, because the the code is either rather ugly, or a helper method is needed.</p>
+                <button class="btn btn-default" ng-click="(fruits|filter:{name:'naartjie'})[0].selected = !(fruits|filter:{name:'naartjie'})[0].selected">Toggle <em>naartjie</em></button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>selection as simple array using $watch</h4>
+                <pre>{{selection|json}}</pre>
+
+                <h4>selection as simple array using a custom filter</h4>
+                <pre>{{fruits|fruitSelection:'name'|json}}</pre>
+
+                <h4>selection using the default filter</h4>
+                <pre>{{fruits|filter:{selected:true}|json}}</pre>
+
+                <h4>selection using a helper function</h4>
+                <pre>{{selectedFruits()|json}}</pre>
+            </div>
+
+            <div class="col-md-6">
+                <h4>input</h4>
+                <pre>{{fruits|json}}</pre>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-<footer>
-</footer>
+<script src="../javascripts/test.js"></script>
 </html>
